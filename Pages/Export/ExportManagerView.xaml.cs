@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ErpAlgerie.Pages.Export
+namespace Ovresko.Generix.Core.Pages.Export
 {
     /// <summary>
     /// Logique d'interaction pour ExportManagerView.xaml
@@ -23,5 +23,7 @@ namespace ErpAlgerie.Pages.Export
         {
             InitializeComponent();
         }
+
+        
     }
 }

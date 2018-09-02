@@ -5,49 +5,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
                 xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-         
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
             xmlns:af="http://schemas.fontawesome.io/icons/"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:grid="clr-namespace:AttributtedDataColumn"
-             xmlns:local="clr-namespace:ErpAlgerie.Pages.Template"
+             xmlns:local="clr-namespace:Ovresko.Generix.Core.Pages.Template"
              xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock" x:Class="ErpAlgerie.Pages.Template.BaseView"
-              xml:lang="ar-DZ"
+             xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock" 
+    x:Class="Ovresko.Generix.Core.Pages.Template.BaseView"
+               xmlns:Tx="http://unclassified.software/source/txtranslation"
              mc:Ignorable="d" KeyDown="{s:Action UserControl_KeyDown}"
              d:DesignHeight="501" d:DesignWidth="1345.5" >
+    <!--TextOptions.TextFormattingMode="Display"
+    TextOptions.TextRenderingMode="Auto"-->
+    <UserControl.Resources>
+        <s:BoolToVisibilityConverter x:Key="boolToVisConverter" TrueVisibility="Visible" FalseVisibility="Collapsed"/>
+    </UserControl.Resources>
+
+
+    <Grid Background="Transparent" VerticalAlignment="Stretch" Margin="0 0 0 0"  HorizontalAlignment="Stretch" >
+
+
+        <Border  Margin="20 0"  BorderThickness="0" Background="Transparent" BorderBrush="#F0F2F4"  DockPanel.Dock="Top"
+                  Height="45"
+                VerticalAlignment="Top">
+
+            <Grid FlowDirection="{Binding GetFlowDirection}">
+                <StackPanel Margin="0" Orientation="Horizontal"   VerticalAlignment="Center"
+                            FlowDirection="{Binding GetFlowDirection}">
+                    
+                    
+                    <TextBlock Text="{Binding displayName, Mode=OneTime}" 
+                           FontWeight="SemiBold" Width="auto" Margin="0 0 50 0" VerticalAlignment="Center"
+                             Foreground="#AFBFC0" FontSize="21"  />
 
 
 
 
-    <Grid Background="White"  >
-        
 
-        <Border BorderThickness="0,1,0,1" BorderBrush="#F4F5F7" Background="#EEF0F2" Height="45" VerticalAlignment="Top">
-            <Grid >
-                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
-                    <Label Content="{Binding displayName, Mode=OneTime}" 
-                           FontWeight="Regular" Foreground="#535864"
-                           FontSize="18"
-                           Padding="0" Margin="5 10 20 0" HorizontalAlignment="Left" Width="auto" MaxWidth="250" />
-
-
-
-
-
-                    <Button Command="{s:Action prevPage}" ToolTip="Page précédente"
-                     Style="{StaticResource SideToolButton}"   >
-                        <materialDesign:PackIcon Kind="ArrowLeftDropCircleOutline" Height="20" Width="20" />
+                    <Button Command="{s:Action prevPage}" ToolTip="{Tx:T words.previous}"  
+                     Style="{StaticResource SideToolButton}" Padding="3" Width="30"  >
+                        <materialDesign:PackIcon Kind="ArrowLeftDropCircleOutline" Height="23" Width="23" />
                     </Button>
-                    <Label Margin="0 10 -15 10" Content="{Binding PageNumber, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                    <Label Margin="0 10 0 10" Content="{Binding PageNumber, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                            
-                           HorizontalAlignment="Left" Width="34"/>
+                           HorizontalAlignment="Left" Width="16"/>
+                    <TextBlock Text="/" Margin="0 10 0 10" VerticalAlignment="Center"/>
+                    <Label Margin="0 10 0 10" 
+                           Content="{Binding PagesNumber, Mode=OneWay, StringFormat='/{0}', UpdateSourceTrigger=PropertyChanged}"                            
+                           HorizontalAlignment="Left" Width="auto"/>
 
-                    <Button Command="{s:Action nextPage}" ToolTip="Page suivante"
+                    <Button Command="{s:Action nextPage}" ToolTip="{Tx:T words.next}" Padding="3" Width="30" 
                      Style="{StaticResource SideToolButton}"   >
-                        <materialDesign:PackIcon Kind="ArrowRightDropCircleOutline"  Height="20" Width="20" />
+                        <materialDesign:PackIcon Kind="ArrowRightDropCircleOutline"  Height="23" Width="23" />
                     </Button>
 
 
@@ -55,9 +68,9 @@
                      Style="{StaticResource SideToolButton}"   >
                         <materialDesign:PackIcon Kind="CheckboxMultipleMarkedOutline"  Height="20" Width="20" />
                     </Button>-->
-                    <Button  Click="Button_Click" ToolTip="Selectionner touts"
+                    <Button  Click="Button_Click" ToolTip="{Tx:T words.selectall}" Margin="10 0"
                      Style="{StaticResource SideToolButton}"   >
-                        <materialDesign:PackIcon Kind="CheckboxMultipleMarkedOutline"  Height="20" Width="20" />
+                        <materialDesign:PackIcon Kind="CheckboxMultipleMarkedOutline"    Height="23" Width="23" />
                     </Button>
 
                     <!--<Button Command="{s:Action Actualiser}"
@@ -107,13 +120,15 @@
 
                     <materialDesign:ColorZone
         Mode="Standard"
+                        ToolTip="Rechercher"
                         Background="White"
         Padding="0"
-        CornerRadius="2"
+        CornerRadius="5" 
         Panel.ZIndex="1"
+                        BorderBrush="#AFBFC0" BorderThickness="1"
         Margin="16 6 0 6"
         materialDesign:ShadowAssist.ShadowDepth="Depth0">
-                        <Grid>
+                        <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition
               Width="Auto" />
@@ -131,7 +146,7 @@
                             <TextBox
             Grid.Column="1"
             Margin="8 0 0 0"
-            materialDesign:HintAssist.Hint="Chercher..."
+            materialDesign:HintAssist.Hint="{Tx:T base.field.chercher}"
             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
             BorderThickness="0"
             MinWidth="200"
@@ -157,48 +172,27 @@
                         BorderBrush="#AFBFC0"
                         Watermark="Chercher..." Margin="5 7" />-->
 
-                    <Button ToolTip="Filtrer les résultats..." 
-                            Command="{s:Action doFiltrer}"  VerticalAlignment="Center"
+                    <Button ToolTip="{Tx:T words.filtrer}" 
+                            Margin="10 0 0 0"
+                            Command="{s:Action doFiltrer}" Width="30" Padding="3" VerticalAlignment="Center"
                             VerticalContentAlignment="Center"
                      Style="{StaticResource SideToolButton}"   >
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="FilterOutline"  Height="20" Width="20"  />
+                            <materialDesign:PackIcon Kind="FilterOutline"   Height="23" Width="23"  />
                             <!--<TextBlock Margin="5 2" Text="Filtrer"/>-->
                         </StackPanel>
 
                     </Button>
 
 
-                    <Button Command="{s:Action Actualiser}"  ToolTip="Actualiser"
+                    <Button Command="{s:Action Actualiser}" Width="30" Padding="3" Margin="5 0 0 0" ToolTip="{Tx:T  words.actualiser}"
                      Style="{StaticResource SideToolButton}"   >
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Refresh"  Height="20" Width="20" />
+                            <materialDesign:PackIcon Kind="Refresh"   Height="23" Width="23" />
                             <!--<TextBlock Margin="5 2" Text="Actualiser"/>-->
                         </StackPanel>
                     </Button>
-
-                    <Menu  IsMainMenu="True" Margin="5 7"   Background="White" BorderBrush="#AFBFC0"  BorderThickness="1" Padding="0">
-                        <MenuItem Margin="0" Header="Outils"  VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontSize="12" Padding="5">
-                            <MenuItem.Icon>
-                                <materialDesign:PackIcon Kind="MenuDown" Padding="0" Margin="2 0 0 0" />
-                            </MenuItem.Icon>
-                            <MenuItem Header="Supprimer"  Command="{s:Action DeleteAll}" />
-                            <MenuItem Header="Valider"  Command="{s:Action ValidateAll}"/>
-                            <Separator/>
-                            <MenuItem Header="Exporter"  Command="{s:Action ExporterPDF}" />
-                            <MenuItem Header="Importer"  Command="{s:Action ImportData}"/>
-                            <MenuItem Header="Exporter template"  Command="{s:Action ExportTemplate}"/>
-                            <Separator/>
-                            <MenuItem Header="Édition en masse"  Command="{s:Action MassEdit}"  />
-                            <MenuItem Header="Ajouter au bureau"  Command="{s:Action AjouterAuBureau}"  />
-                            <MenuItem Header="Modifier module"  Command="{s:Action ModifierModule}"/>
-                        </MenuItem>
-
-                    </Menu>
-                    <ContentControl Content="{Binding opeartionButtons, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                            Height="auto"   HorizontalAlignment="Left" Width="auto"        MinWidth="50"                      />
-
-
+                  
 
 
                     <!--<Button Command="{s:Action CloseWindows}"
@@ -220,17 +214,58 @@
                     </Button>-->
 
 
-
+                   
                 </StackPanel>
+                <StackPanel   FlowDirection="{Binding GetFlowDirection}" Margin="10 0" HorizontalAlignment="Right"  Orientation="Horizontal">
+                    <materialDesign:Card Margin="5,4,5,0"   Background="White" BorderBrush="Gray"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth1" 
+                            BorderThickness="0" Padding="0 0" Height="32" Width="118">
+                        <Menu IsMainMenu="True" Background="White"   HorizontalContentAlignment="Left" >
+                            <MenuItem Margin="0" Header="{Tx:T  base.tool.outils}"  
+                                  ToolTip="Opérations supplémentaires"
+                                  VerticalAlignment="Center" 
+                                  HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="12" Padding="0"   Width="111">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="MenuDown" Padding="0" Margin="2 0 0 0" />
+                                </MenuItem.Icon>
+                                <MenuItem Header="{Tx:T  Supprimer}" Visibility="{Binding SaveVisible ,Converter={StaticResource boolToVisConverter}}"  Command="{s:Action DeleteAll}" />
+                                <MenuItem Header="{Tx:T  Valider}"  Command="{s:Action ValidateAll}" Visibility="{Binding SaveVisible ,Converter={StaticResource boolToVisConverter}}"/>
+                                <Separator Visibility="{Binding SaveVisible ,Converter={StaticResource boolToVisConverter}}"/>
+                                <MenuItem Header="{Tx:T  Exporter}"  Command="{s:Action ExporterPDF}" />
+                                <MenuItem Header="{Tx:T  Importer}" Visibility="{Binding SaveVisible ,Converter={StaticResource boolToVisConverter}}"  Command="{s:Action ImportData}"/>
+                                <MenuItem Header="{Tx:T  Exporter modéle}" Visibility="{Binding SaveVisible ,Converter={StaticResource boolToVisConverter}}"  Command="{s:Action ExportTemplate}"/>
+                                <Separator Visibility="{Binding SaveVisible ,Converter={StaticResource boolToVisConverter}}"/>
+                                <MenuItem Header="{Tx:T  édition en masse}" Visibility="{Binding SaveVisible ,Converter={StaticResource boolToVisConverter}}" Command="{s:Action MassEdit}"  />
+                                <MenuItem Header="{Tx:T  ajouter au bureau}"  Command="{s:Action AjouterAuBureau}"  />
+                                <MenuItem Header="{Tx:T  modifier module}"  Command="{s:Action ModifierModule}"/>
+                            </MenuItem>
 
-                <StackPanel Margin="10 0" HorizontalAlignment="Right"  Orientation="Horizontal">
+                        </Menu>
+                    </materialDesign:Card >
+
+                    <!--<ContentControl Content="{Binding opeartionButtons, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                            Height="auto"   HorizontalAlignment="Left" Width="auto"        MinWidth="20"                      />-->
+                    <materialDesign:Card Margin="5,4,5,0"   Background="White" BorderBrush="Gray"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth1" Visibility="{Binding actionsVisible ,Converter={StaticResource boolToVisConverter}}"
+                            BorderThickness="0" Padding="0 0" Height="32" Width="118">
+                        <Menu IsMainMenu="True"   Background="White"   HorizontalContentAlignment="Left" >
+                            <MenuItem  
+                                  VerticalAlignment="Center" 
+                                  HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="12" Padding="0"   Width="111" Margin="0" Header="{Tx:T  base.tool.actions}" ItemsSource="{Binding opeartionButtons}">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="MenuDown" Padding="0" Margin="2 0 0 0" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                        </Menu>
+                    </materialDesign:Card >
 
                     <Button Command="{s:Action CloseWindows}"
-                        
+                        ToolTip="{Tx:T  base.button.fermer}"
                          Focusable="False" 
                         Style="{StaticResource ToolBarButton}"
                     Custom:ButtonHelper.CornerRadius="2"  
-                    Content="Fermer"
+                    Content="{Tx:T  base.button.fermer}"
                     Margin="0,7,10,0" 
                     Padding="0"
                     VerticalAlignment="Top"   
@@ -243,53 +278,76 @@
 
                     </Button>-->
 
-                    <Button Command="{s:Action Add}"   ToolTip="Créer un nouveau document!"
-                    x:Name="button_Copy"  Content="Nouveau" Height="29"   Custom:ControlsHelper.ContentCharacterCasing="Normal"
-                    FontWeight="Bold" FontSize="12" materialDesign:ShadowAssist.ShadowDepth="Depth0" 
-                    Visibility="{Binding ShowButtonAjouter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"   >
+                    <Button Command="{s:Action Add}"   ToolTip="{Tx:T  base.button.add.hint }"
+                    x:Name="button_Copy"  Content="{Binding AddButton, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="29"  
+                    FontWeight="Bold" FontSize="12"  
+                    Visibility="{Binding SaveVisible ,Converter={StaticResource boolToVisConverter}}"  >
                     </Button>
                 </StackPanel>
+
             </Grid>
         </Border>
+        <DockPanel Margin="0,0,0,30"     >
+            <!--<StackPanel DockPanel.Dock="Left" Width="162" Margin="0 0 0 0"
+                        Visibility="{Binding FiltreVisible ,Converter={StaticResource boolToVisConverter}}">
+                <StackPanel Orientation="Horizontal" Background="#FFFAFAFA" Height="33">
+                    <TextBlock Text="Filtres rapide" Foreground="#FF2B3B9E" Padding="5" Width="142"/>
+                    <materialDesign:PackIcon Foreground="#FF17288F" Kind="Filter" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </StackPanel>
+                -->
+            <!--<ContentControl Content="{Binding Filtres}" BorderThickness="1" BorderBrush="Gray" Margin="5 5 5 0"/>-->
+            <!--
 
-        <DataGrid CanUserAddRows="False"
-                  IsReadOnly="True"      
+            </StackPanel>-->
+            <materialDesign:Card Background="White" materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                 VerticalAlignment="Stretch" UniformCornerRadius="5"   Margin="10 25 10 0">
+                <DataGrid CanUserAddRows="False"
+                  IsReadOnly="True"   Margin="2"   VerticalAlignment="Stretch" 
+                  FlowDirection="{Binding GetFlowDirection}"
                    EnableColumnVirtualization="False"
-                  EnableRowVirtualization="False"
+                  EnableRowVirtualization="True"
                   SelectionUnit="FullRow"
+                  CanUserSortColumns="{Binding SaveVisible}"
+                      CanUserReorderColumns="True"
                   ColumnWidth="*"
-                  ScrollViewer.CanContentScroll="False"
-                  x:Name="datagrid" 
-                   VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                  ScrollViewer.CanContentScroll="True"
+                  x:Name="datagrid"  
                   GridLinesVisibility="All"
                   VerticalGridLinesBrush="#F4F5F7"
                   HorizontalGridLinesBrush="#F4F5F7"
+                      RowHeight="{x:Static sys:Double.NaN}"
+                Background="White"
                   Cursor="Hand"
-                    AlternatingRowBackground="#fcfcfc"
+                           
+                    AlternatingRowBackground="White"
                   MouseDoubleClick="{s:Action ouvrirItem}"                   
                   AutoGenerateColumns="True"  
                     SelectionMode="Extended"
-                  VirtualizingPanel.IsVirtualizing="False"
+                  VirtualizingPanel.IsVirtualizing="True"
                   FontSize="{Binding fontSize, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                 materialDesign:DataGridAssist.CellPadding="6 6 6 6"
+                 materialDesign:DataGridAssist.CellPadding="{Binding CellPadding}"
+                  VerticalContentAlignment="Center"
+                 Tag="{Binding DataGridTag}"
+                          
   materialDesign:DataGridAssist.ColumnHeaderPadding="6 4 4 4"
-                   
+                   BorderThickness="0 0 0 0"
+                  BorderBrush="#DCDCDC"
                   SelectedItem="{Binding selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  
+                  MaxHeight="2000"
+                  MaxWidth="2000"
                   PreviewKeyDown="{s:Action GridKeyUp}"
-                  ItemsSource="{Binding Items, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-               Margin="0,45,0,25" >
-            <i:Interaction.Behaviors>
-                <grid:ColumnHeaderBehavior />
-            </i:Interaction.Behaviors>
-            <DataGrid.Resources>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="IsSelected" Value="{Binding IsSelectedd,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Setter Property='ScrollViewer.CanContentScroll' Value='False' />
+                  ItemsSource="{Binding Items,IsAsync=True, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                >
+                    <i:Interaction.Behaviors>
+                        <grid:ColumnHeaderBehavior />
+                    </i:Interaction.Behaviors>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="IsSelected" Value="{Binding IsSelectedd,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                </Style>
-            </DataGrid.Resources>
-            <!--<DataGrid.RowHeaderTemplate>
+                        </Style>
+                    </DataGrid.Resources>
+                    <!--<DataGrid.RowHeaderTemplate>
                 <DataTemplate>
                     <Grid>
                         <CheckBox Width="50" IsChecked="{Binding Item.IsSelectedd, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}, Mode=FindAncestor}}"/>
@@ -297,21 +355,19 @@
                 </DataTemplate>
             </DataGrid.RowHeaderTemplate>-->
 
-            <DataGrid.ContextMenu>
-                <ContextMenu ItemsSource="{Binding MenuItems, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}"/>
-            </DataGrid.ContextMenu>
-            <DataGrid.ItemsPanel>
-                <ItemsPanelTemplate >
-                    <VirtualizingStackPanel/>
-                </ItemsPanelTemplate>
-            </DataGrid.ItemsPanel>
-            <DataGrid.GroupStyle>
-                <GroupStyle>
-                    
-                </GroupStyle>
-            </DataGrid.GroupStyle>
-        </DataGrid>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItems, Mode=OneTime, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataGrid.ContextMenu>
+                    <DataGrid.ItemsPanel>
+                        <ItemsPanelTemplate >
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </DataGrid.ItemsPanel>
+
+                </DataGrid>
+            </materialDesign:Card>
         
+        </DockPanel>
         <Grid Background="#EEF0F2" Height="25"  VerticalAlignment="Bottom">
             <StackPanel Margin="2" Orientation="Horizontal" >
                 <ComboBox 
@@ -324,7 +380,7 @@
                     SelectionChanged="{s:Action Actualiser}"
                     MinHeight="10"
                     Custom:TextBoxHelper.Watermark="Afficher"
-                    SelectedIndex="0"
+                     
                     HorizontalAlignment="Right" 
                     IsEditable="False"
                     VerticalAlignment="Top" 
@@ -344,19 +400,22 @@
                        Content="{Binding StatusLabel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                     />
                 <Button Command="{s:Action BigFont}"   Padding="0" MinHeight="10" Height="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                    <Label Content="+" Margin="0" Padding="10 0"  Foreground="Black" 
+                    <Label Content="+" Margin="0" Padding="10 0"  Foreground="Black" ToolTip="{Tx:T  Agrandir le tableau}"
                           />
                 </Button>
 
-                <Button Command="{s:Action SmallFont}" Padding="0" MinHeight="10" Height="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Button Command="{s:Action SmallFont}" Padding="0" MinHeight="10" Height="18" 
+                        ToolTip="{Tx:T  Réduire le tableau}"
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                     <Label Content="-" Margin="0" Padding="10 0"  Foreground="Black" 
                           />
                 </Button>
-                
-               
+
+
             </StackPanel>
         </Grid>
         <materialDesign:Snackbar SnapsToDevicePixels="True" MessageQueue="{Binding MessageQueue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+
 
     </Grid>
 </UserControl>

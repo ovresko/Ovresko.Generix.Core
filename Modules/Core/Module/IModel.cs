@@ -1,5 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDbGenericRepository.Models;
+using Ovresko.Generix.Datasource.Models;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ErpAlgerie.Modules.Core.Module
+namespace Ovresko.Generix.Core.Modules.Core.Module
 {
      
     public interface IModel  
@@ -16,5 +16,11 @@ namespace ErpAlgerie.Modules.Core.Module
         bool Delete(bool ConfirmFromUser = true);
         bool Submit();
         bool Cancel();
-     }
+        Task NotifyUpdates();
+        void NotifyUpdates(string source);
+        void Open(OpenMode mode);
+
+        // bool DoRefresh { get; set; }
+
+    }
 }

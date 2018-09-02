@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ErpAlgerie.Modules.Core.Module;
+using Ovresko.Generix.Core.Modules.Core.Module;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.IO;
 
-namespace ErpAlgerie.Framework
+namespace Ovresko.Generix.Core.Framework
 {
 
     class Field
@@ -120,7 +120,7 @@ namespace ErpAlgerie.Framework
                     "string",
                     "bool",
                     "decimal",
-                    "ObjectId",
+                    "Guid",
                     "DateTime",
                     "List<"
                 };
@@ -156,7 +156,7 @@ namespace ErpAlgerie.Framework
             /*
              *   [ShowInTableAttribute(false)]
         [ColumnAttribute(ModelFieldType.Table, "LigneFacture")]
-        [DisplayName("Produits")]
+        [ExDisplayName("Produits")]
         [myTypeAttribute(typeof(Article))]
         public List<LigneFacture> ArticleFacture { get; set; } = new List<LigneFacture>();
 */
@@ -164,7 +164,7 @@ namespace ErpAlgerie.Framework
             var property_init = MyInitValue;
             var property = $@"public {TypeVaraible} {PropertyName}"+ "{ get; set; } "+ property_init;
 
-            var dispalyname = $"[DisplayName(\"{DispalyNameAtt}\")]";
+            var dispalyname = $"[ExDisplayName(\"{DispalyNameAtt}\")]";
             var column = $"[ColumnAttribute(ModelFieldType.{ColumnAttrib}, \"{ColumnAttribOpt}\")]";
             var isBold = $"[IsBoldAttribute({_(IsBold)})]";
             var showInTabel = $"[ShowInTable({_(showInTable)})]";
@@ -213,9 +213,9 @@ namespace ErpAlgerie.Framework
             var baseClass = $@"
 // Auto generated class
 
-using ErpAlgerie.Modules.Core.Data;
-using ErpAlgerie.Modules.Core.Helpers;
-using ErpAlgerie.Modules.Core.Module;
+using Ovresko.Generix.Core.Modules.Core.Data;
+using Ovresko.Generix.Core.Modules.Core.Helpers;
+using Ovresko.Generix.Core.Modules.Core.Module;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
@@ -229,7 +229,7 @@ using System.Threading.Tasks;
 
 
 
-namespace ErpAlgerie.Modules.CRM
+namespace Ovresko.Generix.Core.Modules.
 {{
     class {ClassName} : ModelBase<{ClassName}>
     {{

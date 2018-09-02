@@ -1,59 +1,245 @@
-﻿using ErpAlgerie.Modules.Core.Data;
-using ErpAlgerie.Modules.Core.Helpers;
-using ErpAlgerie.Modules.Core.Module;
-using ErpAlgerie.Modules.CRM;
-using ErpAlgerie.Pages.Events;
-using ErpAlgerie.Pages.Helpers;
-using ErpAlgerie.Pages.MassEdit;
-using MahApps.Metro.Controls;
+﻿using MahApps.Metro.Controls;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
-using MongoDbGenericRepository;
-using MongoDbGenericRepository.Models;
-using OvImport;
-using PagedList;
+using Ovresko.Generix.Core.Modules;
+using Ovresko.Generix.Core.Modules.Core.Data;
+using Ovresko.Generix.Core.Modules.Core.Helpers;
+using Ovresko.Generix.Core.Modules.Core.Module;
+using Ovresko.Generix.Core.Pages.Events;
+using Ovresko.Generix.Core.Pages.MassEdit;
+using Ovresko.Generix.Datasource.Models;
+using Ovresko.Generix.Utils;
 using Stylet;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using Unclassified.TxLib;
+using static Ovresko.Generix.Core.Translations.OvTranslate;
 
-namespace ErpAlgerie.Pages.Template
+namespace Ovresko.Generix.Core.Pages.Template
 {
-    public class BaseViewModel<T> : Screen, IDisposable, IHandle<ModelChangeEvent> where T : ExtendedDocument, new()
+    public class BaseViewModel<T> : Screen, IDisposable, IHandle<ModelChangeEvent>, IBaseViewModel where T : Document, new()
     {
         public IWindowManager windowManager;
-        public IShell shell { get; set; }
-        public ExtendedDocument selected { get; set; }
-
-        public IEnumerable<ExtendedDocument> selectedList { get; set; }
+        private List<T> _list = new List<T>();
         private IEventAggregator aggre;
-        public int PageNumber { get; set; } = 1;
-        public int PageCount { get; set; } = 20;
-        public BindableCollection<T> Items { get; set; } = new BindableCollection<T>();
-        public DataHelpers datahelper { get; set; } = new DataHelpers();
-        public SnackbarMessageQueue MessageQueue { get; set; } = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
         private bool fromFiltre = false;
+        public BaseViewModel()
+        {
+        }
 
-        public StackPanel opeartionButtons { get; set; }
-
-        
-
-        public Type type
+        public string ElementsCount
         {
             get
             {
-                return typeof(T);
+                return $"{Items.Count * PageNumber} / {TotalCount} {_("eléments")} ";
             }
         }
+
+        public int PagesNumber
+        {
+            get
+            {
+                if (TotalCount <= PageCount)
+                    return 1;
+
+                try { return ((int)TotalCount / PageCount) + 1; } catch { }
+                return 1;
+            }
+        }
+
+        public BaseViewModel(IEventAggregator _aggre, bool ForSelectOnly)
+        {
+            this.ForSelectOnly = ForSelectOnly;
+            shell = DataHelpers.Shell;
+            windowManager = DataHelpers.windowManager;
+            aggre = _aggre;
+
+            if (SaveVisible == false)
+            {
+                var s = new T();
+                var i = DS.db.GetAll<T>();// s.GetList();
+                this._list = i;
+                PAGE_MODE = PAGE_MODES.LIST;
+                PageCount = 200;
+                RowHeight = 25;
+                CellPadding = 4;
+                DataGridTag = "report";
+                Task.Run(async () => await NextPage());
+            }
+            else
+            {
+                Task.Run(async () => await NextPage());
+            }
+
+            SetupOperationButtons();
+        }
+
+        public BaseViewModel(IEventAggregator _aggre, bool ForSelectOnly, IEnumerable<IDocument> _list)
+        {
+            if (this._list == null)
+                this._list = new List<T>();
+
+            foreach (var item in _list)
+            {
+                this._list.Add( (T)item);
+            }
+            //this._list = _list;// as IEnumerable<T>;
+            TotalCount = (long)_list?.Count();
+
+            PAGE_MODE = PAGE_MODES.LIST;
+            fromFiltre = true;
+            this.ForSelectOnly = ForSelectOnly;
+            shell = DataHelpers.Shell;
+            windowManager = DataHelpers.windowManager;
+            aggre = _aggre;
+
+            Task.Run(async () => await NextPage());
+            SetupOperationButtons();
+
+        }
+
+        public string btnFermerText
+        {
+            get
+            {
+                return _("Fermer");
+            }
+        }
+
+        public string AddButton
+        {
+            get
+            {
+                if (!ForSelectOnly)
+                    return _("base.button.add");
+
+                return _("Selectionner");
+            }
+        }
+
+        public string btnNouveauHint
+        {
+            get
+            {
+                return _("Créer un nouveau document!");
+            }
+        }
+
+        public string btnNouveauText
+        {
+            get
+            {
+                return _("Nouveau");
+            }
+        }
+
+        public int CellPadding { get; set; } = 6;
+        public string ChercherHint
+        {
+            get
+            {
+                return _("Chercher");
+            }
+        }
+
+        public string DataGridTag { get; set; } = "";
+        public DataHelpers datahelper { get; set; } = new DataHelpers();
+        public WrapPanel Filtres { get; set; } = new WrapPanel();
+        public bool FiltreVisible { get; set; } = false;
+        public bool ForSelectOnly { get; set; } = false;
+        public FlowDirection GetFlowDirection
+        {
+            get
+            {
+                return DataHelpers.GetFlowDirection;
+            }
+        }
+
+        public bool IsRunning { get; set; }
+        public BindableCollection<T> Items { get; set; } = new BindableCollection<T>();
+        public string LblAddBureau
+        {
+            get
+            {
+                return _("Ajouter au bureau");
+            }
+        }
+
+        public string LblEditionMasse
+        {
+            get
+            {
+                return _("Édition en masse");
+            }
+        }
+
+        public string LblExporter
+        {
+            get
+            {
+                return _("Exporter");
+            }
+        }
+
+        public string LblExportertemplate
+        {
+            get
+            {
+                return _("Exporter modéle");
+            }
+        }
+
+        public string LblImporter
+        {
+            get
+            {
+                return _("Importer");
+            }
+        }
+
+        public string LblModifierModel
+        {
+            get
+            {
+                return _("Modifier module");
+            }
+        }
+
+        public string LblOutils
+        {
+            get
+            {
+                return _("Outils");
+            }
+        }
+
+        public string LblSupprimer
+        {
+            get
+            {
+                return _("Supprimer");
+            }
+        }
+
+        public SnackbarMessageQueue MessageQueue { get; set; } = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+        public List<MenuItem> opeartionButtons { get; set; }
+        public int PageCount { get; set; } = 50;
+        public int PageNumber { get; set; } = 1;
+        public int RowHeight { get; set; } = 30;
+        public IDocument selected { get; set; }
+        // private T Instance;
+        public IEnumerable<IDocument> selectedList { get; set; }
+
+        public IShell shell { get; set; }
         public List<int> ShowCounts
         {
             get
@@ -68,96 +254,297 @@ namespace ErpAlgerie.Pages.Template
             }
         }
 
-        IEnumerable<T> _list;
-
-        public bool ForSelectOnly { get; set; } = false;
-
-        public BaseViewModel()
+        public Type type
         {
-        }
-
-        public BaseViewModel(IEventAggregator _aggre, bool ForSelectOnly)
-        {
-            this.ForSelectOnly = ForSelectOnly;
-            shell = DataHelpers.Shell;
-            windowManager = DataHelpers.windowManager;
-            aggre = _aggre;
-            Task.Run(() => NextPage().Wait());
-
-            SetupOperationButtons();
-        }
-
-        public BaseViewModel(IEventAggregator _aggre, bool ForSelectOnly, IEnumerable<T> _list)
-        {
-            this._list = _list;
-            PAGE_MODE = PAGE_MODES.LIST;
-            fromFiltre = true;
-            this.ForSelectOnly = ForSelectOnly;
-            shell = DataHelpers.Shell;
-            windowManager = DataHelpers.windowManager;
-            aggre = _aggre;
-            Task.Run(() => NextPage().Wait());
-
-            SetupOperationButtons();
-
-        }
-
-
-        public void SetupOperationButtons()
-        {
-            opeartionButtons = new StackPanel();
-
-            var sourceType = type;
-            var baseAction = type.GetProperties().Where(a => (a.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute) != null
-            && (a.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute).FieldType == ModelFieldType.BaseButton);
-
-            foreach (var action in baseAction)
+            get
             {
-                var attrib = (action.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute);
-                var attribDisplay = (action.GetCustomAttribute(typeof(DisplayNameAttribute)) as DisplayNameAttribute);
-                Button newOps = new Button();
-                newOps.Content = attribDisplay.DisplayName;
-                newOps.Click += NewOps_Click;
-                newOps.TouchDown += NewOps_Click;
-                newOps.Style = App.Current.FindResource("SideToolButton") as Style;
-                newOps.Tag = attrib.Options;  // <= the name of the function
-                opeartionButtons.Children.Add(newOps);
-               
-            } 
-           
-            opeartionButtons.Orientation = Orientation.Horizontal;             
-          
-
+                return typeof(T);
+            }
         }
-
-        private void NewOps_Click(object sender, RoutedEventArgs e)
-        {
-            var method = (sender as Button).Tag.ToString();
-            var instance = new T();
-            
-            (instance as ExtendedDocument).DoFunction(method);
-            Actualiser();
-        }
-
         public static void Outside()
         {
-
         }
 
-        
-
-        protected override void OnViewLoaded()
+        public async Task Actualiser()
         {
-            base.OnViewLoaded();
-         
+            if (!fromFiltre && SaveVisible == true)
+                PAGE_MODE = PAGE_MODES.ALL;
+
+            if (SaveVisible == false)
+                PAGE_MODE = PAGE_MODES.LIST;
+
+            NameSearch = "";
+            await NextPage();
+            NotifyOfPropertyChange("NameSearch");
+            NotifyOfPropertyChange("PageNumber");
+            MessageQueue.Enqueue(_("Données actualisées"));
         }
-        protected override void OnInitialActivate()
+
+        public async void Add()
         {
-            base.OnInitialActivate();
-            InitContextMenu();
-            aggre.Subscribe(this);
+            if (ForSelectOnly)
+            {
+                selectedList = Items.Where(a => (a as IDocument).IsSelectedd);
+                ForSelectOnly = false;
+                CloseWindows();
+            }
+            else
+            {
+                try
+                {
+                    selected = new T();
+
+                    if (selected.DocOpenMod == OpenMode.Attach && ForSelectOnly == false)
+                    {
+                        //selected.CollectionName = displayName;
+                        shell.OpenScreen(await DetailViewModel.Create(selected, selected.GetType(), aggre, shell), $"{this.DisplayName} | {selected.Name}");
+                    }
+                    else
+                    {
+                        var ioc = DataHelpers.container;
+                        var vm = ioc.Get<ViewManager>();
+                        var c = await DetailViewModel.Create(selected, selected.GetType(), aggre, shell);
+
+                        await shell.OpenScreenDetach(selected, selected.Name);
+
+                    }
+                }
+                catch (Exception s)
+                {
+                    DataHelpers.ShowMessage(s.Message + " " + s.StackTrace);
+                    return;
+                }
+            }
+
+
         }
-        public bool IsRunning { get; set; }
+
+        public void AjouterAuBureau()
+        {
+            var instance = Activator.CreateInstance<T>();
+            var module = this.type.GetMethod("MyModule")?.Invoke(instance, null); //
+            if (module != null)
+            {
+                // Activate show
+                (module as ModuleErp).EstAcceRapide = true;
+                (module as ModuleErp).Save();
+                DataHelpers.ShowMessage($"Icon {_(instance.CollectionName)},{_("ajoutée au bureau")}");
+                return;
+            }
+        }
+
+        public async void DeleteAll()
+        {
+            var selected = Items.Where(a => a.IsSelectedd).ToList();
+            var confirm = DataHelpers.ShowMessage($"{_("Voulez-vous supprimer ces")} {selected.Count} {_("documents?")}", _("Confirmation!"), MessageBoxButton.YesNo);
+            if (confirm == MessageBoxResult.No)
+                return;
+
+            if (selected != null && selected.Any())
+            {
+                foreach (IModel item in selected)
+                {
+                    try
+                    {
+                        if (!item.Delete(false))
+                            continue;
+                    }
+                    catch (Exception s)
+                    {
+                        DataHelpers.ShowMessage(s.Message);
+                        continue;
+                    }
+                }
+                await Actualiser();
+            }
+        }
+
+        public void Dispose()
+        {
+        }
+
+        public async void ExporterPDF()
+        {
+            if (SearchResul?.Any() == true)
+            {
+                windowManager.ShowWindow(new PrintWindowViewModel(SearchResul));
+            }
+            else
+            {
+                var response = DataHelpers.ShowMessage(_("Voulez-vous exporter tous les documents?"), _("Confirmation"), MessageBoxButton.YesNo);
+                if (response == MessageBoxResult.Yes)
+                {
+                    if (SaveVisible == false)
+                    {
+                        SearchResul = _list.ToList<T>();
+                        windowManager.ShowWindow(new PrintWindowViewModel(SearchResul));
+                    }
+                    else
+                    {
+                        SearchResul = DS.db.GetAll<T>();// await datahelper.GetData<T>(a => true);
+                        windowManager.ShowWindow(new PrintWindowViewModel(SearchResul));
+                    }
+                }
+            }
+        }
+
+        public void ExportTemplate()
+        {
+            var dialog = new SaveFileDialog();
+            var file = dialog.ShowDialog();
+            if (file == true)
+            {
+                var result = dialog.FileName;
+                if (!result.Contains("xls"))
+                    result += ".xls";
+
+                var dp = new DynamicPath(result);
+                var ovimport = new ExcelImport(dp);
+
+                ovimport.ExportTemplate(result, type);
+                Process.Start(result);
+            }
+        }
+
+        public void GridKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                ouvrirItem();
+            }
+        }
+
+        public void Handle(ModelChangeEvent message)
+        {
+            if (message.type == this.type)
+            {
+                Execute.OnUIThreadAsync(async () =>
+                {
+                    await Actualiser();
+                });
+            }
+        }
+
+        public void ImportData()
+        {
+            try
+            {
+                var dialog = new OpenFileDialog();
+                var file = dialog.ShowDialog();
+                if (file == true)
+                {
+                    var result = dialog.FileName;
+                    var ovimport = new ExcelImport(new DynamicPath(result));
+
+                    var data = ovimport.ImportDataFromType(result, type);
+
+                    if (data != null)
+                    {
+                        int? count = null;
+                        try { count = data.Count(); } catch { }
+                        var confirmation = DataHelpers.ShowMessage($"{count} {_("documents trouvés")}, {_("voulez-vous continuer!")}", _("Confirmation"), MessageBoxButton.YesNo);
+                        if (confirmation == MessageBoxResult.Yes)
+                        {
+                            foreach (dynamic item in data)
+                            {
+
+
+                                item.AddedAtUtc = DateTime.Now;
+                                //     item.isLocal = false;
+                                try
+                                {
+                                    // item.Series = item.MyModule()?.Id;
+
+                                    item.ForceIgniorValidatUnique = true;
+                                    if ((item as IModel).Save())
+                                    {
+                                        (item as IModel).Submit();
+                                    }
+                                    else
+                                    {
+                                        throw new Exception(_("une erreur s'est produite!")); 
+                                    }
+                                }
+                                catch (Exception s)
+                                {
+                                    DataHelpers.ShowMessageError(s);
+                                    var shouldStop = DataHelpers.ShowMessage(_("une erreur s'est produite voulez-vous annuler?"), _("Erreur"), MessageBoxButton.YesNo, MessageBoxImage.Error);
+                                    if (shouldStop == MessageBoxResult.Yes)
+                                    {
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
+                                }
+                                // item.Save();
+                            }
+                            //var mi = typeof(BaseMongoRepository).GetMethod("AddMany");
+                            //var gen = mi.MakeGenericMethod(type);
+                            //gen.Invoke(DS.db, new object[] { data });
+                            //  DS.db.AddMany<t>(data);
+                            DataHelpers.ShowMessage(_("Terminé"));
+                            Actualiser();
+                        }
+                    }
+                    else
+                    {
+                        DataHelpers.ShowMessage(_("Aucun document trouvé"));
+                        return;
+                    }
+                }
+            }
+            catch (Exception s)
+            {
+                DataHelpers.ShowMessage(s.Message);
+                return;
+            }
+        }
+
+        public void MassEdit()
+        {
+            if (SearchResul != null && SearchResul.Any())
+            {
+                var editMass = new MassEditViewModel(type, (IEnumerable<object>)SearchResul);
+                //var view = DataHelpers.container.Get<ViewManager>();
+                //var bind = view.CreateAndBindViewForModelIfNecessary(editMass);
+                DataHelpers.windowManager.ShowWindow(editMass);
+            }
+            else
+            {
+                DataHelpers.ShowMessage(_("Filter les résultats d'abord"));
+                return;
+            }
+        }
+
+        public async void ModifierModule()
+        {
+            try
+            {
+                var instance = Activator.CreateInstance<T>();
+                ModuleErp module = this.type.GetMethod("MyModule")?.Invoke(instance, null) as ModuleErp; //
+                if (module != null)
+                {
+                    await DataHelpers.Shell.OpenScreenDetach(module, module.CollectionName);
+                }
+            }
+            catch (Exception s)
+            {
+                DataHelpers.Logger.LogError(s);
+                throw;
+            }
+        }
+
+        public async void nextPage()
+        {
+            PageNumber++;
+
+            await NextPage();
+            NotifyOfPropertyChange("PageNumber");
+            NotifyOfPropertyChange("CurrentPage");
+        }
+
         public async Task NextPage()
         {
             if (IsRunning)
@@ -165,48 +552,61 @@ namespace ErpAlgerie.Pages.Template
 
             IsRunning = true;
 
-
             switch (PAGE_MODE)
             {
                 case PAGE_MODES.ALL:
+
                     SearchResul = new List<T>();
-                    TotalCount = await datahelper.GetMongoDataCount<T>();
+                    TotalCount = DS.db.Count<T>();// await datahelper.GetMongoDataCount<T>();
                     Items.Clear();
-                    Items.AddRange(await datahelper.GetMongoDataPaged<T>(PageNumber, PageCount));
+                    //Items.AddRange(await datahelper.GetMongoDataPaged<T>(PageNumber, PageCount));
+                    Items.AddRange( DS.db.GetPage<T>(PageNumber, PageCount));
+
                     break;
+
                 case PAGE_MODES.FILTER_TEXT:
-                    TotalCount = await datahelper.GetMongoDataCount<T>(a => a.Name.Contains(NameSearch.ToLower()));                 
-                    Items.Clear();
-                    Items.AddRange(await datahelper.GetMongoDataFilterPaged<T>(NameSearch.ToLower(), PageNumber, PageCount));
+                    if (SaveVisible == false)
+                    {
+                        //TotalCount = await datahelper.GetMongoDataCount<T>(a => a.NameSearch.Contains(NameSearch.ToLower()));
+                        Items.Clear();
+                        var result = _list.Where(a => a.Name.ToLower().Contains(NameSearch.ToLower()));
+                        Items.AddRange(result.Skip((PageNumber - 1) * PageCount).Take(PageCount));
+                    }
+                    else
+                    {
+                        TotalCount = DS.db.Count<T>(a => a.NameSearch.Contains(NameSearch.ToLower()));
+                            //await datahelper.GetMongoDataCount<T>(a => a.NameSearch.Contains(NameSearch.ToLower()));
+                        Items.Clear();
+                        Items.AddRange( DS.db.GetPage<T>( a=> a.NameSearch.ContainsIgniorCase(NameSearch.ToLower()), PageNumber, PageCount));
+                       // Items.AddRange(await datahelper.GetMongoDataFilterPaged<T>(NameSearch.ToLower(), PageNumber, PageCount));
+
+                    }
                     break;
+
                 case PAGE_MODES.FILTER_BOX:
                     TotalCount = SearchResul.Count;
                     Items.Clear();
                     Items.AddRange(SearchResul.Skip((PageNumber - 1) * PageCount).Take(PageCount));
                     break;
+
                 case PAGE_MODES.LIST:
                     TotalCount = _list.Count();
                     Items.Clear();
                     Items.AddRange(_list.Skip((PageNumber - 1) * PageCount).Take(PageCount));
                     break;
+
                 default:
                     break;
             }
-           
-           
+
             Items.Refresh();
             NotifyOfPropertyChange("Items");
             NotifyOfPropertyChange("ElementsCount");
+            NotifyOfPropertyChange("PagesNumber");
+
             IsRunning = false;
         }
-         
-        public  void GridKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                ouvrirItem(); 
-            }
-        }
+
         public async void ouvrirItem()
         {
             try
@@ -222,10 +622,9 @@ namespace ErpAlgerie.Pages.Template
                     }
                     else
                     {
-
                         if (selected.DocOpenMod == OpenMode.Attach)
                         {
-                           // selected.dis = displayName;
+                            // selected.dis = displayName;
                             shell.OpenScreen(await DetailViewModel.Create(selected, selected.GetType(), aggre, shell), $"{selected.CollectionName} - {selected.Name}");
                         }
                         else
@@ -254,99 +653,6 @@ namespace ErpAlgerie.Pages.Template
             }
         }
 
-        public async Task Actualiser()
-        {
-            if(!fromFiltre)
-                PAGE_MODE = PAGE_MODES.ALL;
-            NameSearch = "";
-            await NextPage();
-            NotifyOfPropertyChange("NameSearch");
-            NotifyOfPropertyChange("PageNumber");
-            MessageQueue.Enqueue("Données actualisées");
-        }
-
-       
-
-        public async void Add()
-        {
-            try
-            {
-                selected = new T();
-
-
-                if (selected.DocOpenMod == OpenMode.Attach && ForSelectOnly == false)
-                {
-                    //selected.CollectionName = displayName;
-                    shell.OpenScreen(await DetailViewModel.Create(selected, selected.GetType(), aggre, shell), $"{this.DisplayName} | {selected.Name}");
-                }
-                else
-                {
-                    var ioc = DataHelpers.container;
-                    var vm = ioc.Get<ViewManager>();
-                    var c = await DetailViewModel.Create(selected, selected.GetType(), aggre, shell);
-
-                    await shell.OpenScreenDetach(selected, selected.Name);
-                    //var content = vm.CreateAndBindViewForModelIfNecessary(c);
-
-                    //var cc = new ContentControl();
-                    //cc.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    //cc.VerticalAlignment = VerticalAlignment.Stretch;
-                    //cc.Content = content;
-
-                    //GenericWindowViewModel gw = new GenericWindowViewModel(cc, displayName, selected.Name);
-                    //windowManager.ShowWindow(gw);
-                }
-
-            }
-            catch (Exception s)
-            {
-                MessageBox.Show(s.Message);
-                return;
-            }
-        }
-
-        public async void ModifierModule()
-        {
-            try
-            {
-                var instance = Activator.CreateInstance<T>();
-                ModuleErp module = this.type.GetMethod("MyModule")?.Invoke(instance,null) as ModuleErp; // 
-                if (module != null)
-                {
-                    await DataHelpers.Shell.OpenScreenDetach(module, module.CollectionName);
-                }
-            }
-            catch (Exception s)
-            {
-                DataHelpers.Logger.LogError(s);
-                throw;
-            }
-        }
-
-        public void AjouterAuBureau()
-        {
-            var instance = Activator.CreateInstance<T>();
-            var module = this.type.GetMethod("MyModule")?.Invoke(instance,null); // 
-            if(module != null)
-            {
-                // Activate show
-                (module as ModuleErp).EstAcceRapide = true;
-                (module as ModuleErp).Save();
-                MessageBox.Show($"Icon {instance.CollectionName}, ajoutée au bureau");
-                return;
-            }
-        }
-
-
-        public async void nextPage()
-        {
-            PageNumber++;
-            
-            await NextPage();
-            NotifyOfPropertyChange("PageNumber");
-            NotifyOfPropertyChange("CurrentPage");
-        }
-
         public async void prevPage()
         {
             PageNumber--;
@@ -359,121 +665,61 @@ namespace ErpAlgerie.Pages.Template
             await NextPage();
             NotifyOfPropertyChange("PageNumber");
         }
-
-
-        public void ExportTemplate()
+        public bool actionsVisible { get; set; } = false;
+        public void SetupOperationButtons()
         {
-
-            var dialog = new SaveFileDialog();
-            var file = dialog.ShowDialog();
-            if (file == true)
+            Execute.OnUIThreadAsync(() =>
             {
-                var result = dialog.FileName;
-                var dp = new DynamicPath(result);
-                var ovimport = new ExcelImport(dp);
+                var sourceType = type;
 
-                ovimport.ExportTemplate(result, type);
-                Process.Start(result);
-            }
-        }
+                #region Filtres
 
-        public void MassEdit()
-        {
+                Filtres = new WrapPanel();
 
-           
-            if(SearchResul != null && SearchResul.Any())
-            {
-                var editMass = new MassEditViewModel(type,(IEnumerable<object>) SearchResul );
-                //var view = DataHelpers.container.Get<ViewManager>();
-                //var bind = view.CreateAndBindViewForModelIfNecessary(editMass);
-                DataHelpers.windowManager.ShowWindow(editMass);             }
-            else
-            {
-                MessageBox.Show("Filter les résultats d'abord");
-                return;
-            }
+                var baseFilter = type.GetProperties().Where(a => (a.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute) != null
+                && (a.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute).FieldType == ModelFieldType.BaseFilter);
 
-
-        }
-
-        public void ImportData()
-        {
-            try
-            {
-
-                var dialog = new OpenFileDialog();
-                var file = dialog.ShowDialog();
-                if (file == true)
+                foreach (var filter in baseFilter)
                 {
-                    var result = dialog.FileName;
-                    var ovimport = new ExcelImport(new DynamicPath(result));
+                    FiltreVisible = true;
+                    var attrib = (filter.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute);
+                    var attribDisplay = (filter.GetCustomAttribute(typeof(DisplayNameAttribute)) as DisplayNameAttribute);
 
-                    var data = ovimport.ImportDataFromType(result, type);
+                    Button newOps = new Button();
+                    newOps.Content = attribDisplay.DisplayName;
+                    newOps.Click += NewOps_Click1;
+                    newOps.Style = App.Current.FindResource("MaterialDesignFlatButton") as Style;
+                    newOps.Foreground = Brushes.Blue;
+                    newOps.Margin = new Thickness(2, 5, 0, 0);
+                    newOps.Tag = attrib.Options;  // <= the name of the function
+                    Filtres.Children.Add(newOps);
+                }
+                NotifyOfPropertyChange("FiltreVisible");
 
-                    if (data != null)
-                    {
-                        var count = data.Count;
-                        var confirmation = MessageBox.Show($"{count} documents trouvés, voulez-vous continuer!", "Confirmation", MessageBoxButton.YesNo);
-                        if (confirmation == MessageBoxResult.Yes)
-                        {
+                #endregion Filtres
 
-                            foreach (var item in data)
-                            {
-                                item.AddedAtUtc = DateTime.Now;
-                           //     item.isLocal = false;
-                                try
-                                {
-                                   // item.Series = item.MyModule()?.Id;
-                                }
-                                catch
-                                {}
-                                item.Save();
-                                item.Submit();
-                                // item.Save();
-                            }
-                            //var mi = typeof(BaseMongoRepository).GetMethod("AddMany");
-                            //var gen = mi.MakeGenericMethod(type);
-                            //gen.Invoke(DS.db, new object[] { data });
-                            //  DS.db.AddMany<t>(data);
-                            MessageBox.Show("Terminé");
-                            Actualiser();
-                        }
+                opeartionButtons = new List<MenuItem>();
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("Aucun document trouvé");
-                        return;
-                    }
+                var baseAction = type.GetProperties().Where(a => (a.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute) != null
+                && (a.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute).FieldType == ModelFieldType.BaseButton);
 
-
+                foreach (var action in baseAction)
+                {
+                    actionsVisible = true;
+                    var attrib = (action.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute);
+                    var attribDisplay = (action.GetCustomAttribute(typeof(DisplayNameAttribute)) as DisplayNameAttribute);
+                    MenuItem newOps = new MenuItem();
+                    newOps.Header = attribDisplay.DisplayName;
+                    newOps.Click += NewOps_Click;
+                    newOps.TouchDown += NewOps_Click;
+                    //  newOps.Style = App.Current.FindResource("MaterialDesignFlatButton") as Style;
+                    newOps.Tag = attrib.Options;  // <= the name of the function
+                    opeartionButtons.Add(newOps);
                 }
 
-            }
-            catch (Exception s)
-            {
-                MessageBox.Show(s.Message);
-                return;
-            }
+                //opeartionButtons.Orientation = Orientation.Horizontal;
+            });
         }
-
-        public async void ExporterPDF()
-        {
-            if (SearchResul?.Any() == true)
-            {
-                windowManager.ShowWindow(new PrintWindowViewModel(SearchResul));
-            }
-            else
-            {
-                var response = MessageBox.Show("Voulez-vous exporter tous les documents?", "Confirmation", MessageBoxButton.YesNo);
-                if(response == MessageBoxResult.Yes)
-                {
-                    SearchResul = await datahelper.GetData<T>(a => true);
-                    windowManager.ShowWindow(new PrintWindowViewModel(SearchResul));
-                }
-            }
-        }
-
         public async void ValidateAll()
         {
             var selected = Items.Where(a => a.IsSelectedd);
@@ -487,184 +733,115 @@ namespace ErpAlgerie.Pages.Template
                     }
                     catch (Exception s)
                     {
-                        MessageBox.Show($"{s.Message}\n{((ExtendedDocument)item).Name}");
+                        DataHelpers.ShowMessage($"{s.Message}\n{((IDocument)item).Name}");
                         continue;
                     }
-
                 }
-                Actualiser();
+                await Actualiser();
             }
         }
 
-        public async void DeleteAll()
+        protected override void OnInitialActivate()
         {
-           
-            var selected = Items.Where(a => a.IsSelectedd).ToList();
-            var confirm = MessageBox.Show($"Voulez-vous supprimer ces {selected.Count} documents?", "Confirmation!",MessageBoxButton.YesNo);
-            if (confirm == MessageBoxResult.No)
-                return;
+            base.OnInitialActivate();
+            InitContextMenu();
+            aggre.Subscribe(this);
+        }
 
+        protected override void OnViewLoaded()
+        {
+            base.OnViewLoaded();
+        }
 
-            if (selected != null && selected.Any())
+        private async void NewOps_Click(object sender, RoutedEventArgs e)
+        {
+            var method = (sender as MenuItem).Tag.ToString();
+            var instance = new T();
+
+            (instance as IDocument).DoFunction(method);
+            await Actualiser();
+        }
+
+        private async void NewOps_Click1(object sender, RoutedEventArgs e)
+        {
+            var method = (sender as Button).Tag.ToString();
+            var instance = new T();
+            List<T> allData;
+            if (SaveVisible)
             {
-                foreach (IModel item in selected)
-                {
-                    if (!item.Delete(false))
-                        break;
-                }
-                Actualiser();
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        #region TEMP
-
-
-
-        //public IWindowManager windowManager;
-        private string _NameSearch;
-        //private static int _SelectedCOunt = 5;
-        //private IEventAggregator aggre;
-        //private ComboBox filtreDropDown;
-        //private List<string> filtreDropDownItems;
-        //private bool fromFiltre = false;
-        //private ICollectionView Itemlist;
-        //private IEnumerable<IDocument> list;
-        public int fontSize { get; set; } = 12;
-        //private Thread tGetPages;
-        //public SnackbarMessageQueue MessageQueue { get; set; } = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-
-        public string StatusLabel { get; set; } = "...";
-
-
-        public async void DoSearchKey()
-        {
-            await FilterThread();
-        }
-
-
-        public void BigFont()
-        {
-            fontSize++;
-            NotifyOfPropertyChange("fontSize");
-        }
-        public void SmallFont()
-        {
-            fontSize--;
-            NotifyOfPropertyChange("fontSize");
-        }
-        public List<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
-
-        public void InitContextMenu()
-        {
-            var menuOpen = new MenuItem();
-            menuOpen.Header = "Ouvrir";
-            menuOpen.Click += MenuOpen_Click;
-            menuOpen.TouchDown += MenuOpen_Click;
-
-            var menuDelete = new MenuItem();
-            menuDelete.Header = "Supprimer";
-            menuDelete.Click += MenuDelete_Click; ;
-            menuDelete.TouchDown += MenuDelete_Click; ;
-
-
-            MenuItems.Add(menuOpen);
-            MenuItems.Add(menuDelete);
-
-            NotifyOfPropertyChange("MenuItems");
-
-
-        }
-
-        private void MenuDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if (selected != null)
-            {
-                selected.IsSelectedd = true;
-                DeleteAll();
+                allData = DS.db.GetAll<T>();// await datahelper.GetMongoDataAll<T>();
             }
             else
             {
-                DataHelpers.windowManager.ShowMessageBox("Selectionner une ligne!");
+                allData = _list.ToList();
+            }
+            var neitems = (instance as IDocument).DoFunction(method, new object[] { allData });
+            _list = (neitems as IEnumerable<T>).ToList();
+            PAGE_MODE = PAGE_MODES.LIST;
+            var originalePage = PageCount;
+            PageCount = 1000;
+            await NextPage();
+            _list = allData;
+            PageCount = originalePage;
+        }
+        // public ListCollectionView CollectionItems { get; set; } = new ListCollectionView(new List<T>());
+        #region TEMP
+
+        //public IWindowManager windowManager;
+        private string _NameSearch;
+
+        public enum PAGE_MODES
+        {
+            ALL,
+            LIST,
+            FILTER_TEXT,
+            FILTER_BOX
+        }
+
+        public string ActionsLbl
+        {
+            get
+            {
+                return _("Actions");
             }
         }
 
-        private void MenuOpen_Click(object sender, RoutedEventArgs e)
+        public string displayName
         {
-            ouvrirItem();
+            get
+            {
+                return _(this.DisplayName);
+            }
         }
 
-        //protected BaseViewModel(IEnumerable<IDocument> _list, Type t, IShell shell, IEventAggregator _aggre, IWindowManager windowManager)
-        //{
-        //    this.windowManager = windowManager;
 
-        //    fromFiltre = true;
-        //    list = _list;
 
-        //    aggre = _aggre;
-        //    aggre.Subscribe(this);
-        //    type = t;
-        //    this.shell = shell;
-        //    InitContextMenu();
-        //}
+        public int fontSize { get; set; } = 12;
 
-        //protected BaseViewModel(Type t, IShell shell, IEventAggregator _aggre, IWindowManager windowManager)
-        //{
-        //    this.windowManager = windowManager;
-        //    fromFiltre = false;
-        //    type = t;
-        //    aggre = _aggre;
-        //    aggre.Subscribe(this);
-        //    this.shell = shell;
-        //    InitContextMenu();
-        //}
+
+        public List<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
+        public string NameSearch
+        {
+            get { return _NameSearch; }
+            set
+            {
+                _NameSearch = value;
+            }
+        }
+
+        public PAGE_MODES PAGE_MODE { get; set; } = PAGE_MODES.ALL;
+
+        //public Visibility ShowButtonAjouter { get; set; } = Visibility.Visible;
+        public bool SaveVisible
+        {
+            get
+            {
+                return !type.Name.Contains("_report");
+            }
+        }
+
+        public List<T> SearchResul { get; set; } = new List<T>();
+        public string StatusLabel { get; set; } = "...";
 
         //public string CurrentPage
         //{
@@ -673,175 +850,13 @@ namespace ErpAlgerie.Pages.Template
         //        return $"{PageNumber * SelectedCOunt} /";
         //    }
         //}
-
-        public string displayName
-        {
-            get
-            {
-                return this.DisplayName;
-            }
-        }
         public long TotalCount { get; set; }
-        public string ElementsCount
+
+        public void BigFont()
         {
-            get
-            {
-                return $"{Items.Count * PageNumber} sur {TotalCount} eléments ";
-            }
+            fontSize++;
+            NotifyOfPropertyChange("fontSize");
         }
-        //public BindableCollection<dynamic> FinalResults { get; set; } = new BindableCollection<dynamic>();
-        //public List<IDocument> Items { get; set; } = new List<IDocument>();
-        //public PagingCollectionView ItemsSource { get; set; }
-
-        public string NameSearch
-        {
-            get { return _NameSearch; }
-            set
-            {
-                _NameSearch = value;
-
-
-            }
-        }
-
-        //public List<MenuItem> opeartionButtons { get; set; }
-
-        //public static int PageNumber { get; set; } = 1;
-        //public ExtendedDocument selected { get; set; }
-
-        //public static int SelectedCOunt
-        //{
-        //    get { return _SelectedCOunt; }
-        //    set
-        //    {
-        //        _SelectedCOunt = value;
-        //        //ItemsSource = new PagingCollectionView(Items, SelectedCOunt);
-        //      // Task.Run(async () => await LoadData());
-        //    }
-        //}
-
-        ////  public List<dynamic> Original { get; set; } = new List<dynamic>();
-        //public IShell shell { get; set; }
-
-        //public Visibility ShowButtonAjouter { get; set; } = Visibility.Visible;
-
-        //public List<int> ShowCounts
-        //{
-        //    get
-        //    {
-        //        return new List<int>()
-        //        {   5,
-        //            30,
-        //            50,
-        //            100,
-        //            200,
-        //            500
-        //        };
-        //    }
-        //}
-
-        //public Type type { get; set; }
-
-        ////private async void loadFromType(Type type)
-        ////{
-        ////    list = await Task.Run(() => DataHelpers.GetMongoData(type.Name) as IEnumerable<IDocument>);
-        ////    this.type = type;
-
-        ////}
-
-        //public static async Task<BaseViewModel> Create(IEnumerable<IDocument> _list, Type t, IShell shell, IEventAggregator _aggre, IWindowManager windowsManager)
-        //{
-        //    BaseViewModel model = new BaseViewModel(_list, t, shell, _aggre, windowsManager);
-        //    await model.LoadData(_list);
-
-        //    return model;
-        //}
-
-        //public static async Task<BaseViewModel> Create(Type t, IShell shell, IEventAggregator _aggre, IWindowManager windowsManager)
-        //{
-        //     methodInfo = typeof(BaseViewModel).GetMethod("CreateAsync");
-
-        //      genericCreat = methodInfo.MakeGenericMethod(t);
-        //     genericparam = new  object[] { t, shell, _aggre, windowsManager };
-        //     return await ((Task < BaseViewModel > )genericCreat.Invoke(null, genericparam));
-
-        //    //BaseViewModel model = new BaseViewModel(t, shell, _aggre, windowsManager);
-        //    //await model.LoadData();
-        //    //return model; 
-        //}
-
-        //public async Task Next()
-        //{
-        //    await((Task<BaseViewModel>)genericCreat.Invoke(null, genericparam));
-        //}
-
-        //public static async Task<BaseViewModel> CreateAsync<T>(Type t, IShell shell, IEventAggregator _aggre, IWindowManager windowsManager) where T:ExtendedDocument, new()
-        //{
-        //    BaseViewModel model = new BaseViewModel(t, shell, _aggre, windowsManager);
-        //    await model.LoadData<T>(PageNumber, SelectedCOunt);
-        //    return model;
-
-        //}
-
-        //public static BaseViewModel CreateSyncSelect(Type t, IShell shell, IEventAggregator _aggre, IWindowManager windowsManager)
-        //{
-        //    ForSelectOnly = true;
-        //    BaseViewModel model = new BaseViewModel(t, shell, _aggre, windowsManager);
-        //    model.LoadDataSync();
-        //    return model;
-        //}
-
-
-
-
-        //public async Task Actualiser()
-        //{
-        //    //t = new Thread(new ThreadStart(FilterThread));
-        //    // SelectedCOunt = 20;
-        //    NameSearch = "";
-        //    PageNumber = 1;  
-        //        await LoadData();
-        //       //  NotifyOfPropertyChange("SelectedCOunt");
-        //        NotifyOfPropertyChange("PageNumber");
-        //    MessageQueue.Enqueue("Données actualisées");
-        //}
-
-        //public async void Add()
-        //{
-        //    try
-        //    {
-        //        selected = (ExtendedDocument)Activator.CreateInstance(type);
-
-
-        //        if (selected.DocOpenMod == OpenMode.Attach)
-        //        {
-        //            selected.CollectionName = displayName;
-        //            shell.OpenScreen(await DetailViewModel.Create(selected, selected.GetType(), aggre, shell), $"{this.DisplayName} | {selected.Name}");
-        //        }
-        //        else
-        //        {
-        //            var ioc = DataHelpers.container;
-        //            var vm = ioc.Get<ViewManager>();
-        //            var c = await DetailViewModel.Create(selected, selected.GetType(), aggre, shell);
-
-        //            var content = vm.CreateAndBindViewForModelIfNecessary(c);
-
-        //            var cc = new ContentControl();
-        //            cc.HorizontalAlignment = HorizontalAlignment.Stretch;
-        //            cc.VerticalAlignment = VerticalAlignment.Stretch;
-        //            cc.Content = content;
-
-        //            GenericWindowViewModel gw = new GenericWindowViewModel(cc, displayName, selected.Name);
-        //            windowManager.ShowWindow(gw);
-        //        }
-
-        //    }
-        //    catch (Exception s)
-        //    {
-        //        MessageBox.Show(s.Message);
-        //        return;
-        //    }
-        //}
 
         public void CloseWindows()
         {
@@ -851,35 +866,24 @@ namespace ErpAlgerie.Pages.Template
             }
             catch
             {
-                //MessageBox.Show(this.View.GetParentObject().TryFindParent<Window>().GetType().ToString());
+                // DataHelpers.ShowMessage( this.View.GetParentObject().TryFindParent<Window>().GetType().ToString());
                 this.View.GetParentObject().TryFindParent<Window>().Close();
             }
         }
 
-
-
-
-
-        //public void Dispose()
-        //{
-
-        //}
-
-
-        public   void SelectAll()
-        { 
-                foreach (ExtendedDocument item in Items)
-                {
-                    item.IsSelectedd = !item.IsSelectedd;
-                }
-                NotifyOfPropertyChange("Items");
-           
-
-        }
         public async void doFiltrer()
         {
-            var allData = await datahelper.GetMongoDataAll<T>();
-            var filtre = new FiltreViewModel<T>();
+            List<T> allData = new List<T>();
+            if (SaveVisible)
+            {
+                allData = DS.db.GetAll<T>();// await datahelper.GetMongoDataAll<T>();
+            }
+            else
+            {
+                allData = _list.ToList();
+            }
+
+            var filtre = new FiltreViewModel<T>(Filtres);
             DataHelpers.container.Get<ViewManager>().BindViewToModel(new FiltreView(), filtre);
             filtre.SetInputs(allData);
             var restulDialog = windowManager.ShowDialog(filtre);
@@ -887,256 +891,48 @@ namespace ErpAlgerie.Pages.Template
             {
                 PAGE_MODE = PAGE_MODES.FILTER_BOX;
                 SearchResul = filtre.Result.ConvertAll<T>(a => (T)a);
-               
+
                 //   SelectedCOunt = Items.Count;
                 //  ItemsSource = new PagingCollectionView(Items, SelectedCOunt);
-
+                PageNumber = 1;
                 await NextPage();
             }
         }
 
-        public List<T> SearchResul { get; set; } = new List<T>();
-        //public void ExporterPDF()
-        //{
-        //    /*
-        //     * /*/
-        //    windowManager.ShowWindow(new PrintWindowViewModel(Items));
+        public async void DoSearchKey()
+        {
+            await FilterThread();
+        }
+        ////}
+        public async Task FilterThread()
+        {
+            StatusLabel = _("Recherche en cours");
+            NotifyOfPropertyChange("StatusLabel");
+            PAGE_MODE = PAGE_MODES.FILTER_TEXT;
+            PageNumber = 1;
 
-        //}
+            await NextPage();
+            StatusLabel = _("Terminé");
+            NotifyOfPropertyChange("StatusLabel");
+        }
 
+        public void InitContextMenu()
+        {
+            var menuOpen = new MenuItem();
+            menuOpen.Header = _("Ouvrir");
+            menuOpen.Click += MenuOpen_Click;
+            menuOpen.TouchDown += MenuOpen_Click;
 
-        //public void ExportTemplate()
-        //{
+            var menuDelete = new MenuItem();
+            menuDelete.Header = _("Supprimer");
+            menuDelete.Click += MenuDelete_Click; ;
+            menuDelete.TouchDown += MenuDelete_Click; ;
 
-        //    var dialog = new SaveFileDialog();
-        //    var file = dialog.ShowDialog();
-        //    if (file == true)
-        //    {
-        //        var result = dialog.FileName;
-        //        var dp = new DynamicPath(result);
-        //        var ovimport = new ExcelImport(dp);
+            MenuItems.Add(menuOpen);
+            MenuItems.Add(menuDelete);
 
-        //        ovimport.ExportTemplate(result, type);
-        //        Process.Start(result);
-        //    }
-        //}
-
-        //public async void ImportData()
-        //{
-        //    try
-        //    {
-
-        //        var dialog = new OpenFileDialog();
-        //        var file = dialog.ShowDialog();
-        //        if (file == true)
-        //        {
-        //            var result = dialog.FileName;
-        //            var ovimport = new ExcelImport(new DynamicPath(result));
-
-        //            var data = ovimport.ImportDataFromType(result, type);
-
-        //            if (data != null)
-        //            {
-        //                var count = data.Count;
-        //                var confirmation = MessageBox.Show($"{count} documents trouvés, voulez-vous continuer!", "Confirmation", MessageBoxButton.YesNo);
-        //                if (confirmation == MessageBoxResult.Yes)
-        //                {
-
-        //                    foreach (var item in data)
-        //                    {
-        //                        item.AddedAtUtc = DateTime.Now;
-        //                        item.isLocal = false;
-        //                        // item.Save();
-        //                    }
-        //                    var mi = typeof(BaseMongoRepository).GetMethod("AddMany");
-        //                    var gen = mi.MakeGenericMethod(type);
-        //                    gen.Invoke(DS.db, new object[] { data });
-        //                    //  DS.db.AddMany<t>(data);
-        //                    MessageBox.Show("Terminé");
-        //                    await Actualiser();
-        //                }
-
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show("Aucun document trouvé");
-        //                return;
-        //            }
-
-
-        //        }
-
-        //    }
-        //    catch (Exception s)
-        //    {
-        //        MessageBox.Show(s.Message);
-        //        return;
-        //    }
-        //}
-
-        //public async void Handle(ModelChangeEvent message)
-        //{
-        //    await Actualiser();
-        //    //new Thread(() =>
-        //    //{
-        //    //    Thread.CurrentThread.IsBackground = true;
-        //    //     Actualiser().Wait();
-        //    //}).Start(  ) ;
-        //}
-
-        //private void Bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
-        //    Console.WriteLine("Finish");
-        //}
-
-        //private  async void Bg_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //     await Actualiser();
-        //}
-        //public DataHelpers datahelper { get; set; } = new DataHelpers();
-
-
-        //public BindableCollection<dynamic> TABLE_DATA { get; set; }
-        //private async Task LoadData<T>(int _PageNumber, int _SelectedCOunt) where T : ExtendedDocument, new()
-        //{
-
-        //    // if(!fromFiltre)
-        //    // list = await DataHelpers.GetMongoData(type.Name);
-        //    // datahelper
-        //    var result =  await datahelper.GetMongoDataPaged<T>(type, _PageNumber, _SelectedCOunt);
-        //    TABLE_DATA = new BindableCollection<dynamic>();
-        //    TABLE_DATA.AddRange(result.ConvertAll<ExtendedDocument>(a => a));
-        //    TABLE_DATA.Refresh();
-        //    // FinalResults = new BindableCollection<dynamic>(t);
-        //    //   TABLE_DATA = new ObservableCollection<dynamic>(r.Cast<ExtendedDocument>());
-        //    NotifyOfPropertyChange("TABLE_DATA");
-        //    //Items = new List<IDocument>();
-        //    //await  LoadDataThread(list); 
-
-
-
-        //}
-        //public async Task LoadData()
-        //{
-
-        //        if(!fromFiltre)
-        //         list = await DataHelpers.GetMongoData(type.Name);
-        //       // datahelper
-        //       // list = await DataHelpers.GetMongoDataSync(type, PageNumber, SelectedCOunt);
-        //        FinalResults = new BindableCollection<dynamic>(list);
-        //        NotifyOfPropertyChange("FinalResults");
-        //    Items = new List<IDocument>();
-        //    await LoadDataThread(list);
-
-
-
-        //}
-
-        //public void LoadDataSync()
-        //{
-
-        //        //if (!fromFiltre)
-        //        //    list = DataHelpers.GetMongoDataSync(type.Name);
-        //        //Items = new List<IDocument>();
-
-
-        //        //    var tLoadData = new Thread(() => LoadDataThread(list).Wait());
-        //        //tLoadData.Start();
-
-        //}
-
-        //public async Task LoadData(IEnumerable<IDocument> _list)
-        //{
-
-        //    if (list != null)
-        //    {
-        //        await Task.Run(() => list = _list.OrderByDescending(a => a?.AddedAtUtc));
-        //    }
-        //    await LoadDataThread(list);
-        //    //var tLoadData = new Thread(() => LoadDataThread(list));
-        //    //tLoadData.Start();
-
-        //}
-
-        //public async Task LoadDataThread(IEnumerable<IDocument> _list)
-        //{
-        //    StatusLabel = "Collection des données..."; NotifyOfPropertyChange("StatusLabel");
-        //    Items = _list.ToList();
-        //    // Items = _list.OrderByDescending(a => a.AddedAtUtc).ToList();
-        //    //  Original = Items;
-
-        //    //ItemsSource = new PagingCollectionView(Items, SelectedCOunt);
-        //    await Setup();
-
-        //    // NotifyOfPropertyChange("Original");
-        //    await GetPages();
-        //    StatusLabel = "Terminé"; NotifyOfPropertyChange("StatusLabel");
-
-        //}
-
-
-        //public async void nextPage()
-        //{
-        //    PageNumber++;
-        //    // await GetPages();
-        //    await Next();
-        //    NotifyOfPropertyChange("PageNumber");
-        //    NotifyOfPropertyChange("CurrentPage");
-
-        //    //pageNumber++;
-        //    //if ((pageNumber * SelectedCOunt) > Items.Count)
-        //    //{
-        //    //    pageNumber--;
-        //    //}
-
-        //    // NotifyOfPropertyChange("Results");
-        //}
-
-        //public async void ouvrirItem()
-        //{
-        //    try
-        //    {
-        //        if (selected != null)
-        //        {
-        //            // Show for select item  only
-        //            if (ForSelectOnly)
-        //            {
-        //                ForSelectOnly = false;
-        //                CloseWindows();
-        //            }
-        //            else
-        //            {
-
-        //                if (selected.DocOpenMod == OpenMode.Attach)
-        //                {
-        //                    selected.CollectionName = displayName;
-        //                    shell.OpenScreen(await DetailViewModel.Create(selected, selected.GetType(), aggre, shell), $"{selected.CollectionName} - {selected.Name}");
-        //                }
-        //                else
-        //                {
-        //                    var ioc = DataHelpers.container;
-        //                    var vm = ioc.Get<ViewManager>();
-        //                    var c = await DetailViewModel.Create(selected, selected.GetType(), aggre, shell);
-        //                    c.DisplayName = selected.CollectionName;
-        //                    var content = vm.CreateAndBindViewForModelIfNecessary(c);
-
-        //                    var cc = new ContentControl();
-        //                    cc.HorizontalAlignment = HorizontalAlignment.Stretch;
-        //                    cc.VerticalAlignment = VerticalAlignment.Stretch;
-        //                    cc.Content = content;
-
-        //                    GenericWindowViewModel gw = new GenericWindowViewModel(cc, displayName, selected.Name);
-        //                    windowManager.ShowWindow(gw);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception s)
-        //    {
-        //        MessageQueue.Enqueue(s.Message);
-        //        return;
-        //    }
-        //}
+            NotifyOfPropertyChange("MenuItems");
+        }
 
         //public async void prevPage()
         //{
@@ -1159,209 +955,26 @@ namespace ErpAlgerie.Pages.Template
                 try { await FilterThread(); }
                 catch (Exception s)
                 {
-                    MessageBox.Show(s.Message);
+                    DataHelpers.ShowMessage(s.Message);
                     return;
                 }
             }
         }
 
-        ////private async Task doFindByName()
-        ////{
-        ////     if(t == null)
-        ////        t = new Thread(new ThreadStart(FilterThread));
-
-        ////    var lengh = NameSearch.Length;
-        ////    if (lengh == 0)
-        ////    {
-        ////        Actualiser();
-        ////        return;
-        ////    }
-
-        ////    if(lengh < originalSearchLengh)
-        ////    {
-        ////         Actualiser();
-        ////    }
-        ////    if (t.ThreadState == ThreadState.Stopped || t.ThreadState == ThreadState.Unstarted)
-        ////    {
-        ////        t = new Thread(new ThreadStart(FilterThread));
-        ////        t.Start();
-        ////    }
-        ////    else
-        ////    {
-        ////        //Actualiser();
-        ////        StatusLabel = "Recherche encours...";
-        ////        NotifyOfPropertyChange("StatusLabel");
-        ////    }
-        ////    originalSearchLengh = lengh;
-
-        ////}
-
-        //int originalSearchLengh = 0;
-        //private static MethodInfo methodInfo;
-        //private static MethodInfo genericCreat;
-        //private static object[] genericparam;
-
-
-        public enum PAGE_MODES
+        public void SelectAll()
         {
-            ALL,
-            LIST,
-            FILTER_TEXT,
-            FILTER_BOX
-        }
-        public PAGE_MODES PAGE_MODE { get; set; } = PAGE_MODES.ALL;
-
-        public async Task FilterThread()
-        { 
-
-            StatusLabel = "Recherche en cours...";
-            NotifyOfPropertyChange("StatusLabel");
-            PAGE_MODE = PAGE_MODES.FILTER_TEXT;
-            PageNumber = 1;
-
-            await NextPage();
-            StatusLabel = "Terminé";
-            NotifyOfPropertyChange("StatusLabel");
+            foreach (IDocument item in Items)
+            {
+                item.IsSelectedd = !item.IsSelectedd;
+            }
+            NotifyOfPropertyChange("Items");
         }
 
-        //private async Task GetPages()
-        //{
-        //   // FinalResults.Clear();
-        //    await LoadPageItems();
-        //    // tGetPages = new Thread(new ThreadStart(GetPagesThread));
-        //    //tGetPages.Start();
-        //    //       this.ClearAllPropertyErrors();
-
-        //    // FinalResults.Refresh();
-        //}
-
-
-
-
-
-        //public async void DeleteAll()
-        //{
-        //    var selected = FinalResults.Where(a => a.IsSelectedd).ToList();
-        //    if(selected != null && selected.Any())
-        //    {
-        //        foreach (IModel item in selected)
-        //        {
-        //            if (!item.Delete())
-        //                break;
-        //        }
-        //       await Actualiser();
-        //    }
-
-
-        //}
-
-        //public async void ValidateAll()
-        //{
-        //    var selected = FinalResults.Where(a => a.IsSelectedd);
-        //    if (selected != null && selected.Any())
-        //    {
-        //        foreach (IModel item in selected)
-        //        {
-        //            try
-        //            {
-        //                item.Submit();
-        //            }
-        //            catch (Exception s)
-        //            {
-        //                MessageBox.Show($"{s.Message}\n{((ExtendedDocument)item).Name}");
-        //                continue;
-        //            }
-
-        //        }
-        //        await Actualiser();
-        //    }
-        //}
-
-        //private async Task LoadPageItems()
-        //{
-
-        //    StatusLabel = "Patientez svp..."; NotifyOfPropertyChange("StatusLabel");
-        //    var values = Items.ToPagedList<IDocument>(PageNumber, SelectedCOunt);
-
-        //    FinalResults = new BindableCollection<dynamic>(values);
-        //    NotifyOfPropertyChange("FinalResults");
-        //    // FinalResults.AddRange(values);
-        //    var ecahntient = FinalResults.FirstOrDefault();
-        //    if(ecahntient != null)
-        //    {
-        //        try
-        //        {
-
-        //            //Type t = (ecahntient.GetType());
-        //            //if (t.Equals(typeof(Prestation)))
-        //            //{
-        //            //    var list = FinalResults.ToList();
-        //            //    var toList = list.ToList();
-        //            //    double total = (double)list.Sum(a => (double)a.MontantTotal);
-        //            //    double totalpaye = (double)list.Sum(a => (double)a.MontantPaye);
-        //            //    FinalResults.Add(new Prestation()
-        //            //    {
-        //            //        Name = "TOTAL",
-        //            //        MontantTotal = total,
-        //            //        MontantPaye = totalpaye
-        //            //    });
-        //            //}
-        //            //if (t.Equals(typeof(EcritureCompte)))
-        //            //{
-        //            //    var list = FinalResults.ToList();
-        //            //    var toList = list.ToList();
-        //            //    double nDebit = (double)list.Sum(a => (double)a.nDebit);
-        //            //    double nCredit = (double)list.Sum(a => (double)a.nCredit);
-        //            //    FinalResults.Add(new EcritureCompte()
-        //            //    {
-        //            //        Name = "TOTAL",
-        //            //        nDebit = nDebit,
-        //            //        nCredit = nCredit
-        //            //    });
-        //            //}
-        //            //if (t.Equals(typeof(CompteResultatReport)))
-        //            //{
-        //            //    var list = FinalResults.ToList();
-        //            //    var toList = list.ToList();
-        //            //    double nDebit = (double)list.Sum(a => (double)a.Montant);
-        //            //    FinalResults.Add(new CompteResultatReport()
-        //            //    {
-        //            //        Name = "TOTAL",
-        //            //        Montant = nDebit,
-
-        //            //    });
-        //            //}
-
-        //        }
-        //        catch (Exception s)
-        //        {
-        //            StatusLabel = s.Message;
-        //        }
-        //    }
-
-        //    // FinalResults.Refresh();
-        //    // NotifyOfPropertyChange("FinalResults");
-
-        //    ElementsCount = $"{Items.Count} élement(s)";
-        //    NotifyOfPropertyChange("ElementsCount");
-        //    StatusLabel = "Terminé"; NotifyOfPropertyChange("StatusLabel");
-        //}
-
-        //private async Task Setup()
-        //{
-        //    var typeName = type.Name.ToLower();
-        //    if (typeName.ToLower().Contains("report"))
-        //    {
-        //        ShowButtonAjouter = Visibility.Hidden;
-        //        NotifyOfPropertyChange("ShowButtonAjouter");
-        //    }
-        //}
-
-        //private void Tb_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    //  NotifyOfPropertyChange("Search");
-        //}
-
+        public void SmallFont()
+        {
+            fontSize--;
+            NotifyOfPropertyChange("fontSize");
+        }
         public void UserControl_KeyDown(object sender, KeyEventArgs args)
         {
             if (args.Key == Key.F1)
@@ -1373,25 +986,26 @@ namespace ErpAlgerie.Pages.Template
                 CloseWindows();
             }
         }
-        #endregion
 
-
-        public void Dispose()
+        private void MenuDelete_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        public void Handle(ModelChangeEvent message)
-        {
-            if (message.type == this.type)
+            if (selected != null)
             {
-                Action t = async () => 
-                {
-                    await Actualiser();
-                };
-
-                t();
+                selected.IsSelectedd = true;
+                DeleteAll();
+            }
+            else
+            {
+                DataHelpers.ShowMessage(_("Selectionner une ligne!"));
             }
         }
+
+        private void MenuOpen_Click(object sender, RoutedEventArgs e)
+        {
+            ouvrirItem();
+        }
+
+
+        #endregion TEMP
     }
 }

@@ -7,17 +7,17 @@
   </section>
 
   <section header="CRM" icon="Desktop">
-    <item header ="Clients" icon="Users" description="" class="ErpAlgerie.Modules.CRM.Client" />
-    <item header ="Contacts" icon="AddressCard" description="" class="ErpAlgerie.Modules.CRM.Contact" />
-    <item header ="Groupes clients" icon="Bookmark" description="" class="ErpAlgerie.Modules.CRM.GroupeClient" />
-    <item header ="Domaines d'activité" icon="Briefcase" description="" class="ErpAlgerie.Modules.CRM.DomaineActivite" />
+    <item header ="Tiers" icon="Users" description="" class="Ovresko.Generix.Core.ModulesTier" />
+    <item header ="Contacts" icon="AddressCard" description="" class="Ovresko.Generix.Core.ModulesContact" />
+    <item header ="Groupes tiers" icon="Bookmark" description="" class="Ovresko.Generix.Core.ModulesGroupeTier" />
+    <item header ="Domaines d'activité" icon="Briefcase" description="" class="Ovresko.Generix.Core.ModulesDomaineActivite" />
   </section>
 
   <section header="Ventes">
-    <item header ="Commandes client" icon="Search" description="" class="ErpAlgerie.Modules.CRM.CommandeVente" />
-    <item header ="Factures" icon="Search" description="" class="ErpAlgerie.Modules.CRM.Facture" />
+    <item header ="Commandes tier" icon="Search" description="" class="Ovresko.Generix.Core.ModulesCommandeVente" />
+    <item header ="Factures" icon="Search" description="" class="Ovresko.Generix.Core.ModulesFacture" />
 
-    <item header ="Modéle entéte" icon="Search" description="" class="ErpAlgerie.Modules.CRM.ModeleEntete" />
+    <item header ="Modéle entéte" icon="Search" description="" class="Ovresko.Generix.Core.ModulesModeleEntete" />
 
   </section>
 
@@ -25,8 +25,8 @@
   </section>
 
   <section header="Stocks">
-    <item header ="Produits" icon="ShoppingCart" description="" class="ErpAlgerie.Modules.CRM.Article" />
-    <item header ="Stock" icon="Industry" description="" class="ErpAlgerie.Modules.CRM.Stock" />
+    <item header ="Produits" icon="ShoppingCart" description="" class="Ovresko.Generix.Core.ModulesArticle" />
+    <item header ="Stock" icon="Industry" description="" class="Ovresko.Generix.Core.ModulesStock" />
 
   </section>
 
@@ -43,13 +43,13 @@
   </section>
 
   <section header="Paramétrages">
-    <item header ="Options" icon="Gear" description="" instance="getInstance" class="ErpAlgerie.Modules.CRM.ElvaSettings" />
-    <item header ="Séries" icon="Clipboard" description=""   class="ErpAlgerie.Modules.CRM.SeriesName" />
-     <item header ="Taxes" icon="Clipboard" description=""   class="ErpAlgerie.Modules.CRM.Taxe" />
-    <item header ="Marques" icon="Certificate" description=""   class="ErpAlgerie.Modules.CRM.Marque" />
-    <item header ="Role" icon="Certificate" description=""   class="ErpAlgerie.Modules.CRM.Role" />
-    <item header ="Utilisateur" icon="Certificate" description=""   class="ErpAlgerie.Modules.CRM.User" />
- <item header ="Modules" icon="Certificate" description=""   class="ErpAlgerie.Modules.CRM.ModuleErp" />
+    <item header ="Options" icon="Gear" description="" instance="getInstance" class="Ovresko.Generix.Core.ModulesElvaSettings" />
+    <item header ="Séries" icon="Clipboard" description=""   class="Ovresko.Generix.Core.ModulesSeriesName" />
+     <item header ="Taxes" icon="Clipboard" description=""   class="Ovresko.Generix.Core.ModulesTaxe" />
+    <item header ="Marques" icon="Certificate" description=""   class="Ovresko.Generix.Core.ModulesMarque" />
+    <item header ="Role" icon="Certificate" description=""   class="Ovresko.Generix.Core.ModulesRole" />
+    <item header ="Utilisateur" icon="Certificate" description=""   class="Ovresko.Generix.Core.ModulesUser" />
+ <item header ="Modules" icon="Certificate" description=""   class="Ovresko.Generix.Core.ModulesModuleErp" />
 
   </section>
 

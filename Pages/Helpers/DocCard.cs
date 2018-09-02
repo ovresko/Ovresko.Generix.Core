@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ErpAlgerie.Pages.Helpers
+namespace Ovresko.Generix.Core.Pages.Helpers
 {
    public class DocCard
     { 

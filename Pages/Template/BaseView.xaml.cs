@@ -19,7 +19,7 @@ using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 using System.Xml.Linq;
 
-namespace ErpAlgerie.Pages.Template
+namespace Ovresko.Generix.Core.Pages.Template
 {
     /// <summary>
     /// Logique d'interaction pour BaseView.xaml

@@ -1,4 +1,6 @@
-﻿using ErpAlgerie.Modules.Core.Module;
+﻿using Ovresko.Generix.Core.Modules.Core.Module;
+using Ovresko.Generix.Core.Modules.Core.Module;
+using Ovresko.Generix.Datasource.Models;
 using SimpleWPFReporting;
 using Stylet;
 using System;
@@ -9,15 +11,15 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace ErpAlgerie.Pages.Template
+namespace Ovresko.Generix.Core.Pages.Template
 {
     class ObjReportViewModel : Screen, IDisposable
     {
 
         public StackPanel panel { get; set; } = new StackPanel();
-        public ExtendedDocument Doc { get; set; }
+        public IDocument Doc { get; set; }
 
-        public ObjReportViewModel(ExtendedDocument doc)
+        public ObjReportViewModel(IDocument doc)
         {
             this.Doc = doc;
             SetView();

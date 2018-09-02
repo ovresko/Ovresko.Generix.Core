@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ErpAlgerie.Modules.Core.Module
+namespace Ovresko.Generix.Core.Modules.Core.Module
 {
    public  enum ModelFieldType
     {
@@ -18,7 +18,7 @@ namespace ErpAlgerie.Modules.Core.Module
         Lien,
         LienField,
         LienButton,
-        LienFetch,
+       // LienFetch,
         ReadOnly,
         Separation,
         FiltreText,
@@ -29,6 +29,8 @@ namespace ErpAlgerie.Modules.Core.Module
         WeakTable,
         Button,
         OpsButton,
-        BaseButton
+        BaseButton,
+        BaseFilter,
+        ReportControl
     }
 }

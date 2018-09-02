@@ -1,15 +1,15 @@
-﻿<Window x:Class="ErpAlgerie.Pages.LicenceManage.LicenceManagerView"
+﻿<Window x:Class="Ovresko.Generix.Core.Pages.LicenceManage.LicenceManagerView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ErpAlgerie.Pages.LicenceManage"
+        xmlns:local="clr-namespace:Ovresko.Generix.Core.Pages.LicenceManage"
         mc:Ignorable="d"
         Background="WhiteSmoke"
         
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
           xmlns:s="https://github.com/canton7/Stylet"
-        Title="Activation de licence" Height="485" Width="416" VerticalAlignment="Top">
+        Title="Activation de licence" Height="485" Width="419.466" VerticalAlignment="Top" Icon="/Ovresko.Generix.Core;component/Images/logo ovresko_128.ico">
     <StackPanel Margin="15,15,15,6">
         <TextBlock Text="Enregistrement"/>
         <Separator/>

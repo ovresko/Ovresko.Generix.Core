@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ErpAlgerie.Properties {
+namespace Ovresko.Generix.Core.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -82,6 +82,57 @@ namespace ErpAlgerie.Properties {
             }
             set {
                 this["UpdateModules"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EmailTemplates")]
+        public string EMAIL_TEMPLATES_ROOT {
+            get {
+                return ((string)(this["EMAIL_TEMPLATES_ROOT"]));
+            }
+            set {
+                this["EMAIL_TEMPLATES_ROOT"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SMTP_HOST {
+            get {
+                return ((string)(this["SMTP_HOST"]));
+            }
+            set {
+                this["SMTP_HOST"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>fr</string>\r\n  <string>ar</string>\r\n  <string>en</string>\r\n</ArrayOfString" +
+            ">")]
+        public global::System.Collections.Specialized.StringCollection LANGS {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["LANGS"]));
+            }
+            set {
+                this["LANGS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseMongoServer {
+            get {
+                return ((bool)(this["UseMongoServer"]));
+            }
+            set {
+                this["UseMongoServer"] = value;
             }
         }
     }

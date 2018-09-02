@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ovresko.Generix.Core.Modules.Core.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ErpAlgerie.Pages
+namespace Ovresko.Generix.Core.Pages
 {
     /// <summary>
     /// Logique d'interaction pour LoginView.xaml
@@ -21,9 +22,23 @@ namespace ErpAlgerie.Pages
     {
         public LoginView()
         {
+           
             InitializeComponent();
         }
 
-      
+        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+          //  var val = App.MyEZLocalize.LanguagesForFileBaseName("Languages", "InterfaceStrings");
+          // var s= this.TryFindResource("HelloStr") as string;
+
+          //string error =  App.MyEZLocalize.ChangeLanguage("en");
+          //  string val2 = this.TryFindResource("HelloStr") as string;
+
+        }
+
+        private void pwdBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            (this.DataContext as LoginViewModel).pwd = pwdBox.Password;
+        }
     }
 }

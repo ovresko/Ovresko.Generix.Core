@@ -1,6 +1,6 @@
-﻿using ErpAlgerie.Modules.Core;
-using ErpAlgerie.Modules.Core.Data;
-using ErpAlgerie.Modules.CRM;
+﻿using Ovresko.Generix.Core.Modules.Core;
+using Ovresko.Generix.Core.Modules.Core.Data;
+using Ovresko.Generix.Core.Modules;
 using Microsoft.Win32;
 using Portable.Licensing;
 using Stylet;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ErpAlgerie.Pages.LicenceManage
+namespace Ovresko.Generix.Core.Pages.LicenceManage
 {
     class LicenceManagerViewModel : Screen
     {
@@ -28,39 +28,39 @@ namespace ErpAlgerie.Pages.LicenceManage
 
         public LicenceManagerViewModel()
         {
-            if (File.Exists("public-lcs"))
-            {
-                using(var str = new StreamReader("public-lcs"))
-                {
-                    clePublic = str.ReadToEnd();
+            //if (File.Exists("public-lcs"))
+            //{
+            //    using(var str = new StreamReader("public-lcs"))
+            //    {
+            //        clePublic = str.ReadToEnd();
                    
-                }
-            }
+            //    }
+            //}
 
-            if (File.Exists("License.lic"))
-            {
-                try
-                {
-                    using (var sr = (new StreamReader("License.lic")))
-                    {
-                        var lic = License.Load(sr);
-                        TypeLicence = lic.Type.ToString();
-                        DateExpiration = lic.Expiration.ToLongDateString();
-                        IsValide = true;
-                    }
-                }
-                catch 
-                {}
-            }
+            //if (File.Exists("License.lic"))
+            //{
+            //    try
+            //    {
+            //        using (var sr = (new StreamReader("License.lic")))
+            //        {
+            //            var lic = License.Load(sr);
+            //            TypeLicence = lic.Type.ToString();
+            //            DateExpiration = lic.Expiration.ToLongDateString();
+            //            IsValide = true;
+            //        }
+            //    }
+            //    catch 
+            //    {}
+            //}
 
-            var settings = DataHelpers.Settings;
-            email = settings.Email;
-            userName = settings.UserName;
-            NotifyOfPropertyChange("clePublic");
-            NotifyOfPropertyChange("email");
-            NotifyOfPropertyChange("userName");
-            NotifyOfPropertyChange("TypeLicence");
-            NotifyOfPropertyChange("DateExpiration");
+            //var settings = DataHelpers.Settings;
+            //email = settings.Email;
+            //userName = settings.UserName;
+            //NotifyOfPropertyChange("clePublic");
+            //NotifyOfPropertyChange("email");
+            //NotifyOfPropertyChange("userName");
+            //NotifyOfPropertyChange("TypeLicence");
+            //NotifyOfPropertyChange("DateExpiration");
         }
 
         public void LoadLicence()
@@ -71,7 +71,7 @@ namespace ErpAlgerie.Pages.LicenceManage
                 var file = od.FileName;
                 if (!file.Contains("lic"))
                 {
-                    MessageBox.Show("Licence non valide");
+                     DataHelpers.ShowMessage( "Licence non valide");
                     return;
                 }
                 licenceFile = file;
@@ -84,55 +84,55 @@ namespace ErpAlgerie.Pages.LicenceManage
 
         public void VlidateLicence()
         {
-            if(string.IsNullOrWhiteSpace( licenceFile))
-            {
-                MessageBox.Show("Charger votre licence d'abord");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(clePublic))
-            {
-                MessageBox.Show("Clé public obligatoire!");
-                return;
-            }
+            //if(string.IsNullOrWhiteSpace( licenceFile))
+            //{
+            //     DataHelpers.ShowMessage( "Charger votre licence d'abord");
+            //    return;
+            //}
+            //if (string.IsNullOrWhiteSpace(clePublic))
+            //{
+            //     DataHelpers.ShowMessage( "Clé public obligatoire!");
+            //    return;
+            //}
 
-            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrEmpty(userName))
-            {
-                MessageBox.Show("Vérifer nom d'utilsateur ou email");
-                return;
-            }
+            //if (string.IsNullOrWhiteSpace(email) || string.IsNullOrEmpty(userName))
+            //{
+            //     DataHelpers.ShowMessage( "Vérifer nom d'utilsateur ou email");
+            //    return;
+            //}
 
-            using (var publicK = new StreamWriter("public-lcs"))
-            {
-                publicK.Write(clePublic);
-                publicK.Close();
-            }
+            //using (var publicK = new StreamWriter("public-lcs"))
+            //{
+            //    publicK.Write(clePublic);
+            //    publicK.Close();
+            //}
               
 
-            File.Copy(licenceFile, "License.lic", true);
+            //File.Copy(licenceFile, "License.lic", true);
 
-            try
-            {
-                if (FrameworkManager.ValidateLicence(clePublic,userName,email))
-                {
-                    MessageBox.Show("Licence validée");
-                    var settings = new ElvaSettings().getInstance();
-                    settings.UserName = userName;
-                    settings.Email = email;
-                    settings.Save();
-                    IsValide = true;
-                    this.RequestClose();
-                }
-                else
-                {
-                    IsValide = false;
-                    MessageBox.Show("Licence invalide");
+            //try
+            //{
+            //    if (FrameworkManager.ValidateLicence(clePublic,userName,email))
+            //    {
+            //         DataHelpers.ShowMessage( "Licence validée");
+            //        var settings =  ElvaSettings.getInstance();
+            //        settings.UserName = userName;
+            //        settings.Email = email;
+            //        settings.Save();
+            //        IsValide = true;
+            //        this.RequestClose();
+            //    }
+            //    else
+            //    {
+            //        IsValide = false;
+            //         DataHelpers.ShowMessage( "Licence invalide");
 
-                }
-            }
-            catch (Exception s)
-            {
-                MessageBox.Show(s.Message);
-            }
+            //    }
+            //}
+            //catch (Exception s)
+            //{
+            //     DataHelpers.ShowMessage( s.Message);
+            //}
 
 
 
@@ -152,7 +152,7 @@ namespace ErpAlgerie.Pages.LicenceManage
         {
             if (string.IsNullOrWhiteSpace(clePublic))
             {
-                MessageBox.Show("Clé public obligatoire!");
+                 DataHelpers.ShowMessage( "Clé public obligatoire!");
                 return;
             }
             using (var publicK = new StreamWriter("public-lcs"))
@@ -161,10 +161,10 @@ namespace ErpAlgerie.Pages.LicenceManage
                 publicK.Close();
             }
                
-            var used = new ElvaSettings().getInstance().DemoUsed;
+            var used =  ElvaSettings.getInstance().DemoUsed;
             if (false)
             {
-                MessageBox.Show("Licence demo expirée, Contactez votre fournisseur/ 0665 97 76 79 / ovresko@gmail.com");
+                 DataHelpers.ShowMessage( "Licence demo expirée, Contactez votre fournisseur/ 0665 97 76 79 / ovresko@gmail.com");
                 return;
             }
             else
@@ -174,20 +174,20 @@ namespace ErpAlgerie.Pages.LicenceManage
                 {
                     if (FrameworkManager.ValidateLicence(clePublic,userName,email))
                     {
-                        MessageBox.Show("Licence validée");
+                         DataHelpers.ShowMessage( "Licence validée");
                         IsValide = true;
                         this.RequestClose();
                     }
                     else
                     {
-                        MessageBox.Show("Licence invalide");
+                         DataHelpers.ShowMessage( "Licence invalide");
                         IsValide = false;
                         
                     }
                 }
                 catch (Exception s)
                 {
-                    MessageBox.Show(s.Message);
+                     DataHelpers.ShowMessage( s.Message);
                 }
             }
         }

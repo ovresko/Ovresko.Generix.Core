@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ErpAlgerie.Pages
+namespace Ovresko.Generix.Core.Pages
 {
     /// <summary>
     /// Logique d'interaction pour PrintWindowView.xaml

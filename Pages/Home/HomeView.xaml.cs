@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ErpAlgerie.Pages.Home
+namespace Ovresko.Generix.Core.Pages.Home
 {
     /// <summary>
     /// Logique d'interaction pour HomeView.xaml

@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="ErpAlgerie.Framework.ModuleBuilderView"
+﻿<UserControl x:Class="Ovresko.Generix.Core.Framework.ModuleBuilderView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                xmlns:s="https://github.com/canton7/Stylet"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ErpAlgerie.Framework"
+        xmlns:local="clr-namespace:Ovresko.Generix.Core.Framework"
         mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="White" d:DesignWidth="937.138" d:DesignHeight="393.255">
     <Grid>
         <StackPanel Margin="10,10,0,0" Orientation="Horizontal" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="353">
@@ -52,7 +52,7 @@
         <Button Content="Créer class" Command="{s:Action ExportClass}" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75"/>
         <Button Command="{s:Action Generate}" Content="Créer property" HorizontalAlignment="Right" Margin="0,190,10,0" VerticalAlignment="Top" Width="75"/>
         <TextBox  Text="{Binding MyTypeAttrib, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="692,125,0,0" HorizontalAlignment="Left" Width="108" Height="26" VerticalAlignment="Top"  />
-        <ListView ItemsSource="{Binding Fields, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="369,260,0,0">
+        <ListView ItemsSource="{Binding FielDS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="369,260,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <StackPanel Orientation="Vertical">

@@ -27,7 +27,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
-namespace ErpAlgerie.Pages.Reports
+namespace Ovresko.Generix.Core.Pages.Reports
 {
     /// <summary>
     /// Logique d'interaction pour ReportView.xaml

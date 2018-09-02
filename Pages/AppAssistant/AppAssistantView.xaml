@@ -1,0 +1,135 @@
+﻿<Window x:Class="Ovresko.Generix.Core.Pages.AppAssistant.AppAssistantView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+           xmlns:s="https://github.com/canton7/Stylet"
+       
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ovresko.Generix.Core.Pages.AppAssistant"
+        mc:Ignorable="d" Topmost="True"   xmlns:Tx="http://unclassified.software/source/txtranslation"
+         xmlns:tab="clr-namespace:Dragablz;assembly=Dragablz"
+        FontFamily="{StaticResource LatoRegular}" Background="#FF3C3C5F"
+        Title="{Tx:T app.name}" Height="466" Width="300">
+    <Grid>
+        <TabControl   Background="#FF3C3C5F"
+                            IsManipulationEnabled="False"
+                      
+                            SelectedIndex="{Binding indexPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Name="main_tab" 
+                            Margin="0,0,-1,52"
+                            BorderBrush="#FF078CD8" 
+                            BorderThickness="0,0,0,0"
+                             >
+            <TabItem Header="Application" Background="White">
+                <Grid Background="#252526">
+                    <Image Width="133" Margin="199,22,202,0" Height="138" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Ovresko.Generix.Core;component/Images/logo ovresko_128.png"/>
+                    <Label Content="Bienvenue..."  HorizontalContentAlignment="Center"
+                           FontSize="25" VerticalAlignment="Top"
+                           FontWeight="Light"
+                           Foreground="White"
+                           Margin="105,148,92,0"  />
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="L'entreprise" Background="White">
+                <Grid>
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}"
+                         VerticalAlignment="Top" AcceptsReturn="True" Text="{Binding Entreprise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" MaxWidth="400" materialDesign:HintAssist.Hint="Nom d'entreprise"
+                         
+                             HorizontalAlignment="Left" Width="307" Margin="26,26,0,0" Height="auto" />
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}"
+                        VerticalAlignment="Top" AcceptsReturn="True" Text="{Binding Entreprise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap" MaxWidth="400" materialDesign:HintAssist.Hint="E-Mail"
+                        
+                        HorizontalAlignment="Left" Width="307" Margin="26,73,0,0"   />
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}"
+                        VerticalAlignment="Top" AcceptsReturn="True" Text="{Binding Entreprise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap" MaxWidth="400" materialDesign:HintAssist.Hint="Mots de passe"
+                        IsEnabled="{Binding IsChecked, ElementName=MaterialDesignTextFieldBoxTextBoxEnabledComboBox}"
+                        HorizontalAlignment="Left" Width="307" Margin="26,120,0,0"   />
+                    <ComboBox materialDesign:HintAssist.Hint="Serveur Mail" SelectedIndex="0" 
+                              Style="{StaticResource MaterialDesignFloatingHintComboBoxWhite}"  Margin="26,255,346,10" >
+                        <ComboBoxItem>Gmail</ComboBoxItem>
+                        <ComboBoxItem>Yahoo</ComboBoxItem>
+                        <ComboBoxItem>Hotmail/Live</ComboBoxItem>
+
+                    </ComboBox>
+                    <Label Content="Fournisseur Email" HorizontalAlignment="Left" Margin="26,228,0,0" VerticalAlignment="Top"/>
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}"
+                        VerticalAlignment="Top" AcceptsReturn="True" Text="{Binding Entreprise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap" MaxWidth="400" materialDesign:HintAssist.Hint="Nom d'entreprise"
+                         
+                        HorizontalAlignment="Left" Width="307" Margin="349,73,0,0" Height="auto" />
+
+                </Grid>
+            </TabItem>
+
+
+
+        </TabControl>
+        <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{s:Action Next}"  
+                HorizontalAlignment="Right" Margin="0,0,10,12" VerticalAlignment="Bottom" Width="114">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                <TextBlock Text="{Binding NextButtonText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 0" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="ArrowRightBoldCircleOutline" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+
+            </StackPanel>
+        </Button>
+        <Button  Style="{StaticResource MaterialDesignFlatButton}"  Command="{s:Action Return}"  Margin="10,0,0,12" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="120">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                <materialDesign:PackIcon Kind="ArrowLeftBoldCircleOutline" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+                <TextBlock Text="{DynamicResource btn.assistant.precedent}" Margin="5 0" VerticalAlignment="Center"/>
+
+            </StackPanel>
+        </Button>
+        <TabControl   Background="#FF3C3C5F"
+            IsManipulationEnabled="False"
+                     
+            SelectedIndex="{Binding indexPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            x:Name="main_tab_Copy" 
+            Margin="0,0,-1,52"
+            BorderBrush="#FF078CD8" 
+            BorderThickness="0,0,0,0"
+                             >
+            <TabItem Header="{Tx:T assistant.tab.app}" HorizontalAlignment="Stretch" 
+                     Width="auto"
+                     HorizontalContentAlignment="Center"
+                     BorderThickness="0" Background="#FF3C3C5F">
+                <Grid Background="#FF3C3C5F" Margin="-2" >
+                    <Image Margin="0,24,0,0" Height="113" VerticalAlignment="Top" Source="/Ovresko.Generix.Core;component/Images/logo ovresko_128.png"/>
+                    <TextBlock Margin="0,157,0,0" MaxWidth="150" TextAlignment="Center" 
+                               
+                               Text= "{Tx:T app.assist.promo}" MouseDown="{s:Action OpenSite}"
+                               HorizontalAlignment="Center" Foreground="White" TextWrapping="Wrap"   VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="{Tx:T entrepriseTab}" Width="auto" BorderThickness="0" Background="#FF3C3C5F">
+                <Grid Background="#FF3C3C5F" Margin="-2" >
+
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}"
+                        VerticalAlignment="Top" AcceptsReturn="True" Text="{Binding Entreprise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap"   materialDesign:HintAssist.Hint="{Tx:T Nom entreprise}" Margin="26,26,23,0" Height="auto" Grid.ColumnSpan="2" />
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}"
+                        VerticalAlignment="Top" AcceptsReturn="True" 
+                        TextWrapping="Wrap" MaxWidth="400" materialDesign:HintAssist.Hint="{Tx:T Mots de pass administrateur}"
+                         Text="{Binding PasswordAdmin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="26,151,23,0" Height="auto" Grid.ColumnSpan="2" />
+
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}"
+                        VerticalAlignment="Top" IsReadOnly="True" Background="WhiteSmoke" AcceptsReturn="True" Text="{Binding LogoPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap" MaxWidth="400" materialDesign:HintAssist.Hint="{Tx:T Logo entreprise}" Margin="26,209,56,0" Height="auto" Grid.ColumnSpan="2" />
+                    <Button Content="+"  Command="{s:Action AddLogo}" Background="White" FontSize="18" BorderBrush="LightGray" Foreground="Blue" Padding="0" Margin="0,222,23,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="28"/>
+
+                </Grid>
+            </TabItem>
+
+
+
+        </TabControl>
+
+    </Grid>
+</Window>

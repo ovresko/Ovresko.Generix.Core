@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ErpAlgerie.Modules.Core.Module
+namespace Ovresko.Generix.Core.Modules.Core.Module
 {
    public interface NoModule
     {

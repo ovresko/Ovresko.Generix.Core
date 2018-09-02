@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ErpAlgerie.Pages.MassEdit
+namespace Ovresko.Generix.Core.Pages.MassEdit
 {
     /// <summary>
     /// Logique d'interaction pour MassEditView.xaml

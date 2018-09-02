@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ErpAlgerie.Pages.PopupWait
+namespace Ovresko.Generix.Core.Pages.PopupWait
 {
     /// <summary>
     /// Logique d'interaction pour PopupWaitView.xaml

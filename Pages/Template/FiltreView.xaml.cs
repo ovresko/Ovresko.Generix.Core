@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ErpAlgerie.Pages.Template
+namespace Ovresko.Generix.Core.Pages.Template
 {
     /// <summary>
     /// Logique d'interaction pour FiltreView.xaml

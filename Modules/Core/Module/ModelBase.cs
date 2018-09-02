@@ -1,13 +1,12 @@
-﻿using ErpAlgerie.Modules.Core.Data;
-using ErpAlgerie.Modules.Core.Helpers;
-using ErpAlgerie.Modules.CRM;
-using ErpAlgerie.Pages.Export;
-using ErpAlgerie.Pages.Helpers;
-using ErpAlgerie.Pages.Reports;
+﻿using Ovresko.Generix.Core.Modules.Core.Data;
+using Ovresko.Generix.Core.Modules.Core.Helpers;
+using Ovresko.Generix.Core.Modules;
+using Ovresko.Generix.Core.Pages.Export;
+using Ovresko.Generix.Core.Pages.Helpers;
+using Ovresko.Generix.Core.Pages.Reports;
 using MaterialDesignThemes.Wpf;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDbGenericRepository.Models;
+using MongoDB.Bson.Serialization.Attributes; 
 using Stylet;
 using System;
 using System.Collections;
@@ -21,325 +20,19 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows; 
+using static Ovresko.Generix.Core.Translations.OvTranslate;
+using Ovresko.Generix.Core.Exceptions;
+using Ovresko.Generix.Datasource.Models;
+using Ovresko.Generix.Datasource.Services.Queries;
 
-namespace ErpAlgerie.Modules.Core.Module
+namespace Ovresko.Generix.Core.Modules.Core.Module
 {
-
-    public enum OpenMode
-    {
-        Attach = 0,
-        Detach = 1
-    }
-
     [BsonIgnoreExtraElements(true, Inherited = true)]
-    public abstract class ExtendedDocument : Document
-    { 
-
-
-        [DisplayName("Réf")]
-        [DontShowInDetail()]
-        [ShowInTable(true)]
-        public new abstract string Name { get; set; }
-
-        [BsonIgnore]
-        public abstract string CollectionName { get; }
-
-
-        [ShowInTable]
-        [DisplayName("Crée par")]
-        [Column(ModelFieldType.Lien,"User")]
-        [DontShowInDetail]
-        [myType(typeof(User))]
-        public ObjectId? CreatedBy { get; set; } = ObjectId.Empty;
-
-        [BsonIgnore]
-        [DisplayName("Crée par")]
-        public string CreatedByName { get
-            {
-                return CreatedBy?.GetObject("User")?.Name;
-            }
-        }
-
-        [BsonIgnore]
-        public virtual bool IsInstance { get; set; } = false;
-
-        [BsonIgnore]
-        public virtual OpenMode DocOpenMod { get; set; } = OpenMode.Attach;
-
-        public ObjectId _etag { get; set; }
-        /// <summary>
-        /// 0 not handled - 1 Handled
-        /// </summary>
-        public int isHandled { get; set; } // 0 no / 1 handled
-
-        /// <summary>
-        /// TRUE NEWDOW - FALSE SAVED
-        /// </summary>
-        public bool isLocal { get; set; } = true;
-        /// <summary>
-        /// 0: Draft. 1: Submit (valide)
-        /// </summary>
-        public int DocStatus { get; set; }
-
-        [BsonIgnore]
-        public virtual bool Submitable { get; set; } = false;
-
-        [DisplayName("Crée le")]
-        [DontShowInDetail()]
-        [ShowInTable(true)]
-        public override DateTime AddedAtUtc { get => base.AddedAtUtc; set => base.AddedAtUtc = value; }
-
-        [DisplayName("Éditer le")]
-        [DontShowInDetail()]
-        public DateTime EditedAtUtc { get; set; }
-
-        [BsonIgnore]
-        [DisplayName("Status")]
-        [DontShowInDetail()]
-        [ShowInTable(true)]
-        public virtual string Status { get
-            {
-                if (isLocal)
-                    return "Nouveau";//, "#2196F3"); new Tuple<string, string>( , "#FFC400") new Tuple<string, string>(, "#00E676"), "#00E676")
-                if (Submitable)
-                {
-                    return DocStatus == 0 ? "Brouillon" : "Validé";
-                }
-                return  "Enregistrer";
-            }
-        }
-
-        [BsonIgnore] 
-        [DontShowInDetail()] 
-        public virtual string StatusColor
-        {
-            get
-            {
-                if (isLocal)
-                    return "#2196F3";//, "#2196F3"); new Tuple<string, string>( , "#FFC400") new Tuple<string, string>(, "#00E676"), "#00E676")
-                if (Submitable)
-                {
-                    return DocStatus == 0 ? "#FFC400" : "#00E676";
-                }
-                return "#00E676";
-            }
-        }
-
-        // Method
-        public virtual void DoFunction(string methodName)
-        {
-            try
-            {
-                var method = this.GetType().GetMethod(methodName);
-                if (method != null)
-                {
-                    method.Invoke(this, null);
-                }
-            }
-            catch (Exception s)
-            {
-                DataHelpers.Logger.LogError($"Method {methodName} not found in {this.CollectionName}\n{s.Message}");
-            }
-        }
-        public virtual void DoFunction(string methodName, object[] parameters = null)
-        {
-            try
-            {
-                var method = this.GetType().GetMethod(methodName);
-                if(method != null)
-                {
-                    method.Invoke(this, parameters);
-                }
-            }
-            catch (Exception s)
-            {
-                DataHelpers.Logger.LogError($"Method {methodName} not found in {this.CollectionName}\n{s.Message}");
-            }
-        }
-
-        public event EventHandler CloseEvent;
-
-        public void CloseParent()
-        {
-            EventHandler handler = CloseEvent;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
-
-        public string DefaultTemplate { get; set; }
-
-
-        public virtual void ExportPDF(Type t, bool useDefault = false, bool UseHeader = true)
-        {
-            var exportPdf = new ExportManagerViewModel(t, this, "PDF",useDefault,UseHeader);
-            exportPdf.UseHeader = UseHeader;
-            if(useDefault!=true)
-                DataHelpers.windowManager.ShowDialog(exportPdf);
-
-        }
-
-
-        public virtual string ExportPDF(Type t, string template, bool Useheader = true)
-        {
-            OvExport.OvPdfModelExport ov = new OvExport.OvPdfModelExport(t, template, this);
-            ov.UseHeader = Useheader;
-           return ov.GeneratePdf();
-        }
-
-        public virtual void ExportWORD(Type t, bool useDefault = false, bool UseHeader = true)
-        {
-            var exportPdf = new ExportManagerViewModel(t, this, "WORD", useDefault);
-            exportPdf.UseHeader = UseHeader;
-            if (useDefault != true)
-               DataHelpers.windowManager.ShowDialog(exportPdf);            
-        }
-
-        public virtual string ExportWORD(Type t, string template, bool Useheader = true)
-        {
-            OvExport.OvPdfModelExport ov = new OvExport.OvPdfModelExport(t, template, this);
-            ov.UseHeader = Useheader;
-            ov.GenerateProps = false;
-            return ov.GenerateOffice();
-        }
-
-        public virtual IEnumerable<dynamic> GetList(string link)
-        {
-            try
-            {  
-                try
-                { 
-                    var result = DataHelpers.GetMongoData(link, $"l{CollectionName}", Id.ToString(), true).OrderByDescending(a => a.AddedAtUtc).ToList<dynamic>();
-                    return result;
-                }
-                catch 
-                {
-                    return new List<dynamic>();
-                }
-            }
-            catch 
-            {
-                return new List<dynamic>();
-            }
-        }
-
-        [BsonIgnore]
-        [ShowInTable(true)]
-        [DontShowInDetail]  
-        public bool IsSelectedd { get; set; }
-
-        internal virtual ExtendedDocument Map(string mappedClass)
-        {
-            return this;
-        }
-
-        [BsonIgnore]
-        public virtual string ModuleName { get; set; }
-
-        [BsonIgnore]
-        public virtual bool ShowInDesktop { get; set; }
-        [BsonIgnore]
-        public virtual string SubModule { get; set; }
-
-
-        [BsonIgnore]
-        public virtual DocCard DocCardOne { get; } = null;
-
-
-        [BsonIgnore]
-        public virtual DocCard DocCardTow { get; } = null;
-
-
-        [BsonIgnore]
-        public virtual string IconName { get; set; } = "InformationOutline";
-        public bool Has(string value,Type t)
-        {
-            var attrib = t.GetProperties();
-
-            foreach (var item in attrib)
-            {
-                if (item.GetValue(this)?.ToString().Contains(value) == true)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-
-        public bool EnsureIsSavedSubmit()
-        {
-            if (this.isLocal || this.DocStatus != 1)
-            {
-                MessageBox.Show("Document non enregsitré/validé!");
-                return false;
-            }
-            return true;
-        }
-
-
-        [BsonIgnore]
-        public bool ForceIgniorValidatUnique = false;
-
-        public string GetLiteralValue(PropertyInfo property)
-        {
-            var id = property.GetValue(this);
-            var value = id?.ToString();
-            if (property.PropertyType == typeof(ObjectId) || property.PropertyType == typeof(ObjectId?))
-            {
-                var isLink = (property.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute);
-                if (isLink != null && isLink.FieldType == ModelFieldType.Lien)
-                {
-                    var lienClass = isLink.Options;
-                    var name = DataHelpers.GetById(lienClass, id as ObjectId?)?.Name;
-
-                    value = name;
-                }
-                if (isLink != null && isLink.FieldType == ModelFieldType.LienField)
-                {
-                    if (isLink.Options.Contains('>'))
-                    {
-                        try
-                        {
-                            var lienClass = isLink.Options.Split('>');
-                            var type_ = (property.GetCustomAttribute(typeof(myTypeAttribute)) as myTypeAttribute);
-
-                            var className = lienClass[0].ToString(); // CLient
-                            var field = lienClass[1].ToString(); // Adresses list ids
-
-                            var inner = $"ErpAlgerie.Modules.CRM.{className}";
-                            var pro = (Type.GetType(inner).GetProperty(field).GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute);
-                            if (pro.FieldType == ModelFieldType.Table)
-                            {
-                                var classLien = pro.Options; // Adresse
-                                var concrete = DataHelpers.GetById(classLien, id as ObjectId?)?.Name; // Client object
-                                value = concrete;
-                            }
-                        }
-                        catch (Exception s)
-                        {
-                            Console.WriteLine(s.Message );
-                        }
-                    }
-                   
-                }
-
-            }
-
-            return value;
-        }
-
-
-    }
-
-
-    [BsonIgnoreExtraElements(true, Inherited = true)]
-    public abstract class ModelBase<T> : ExtendedDocument, IModel where T : ExtendedDocument, new()
+    public abstract class ModelBase<T> : Document, IModel where T : Document, new()
     {
-        public override string Name { get; set; }
-         
+       // public override string Name { get; set; } 
+
         private Type type; 
 
         public   virtual  T getInstance()
@@ -349,16 +42,83 @@ namespace ErpAlgerie.Modules.Core.Module
 
         public ModelBase()
         {
-            Name = Id.Increment.ToString();
+            Name = _("Nouveau"); 
             type = typeof(T);
-
-            //var module = this.GetModule()?.SeriesName?.GetObject("SeriesName");
-            //if (module != null)
-            //{
-            //    this.Index = module.Indexe++;
-                
-            //}
+            this.Version++;
+            
         }
+
+        [LiteDB.BsonIgnore]
+        [BsonIgnore]
+        public override Action<Action> PropertyChangedDispatcher { get => base.PropertyChangedDispatcher; set => base.PropertyChangedDispatcher = value; }
+
+        public void Open(OpenMode mode = OpenMode.Attach)
+        {
+            switch (mode)
+            {
+                case OpenMode.Attach:
+                    DataHelpers.Shell.OpenScreenAttach(this, this.Name);
+                    break;
+                case OpenMode.Detach:
+                    DataHelpers.Shell.OpenScreenDetach(this, this.Name).Wait();
+                    break;
+                default:
+                    DataHelpers.Shell.OpenScreenAttach(this, this.Name);
+                    break;
+            }
+        }
+        [LiteDB.BsonIgnore]
+        [BsonIgnore]
+        public bool DoRefresh { get; set; }
+        public async virtual Task  NotifyUpdates()
+        {
+           await Execute.PostToUIThreadAsync(() =>
+            {
+
+            var props = GetType().GetProperties(); 
+            this.PropertyChangedDispatcher = Execute.OnUIThread;
+            foreach (var item in props.Reverse())
+            {
+                try
+                { 
+                    var display = item.GetAttribute<DisplayNameAttribute>(false) as DisplayNameAttribute;                  
+                    if (display != null || item.Name.ContainsIgniorCase("card"))
+                    {
+                        this.NotifyOfPropertyChange(item.Name);
+                    }
+                }
+                catch
+                {
+                }
+            }
+
+                Execute.PostToUIThread(() => { OnNotifyUpdates(); });
+                //AddFetch(this);
+
+
+            });
+        }
+
+        public virtual void NotifyUpdates(string source)
+        { 
+                try
+                {
+                   // this.NotifyOfPropertyChange(source);
+                   Execute.PostToUIThread(() => { this.OnNotifyUpdates(source); });
+                }
+                catch
+                {
+                }
+            
+
+            OnNotifyUpdates();
+            //AddFetch(this);
+        }
+
+        public virtual void OnNotifyUpdates()
+        { }
+        public virtual void OnNotifyUpdates(string propertyName)
+        { }
 
         public long Index { get; set; }
 
@@ -367,39 +127,43 @@ namespace ErpAlgerie.Modules.Core.Module
         
 
          
-        public ModuleErp MyModule() {  
-                return DataHelpers.GetModule(this) ;
-            
-        }
-           
-       
 
+        public override string DefaultTemplate { get { return (MyModule() as ModuleErp)?.DefaultTemplateName; } }
+
+
+        [LiteDB.BsonIgnore]
         [BsonIgnore]
         private string _NameField;
+        [LiteDB.BsonIgnore]
         [BsonIgnore]
         public virtual string NameField
         {
             get {
-                var v = MyModule()?.NameFieldEntity;
-                return (string.IsNullOrWhiteSpace(v)) ? "Id" : MyModule()?.NameFieldEntity;
+                var v = (MyModule() as ModuleErp)?.NameFieldEntity;
+                return (string.IsNullOrWhiteSpace(v)) ? "Id" : (MyModule() as ModuleErp)?.NameFieldEntity;
             }
             set { _NameField = value; }
         }
 
-       
-        //public async static Task<T> GetByIdBase(ObjectId id)
+
+        //public async static Task<T> GetByIdBase(Guid id)
         //{
         //    return await DS.db.GetOneAsync<T>(a => a.Id == id); 
         //}
 
+       
         public void SetSeries()
         {
-            var index = MyModule();
+            var index = (MyModule() as ModuleErp);
             bool named = false;
+            var propert = GetType().GetProperty(this.NameField);
+            var name = propert?.GetValue(this);
+            GenericName = name?.ToString(); // ZEMZEM
+
             if (index != null)
             {
-                var usedSeries = (ObjectId?)this.GetType().GetProperty("Series")?.GetValue(this);
-                if (usedSeries != null && usedSeries != ObjectId.Empty)
+                var usedSeries = GuidParser.Convert( this.GetType().GetProperty("Series")?.GetValue(this)  );
+                if (usedSeries != null && usedSeries != Guid.Empty)
                 {
                     var serie = index.SeriesNames.FirstOrDefault(a => a.Id == usedSeries);
                     if (serie != null)
@@ -414,6 +178,10 @@ namespace ErpAlgerie.Modules.Core.Module
                         if (finaluffix.Contains("MM") == true)
                         {
                             finaluffix = finaluffix.Replace("MM", this.AddedAtUtc.ToString("MM"));
+                        }
+                        if (finaluffix.Contains("AAAA") == true)
+                        {
+                            finaluffix = finaluffix.Replace("AAAA", this.AddedAtUtc.ToString("yyyy"));
                         }
                         if (finaluffix.Contains("AA") == true)
                         {
@@ -453,13 +221,19 @@ namespace ErpAlgerie.Modules.Core.Module
                       
                     }
                 }
-
             }
             if (!named)
+            {               
+                this.Name = GenericName;
+                NameSearch = $"{Name}";
+            }else if(NameField == "Id")
             {
-                var propert = GetType().GetProperty(this.NameField);
-                var name = propert?.GetValue(this);
-                this.Name = name?.ToString();
+                NameSearch = Name;
+            }
+            else
+            {
+                NameSearch = $"{Name} - {GenericName}";
+               // GenericName = this.Name; //TR-0000055
             }
         }
         public virtual bool Save()
@@ -469,27 +243,50 @@ namespace ErpAlgerie.Modules.Core.Module
             {
                 if (FrameworkManager.CanAdd(type))
                 {
-                    SetSeries();
-                    BeforeSave();
-                    this.isLocal = false;
-                    DS.db.AddOne<T>(this as T);
-                    AfterSave();
-                    return true;
+                    try
+                    {
+                        BeforeSave();
+                        SetSeries();
+                      
+                        this.isLocal = false;
+                        DS.db.AddOne<T>(this as T);
+                        AfterSave();
+                        return true;
+                    }
+                    catch (Exception s)
+                    {
+                        DataHelpers.Logger.LogError(s);
+                        DataHelpers.ShowMessage( s.Message);
+                        return false;
+                    }
                 }
-                MessageBox.Show("Vous n'avez pas l'autorisation pour créer!", "Action non autorisée");
-                return false;
+                DataHelpers.ShowMessage("Vous n'avez pas l'autorisation pour créer!", "Action non autorisée");
+                 return false;
             }
             else
             {
                 if (FrameworkManager.CanSave(type))
                 {
-                    SetSeries();
-                    BeforeEdit();
+                    try {
+
+                        BeforeEdit();
+                        if(this.DocStatus != 1)
+                            SetSeries();
+                   
+                    if(DocStatus == 2)
+                        this.DocStatus = 0;
                     var res = DS.db.UpdateOne<T>(this as T);
                     AfterEdit();
                     return res;
+                    }
+                    catch (Exception s)
+                    {
+                        DataHelpers.Logger.LogError(s);
+                         DataHelpers.ShowMessage( s.Message);
+                        return false;
+                    }
                 }
-                MessageBox.Show("Vous n'avez pas l'autorisation pour modifier!", "Action non autorisée");
+                 DataHelpers.ShowMessage( "Vous n'avez pas l'autorisation pour modifier!", "Action non autorisée");
                 return false;
             }
         }
@@ -498,16 +295,26 @@ namespace ErpAlgerie.Modules.Core.Module
         {
             if (FrameworkManager.CanDelete(type))
             {
-                if (BeforeDelete(ConfirmFromUser))
+                try
                 {
+                    if (BeforeDelete(ConfirmFromUser))
+                    {                   
                     DS.db.DeleteOne<T>(this as T);                  
                     AfterDelete();
                     return true;
-                }               
+                    }
+                   
+                }
+                catch (Exception s)
+                {
+                    DataHelpers.Logger.LogError(s);
+                     DataHelpers.ShowMessage( s.Message);
+                    return false;
+                }
                 return false;
             }
              
-            MessageBox.Show("Vous n'avez pas l'autorisation de supprimer!", "Action non autorisée");
+             DataHelpers.ShowMessage( _("Vous n'avez pas l'autorisation de supprimer!"), _("Action non autorisée"));
             return false;
         }
 
@@ -515,15 +322,24 @@ namespace ErpAlgerie.Modules.Core.Module
         {
             if (FrameworkManager.CanCancel(type))
             {
-              //  BeforeEdit();
-                this.DocStatus = 0;
-                var res =DS.db.UpdateOne<T>(this as T);
-                AfterEdit();
-                return res;
+                try
+                {
+                    BeforeCancel();
+                    this.DocStatus = 2;
+                    var res = DS.db.UpdateOne<T>(this as T);
+                    AfterCancel();
+                    return res;
+                }
+                catch (Exception s)
+                {
+                    DataHelpers.Logger.LogError(s);
+                     DataHelpers.ShowMessage( s.Message);
+                    return false;
+                }
             }
             else
             {
-                MessageBox.Show("Vous n'avez pas l'autorisation pour annuler!", "Action non autorisée");
+                 DataHelpers.ShowMessage( _("Vous n'avez pas l'autorisation pour annuler!"), _("Action non autorisée"));
                 return false;
             }
         }
@@ -532,13 +348,22 @@ namespace ErpAlgerie.Modules.Core.Module
         {
             if (FrameworkManager.CanValidate(type))
             {
-                BeforeEdit();
-                this.DocStatus = 1;
-               var res=  DS.db.UpdateOne<T>(this as T);
-                AfterEdit();
-                return res;
+                try
+                {
+                    BeforeEdit();
+                    this.DocStatus = 1;
+                    var res = DS.db.UpdateOne<T>(this as T);
+                    AfterEdit();
+                    return res;
+                }
+                catch (Exception s)
+                {
+                    DataHelpers.Logger.LogError(s);
+                     DataHelpers.ShowMessage( s.Message);
+                    return false;
+                }
             }
-            MessageBox.Show("Vous n'avez pas l'autorisation pour valider!", "Action non autorisée");
+             DataHelpers.ShowMessage( _("Vous n'avez pas l'autorisation pour valider!"), _("Action non autorisée"));
             return false;
         }
 
@@ -549,8 +374,9 @@ namespace ErpAlgerie.Modules.Core.Module
 
         public virtual void BeforeSave()
         {
-
-            this.CreatedBy = DataHelpers.ConnectedUser?.Id;
+            //this.Version++;
+            if(DataHelpers.ConnectedUser!=null)
+                this.CreatedBy = DataHelpers.ConnectedUser.Id;
             Validate();
         }
 
@@ -561,11 +387,14 @@ namespace ErpAlgerie.Modules.Core.Module
 
         public virtual bool BeforeDelete(bool Confirm = true)
         {
+           
             if (Confirm)
             {
-                var result = DataHelpers.windowManager.ShowMessageBox("Voulez-vous supprimer le document?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = DataHelpers.ShowMessage(_("Voulez-vous supprimer le document?"), _("Confirmation"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+                CheckReferences();
                 return (result == MessageBoxResult.Yes); 
             }
+            CheckReferences();
             return true;
         }
 
@@ -577,9 +406,71 @@ namespace ErpAlgerie.Modules.Core.Module
         public virtual void BeforeEdit()
         {
             Validate();
+            //this.Version++;
             this.EditedAtUtc = DateTime.Now;
         }
 
+        public virtual void BeforeCancel()
+        {
+            this.Version++;
+            CheckReferences();
+        }
+
+        public virtual void AfterCancel()
+        {
+
+        }
+
+
+        public void CheckReferences()
+        {
+            var refs = GetType().GetProperties();
+            foreach (var item in refs)
+            {
+                var isref = item.GetCustomAttribute(typeof(IsRefAttribute)) as IsRefAttribute;
+                if(isref != null && isref?.Ignore == false)
+                {
+                    var doc = isref.TypeName;
+                    var id = item.GetValue(this);
+                    if (id == null)
+                        continue;
+                    if( id.GetType() == typeof(IList))
+                    {
+                        var listIds = id as IList;
+                        foreach (var oneId in listIds)
+                        {
+                            try
+                            {
+
+                                var o = GuidParser.Convert(oneId).GetObject(doc) as IDocument;
+                                if (o != null && (o).DocStatus == 1)
+                                    throw new Exception($"{this.CollectionName} {this.Name} => {_("ce document fait référencer à un(e)")} {o.CollectionName} {o.Name}  {_("validé")}.\n {_("annuler les références avant d'annuler ce document")}");
+
+
+                            }
+                            catch (ModuleClassNotFoundException s)
+                            {
+                                
+                            }
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            var o = GuidParser.Convert(id ).GetObject(doc) as IDocument;
+                            if (o != null && (o).DocStatus == 1)
+                                throw new Exception($"{this.CollectionName} {this.Name} => {_("ce document fait référencer à un(e)")} {o.CollectionName} {o.Name}  {_("validé")}.\n {_("annuler les références avant d'annuler ce document")}");
+
+                        }
+                        catch (ModuleClassNotFoundException)
+                        {
+                        }
+                    }
+
+                }
+            }
+        }
         //[BsonIgnore]
 
 
@@ -596,6 +487,39 @@ namespace ErpAlgerie.Modules.Core.Module
         //    return DS.db.GetById<T>(id);
         //}
 
+
+        //public virtual IEnumerable<Tuple<string, string, string>> FetchList { get;  } = new List<Tuple<string, string, string>>();
+
+        //public void AddFetch(ExtendedDocument Me)
+        //{
+        //    if (this.DocStatus == 1)
+        //        return;
+
+        //    foreach (var fetch in FetchList) // Tier, Addresse
+        //    {
+        //        var p = GetType().GetProperty(fetch.Item1);
+        //        if (p != null)
+        //        {
+        //            var link = p.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute;
+        //            var value = p.GetValue(this);
+        //            if(link != null && value.GetType().Name.Contains("Guid"))
+        //            {
+        //                var id = (value as Guid);
+        //                if (id.IsValide())
+        //                {
+        //                    var obj = id.GetObject(link.Options);
+        //                    if(obj != null)
+        //                    {
+        //                        DataHelpers.MapPropertiesRef(ref Me, obj,fetch.Item2);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        NotifyOfPropertyChange(fetch.Item2);
+        //    }
+
+        //}
+
         public virtual void ValidateUnique()
         {
             if (ForceIgniorValidatUnique)
@@ -604,20 +528,22 @@ namespace ErpAlgerie.Modules.Core.Module
             var names = DS.db.Count<T>(a => a.Name == this.Name);
             if (names > 0 && isLocal)
             {
-                var confirmation = MessageBox.Show($"Un document avec le méme identifiant existe déja '{this.Name}'\nVoullez-vous continuer", "Identifiant existe!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                var confirmation =  DataHelpers.ShowMessage( $"{_("Un document avec le méme identifiant existe déja")} '{this.Name} / {this.CollectionName}'\n {_("Voullez-vous continuer")}", _("Identifiant existe!"), MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (confirmation == MessageBoxResult.No)
                 {
 
-                   throw new Exception($"Opération annuler");
+                   throw new Exception(_("Opération annuler"));
                   
                 }
             }
             else if (names > 1 && !isLocal)
             {
-                var confirmation = MessageBox.Show($"Un document avec le méme identifiant existe déja '{this.Name} / {this.CollectionName}'\nVoullez-vous continuer", "Identifiant existe!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                var confirmation = DataHelpers.ShowMessage($"{_("Un document avec le méme identifiant existe déja")} '{this.Name} / {this.CollectionName}'\n {_("Voullez-vous continuer")}", _("Identifiant existe!"), MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (confirmation == MessageBoxResult.No)
                 {
-                    throw new Exception($"Opération annuler");
+
+                    throw new Exception(_("Opération annuler"));
+
                 }
 
             }
@@ -639,11 +565,17 @@ namespace ErpAlgerie.Modules.Core.Module
                     var value = item.GetValue(this);
                     if (display != null)
                     {
+                        try
+                        {
+                            Guid d = (Guid) value;
+                            if(d == Guid.Empty)
+                                throw new Exception($"{_("Le champ")} <{display?.DisplayName}> {_("est requis")}!");
+                        }
+                        catch { }
                         if (value == null
-                                       || (value as ObjectId?) == ObjectId.Empty
                                        || (value as IList)?.Count < 1)
                         {
-                            throw new Exception($"Le champ <{display?.DisplayName}> est requis!");
+                            throw new Exception($"{_("Le champ")} <{display?.DisplayName}> {_("est requis")}!");
                         }
 
                     }
@@ -672,13 +604,9 @@ namespace ErpAlgerie.Modules.Core.Module
             return (T)Activator.CreateInstance(typeof(T));
         }
 
-        public virtual IEnumerable<IDocument> GetList()
-        {
-            return DataHelpers.GetMongoData(type.Name) as IEnumerable<IDocument>;
-        }
+       
 
 
-        
        
     }
 }

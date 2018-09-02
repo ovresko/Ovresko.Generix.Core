@@ -1,0 +1,953 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- TxTranslation dictionary file. Use TxEditor to edit this file. http://unclassified.software/txtranslation -->
+<translation xml:space="preserve">
+	<culture name="ar">
+		<text key="Action non autorisée">عملية غير مسموحة</text>
+		<text key="Actions">عمليات</text>
+		<text key="Actualiser">تحديث</text>
+		<text key="Adresse" acceptmissing="true">العنوان</text>
+		<text key="Adresse email d'envoi">Sending email address</text>
+		<text key="Adresse serveur SMTP">سيرفير SMTP</text>
+		<text key="afficher.les.champs">خصائص الملف</text>
+		<text key="Afficher Tous">أظهر كل شيء</text>
+		<text key="Age">العمر</text>
+		<text key="Agrandir le tableau">تكبير</text>
+		<text key="ajoutée au bureau">أظيف الى الصفحة الرئيسية</text>
+		<text key="ajouter au bureau">أضف الى الرئيسية</text>
+		<text key="Annulé">ملغى</text>
+		<text key="Annulée">ملغى</text>
+		<text key="Annuler">إلغاء</text>
+		<text key="annuler les références avant d'annuler ce document">الغي الملفات قبل الإلغاء</text>
+		<text key="ans">سنة</text>
+		<text key="app">البرنامج</text>
+		<text key="app.assist.promo">حمل و ثبت إضافات جديدة من الموقع
+www.ovresko.com</text>
+		<text key="app.name">أوفريسكو</text>
+		<text key="Application">البرنامج</text>
+		<text key="assistant.tab.app">إعدادات</text>
+		<text key="Aucun document trouvé" acceptmissing="true" acceptpunctuation="true">.لا يوجد أي ملف</text>
+		<text key="Aujourd'hui">اليوم</text>
+		<text key="base.button.add">أظف</text>
+		<text key="base.button.add.hint">أظف ملف جديد</text>
+		<text key="base.button.fermer">أغلق</text>
+		<text key="base.field.chercher" acceptpunctuation="true">...إبحث</text>
+		<text key="base.tool.actions">عمليات</text>
+		<text key="base.tool.outils">أدوات</text>
+		<text key="Brouillon">مؤقت</text>
+		<text key="btn.assistant.precedent">الخلف</text>
+		<text key="ce document fait référencer à un(e)">هذا الملف مرتبط بملفات اخرى</text>
+		<text key="Chercher" acceptpunctuation="true">...إبحث</text>
+		<text key="Choisir template à exporté">إختر قالب الطبع</text>
+		<text key="Codes">الرموز</text>
+		<text key="Condition">العملية</text>
+		<text key="Configuration">إعدادات</text>
+		<text key="Confirmation">تأكيد</text>
+		<text key="Contact">أشخاص</text>
+		<text key="Crée le">حفظ بتاريخ</text>
+		<text key="Crée par">أنشأه</text>
+		<text key="créer.nouveau">جديد</text>
+		<text key="Créer nouveau">ملف جديد</text>
+		<text key="Créer un nouveau document!" acceptpunctuation="true">أنشئ ملف جديد</text>
+		<text key="Culture / Pays">البلد</text>
+		<text key="Culture is empty">إسم البلد مطلوب</text>
+		<text key="Date naissance">تاريخ الميلاد</text>
+		<text key="documents trouvés">تم العثور على بيانات</text>
+		<text key="Données actualisées" acceptpunctuation="true">...تم التحديث</text>
+		<text key="Dupliquer">إنسخ</text>
+		<text key="édition en masse">تعديل البيانات</text>
+		<text key="eléments">ملف</text>
+		<text key="Email">إيميل</text>
+		<text key="Email envoyé">تم إرسال الإيميل</text>
+		<text key="Email provider">إعدادات الإيميل</text>
+		<text key="En attente">جديد</text>
+		<text key="En cours">جاري حاليا</text>
+		<text key="Enregistré">حفظ</text>
+		<text key="Enregistrer">إحفظ</text>
+		<text key="entreprise">إسم الشركة</text>
+		<text key="entrepriseTab">المؤسسة</text>
+		<text key="Envoyer par email">أرسل الملف - أيميل</text>
+		<text key="Erreur">خطأ</text>
+		<text key="est invalide ou vide">خطأ في الملف</text>
+		<text key="est requis">يجب ملأها</text>
+		<text key="Exporter">إستخراج البيانات</text>
+		<text key="Exporter la base des données">إستخرج قاعدة البيانات</text>
+		<text key="Exporter modéle">إستخراج شكل الإكسال</text>
+		<text key="Exporter/Imprimer Document Word">أنشئ ملف Word</text>
+		<text key="Exporter/Imprimer PDF">أنشئ ملف PDF</text>
+		<text key="exportexcelall">كل البيانات</text>
+		<text key="exportexcelimportant">البيانات الرئيسية فقط</text>
+		<text key="Fax">فاكس</text>
+		<text key="Femme">أنثى</text>
+		<text key="Fermer">إغلق</text>
+		<text key="Fermeture">غلق</text>
+		<text key="Filter les résultats d'abord">قم بإختيار الملفات اولا عن طريق البحث</text>
+		<text key="Filtrage">البحث</text>
+		<text key="Filtres Rapide">بحث سريع</text>
+		<text key="Général">معلومات عامة</text>
+		<text key="home.app.btn.home">الصفحة الاولى</text>
+		<text key="home.app.btn.modules">تثبيت إظافات</text>
+		<text key="home.app.btn.notification">تنبيهات</text>
+		<text key="home.app.btn.retour">الرجوع</text>
+		<text key="home.app.btn.settings">إعدادات</text>
+		<text key="home.app.init">أوفريسكو</text>
+		<text key="home.app.search" acceptpunctuation="true">...إبحث</text>
+		<text key="home.btn.open">عدل</text>
+		<text key="home.btn.plus">جديد</text>
+		<text key="home.error.contactprovider">خطأ في النظام. قم بزيارة الموقع help@ovresko.com</text>
+		<text key="Home">الرئيسية</text>
+		<text key="homemenumenu">القائمة</text>
+		<text key="Homme">ذكر</text>
+		<text key="Identifiant existe!">إسم مستعمل</text>
+		<text key="Ignorer les modifications?" acceptpunctuation="true"> إختر 'لا' للخروج ?هل تريد حفظ التغييرات</text>
+		<text key="Importer">إستيراد البيانات</text>
+		<text key="Imprimer">اطبع</text>
+		<text key="Infos supplémentaires">معلومات إضافية</text>
+		<text key="Installer nouveau">تثبيت جديد</text>
+		<text key="jours">يوم</text>
+		<text key="Lancer">إفتح الملف</text>
+		<text key="Lancer serveur API" acceptpunctuation="true">API إستعمل سيرفر  </text>
+		<text key="lang">اللغة</text>
+		<text key="Le champ" acceptmissing="true">معلمومات ضرورية ناقصة</text>
+		<text key="Libelle">الإسم</text>
+		<text key="login.button.connect">سجل الدخول</text>
+		<text key="login.button.exit">أغلق</text>
+		<text key="login.label.title">تسجيل الدخول</text>
+		<text key="login.label.user">المستخدم</text>
+		<text key="login.label.version">إصدار</text>
+		<text key="login.msg.select.user">إختر احد المستخدمين</text>
+		<text key="login.text.password">كلمة السر</text>
+		<text key="login.text.username">إسم المستخدم</text>
+		<text key="Logo entreprise">صورة</text>
+		<text key="Mobile">الهاتف النقال</text>
+		<text key="Model vide">الملف غير موجود</text>
+		<text key="Modifications enregistrées">تم حفظ التغييرات</text>
+		<text key="Modifier">تعديل</text>
+		<text key="modifier module">خصائص الملف</text>
+		<text key="Module">ملفات النظام</text>
+		<text key="mois">شهر</text>
+		<text key="Mot de passe email d'envoi">Sending email password</text>
+		<text key="Mots de pass administrateur">كلمة السر</text>
+		<text key="Mots de pass incorrect!">كلمة سر خاطئة</text>
+		<text key="Must choose a language!">يجب إختيار لغة</text>
+		<text key="N/A">غير معلوم</text>
+		<text key="Nom de champ">إسم الحقل</text>
+		<text key="Nom de série">ترقيم الملفات</text>
+		<text key="Nom entreprise">إسم الشركة</text>
+		<text key="Nom et prénom">الإسم كامل</text>
+		<text key="Notifications">تنبيهات</text>
+		<text key="Nouveau">جديد</text>
+		<text key="Nouveau(elle)">جديد</text>
+		<text key="Ok">Ok</text>
+		<text key="OkAndNew">Ok et continuer</text>
+		<text key="Opération annuler">تم إلغاء العملية</text>
+		<text key="Opérations">عمليات</text>
+		<text key="Ouvrir">إفتح</text>
+		<text key="Ouvrir.touts">إفتح كل</text>
+		<text key="Ouvrir assistant">صفحة الخيارات السريعة</text>
+		<text key="Paramétres">إعدادات</text>
+		<text key="plugin.install.btn">حمل</text>
+		<text key="plugin.install.file">.zip حمل ملف </text>
+		<text key="plugin.install.install">تثبيت</text>
+		<text key="plugin.install.subtitle" acceptpunctuation="true">www.ovresko.com قم بتحميل إضافات من الموقع </text>
+		<text key="plugin.install.title">تثبيت إضافات جديدة</text>
+		<text key="Plugin">إضافات</text>
+		<text key="Port serveur SMTP">SMTP server port</text>
+		<text key="pour">ل</text>
+		<text key="Propriétés">قائمة البحث</text>
+		<text key="Recherche en cours" acceptpunctuation="true">يتم البحث</text>
+		<text key="Réduire le tableau">تصغير</text>
+		<text key="Réf">الملف</text>
+		<text key="Région">المنطقة</text>
+		<text key="Règles d'autorisation">قواعد الوصول</text>
+		<text key="Remplacer les valeurs">تبديل الحروف</text>
+		<text key="Restaurer la base des données">إسترجع قاعدة البيانات</text>
+		<text key="Rôle">دور المستخدم</text>
+		<text key="Saisir la valeur à remplacer">ضع الحروف التي تريد تبديلها</text>
+		<text key="Select date">...إختر تاريخ</text>
+		<text key="Selectioner">إختر</text>
+		<text key="Selectioner document">إختر ملف</text>
+		<text key="Selectionner" acceptmissing="true">إختر</text>
+		<text key="Selectionner une image">إختر صورة</text>
+		<text key="Selectionner une ligne à ajoutée, ou vérifier la déclaration">يجب إختيار ملف لإضافته</text>
+		<text key="Selectionner une ligne!" acceptpunctuation="true">إختر ملف</text>
+		<text key="Sexe">الجنس</text>
+		<text key="Si vous annuler, vous devez modifier les changements effectués">عليك تعديل الملفات المرتبطة بهذا الملف</text>
+		<text key="Site web">الموقع الإلكتروني</text>
+		<text key="Source Db">مصدر البيانات</text>
+		<text key="Source DB">قاعدة البيانات</text>
+		<text key="startup.label.checkadmin">يرجى الاإنتظار</text>
+		<text key="startup.label.checkingdb">تفقد البيانات</text>
+		<text key="startup.label.checkmodules">التأكد من الإظافات</text>
+		<text key="startup.label.cultures">اللغة</text>
+		<text key="startup.label.data">يرجى الإنتظار</text>
+		<text key="startup.label.init">يرجى الإنتظار</text>
+		<text key="startup.label.initdb">تنصيب قاعدة البيانات</text>
+		<text key="startup.label.lang">اللغة</text>
+		<text key="startup.label.loadingdb">تحميل المعلومات</text>
+		<text key="startup.label.loadingmodule">تحميل الإضافات</text>
+		<text key="startup.label.logging">Logging</text>
+		<text key="startup.label.series">ترقيم الملفات</text>
+		<text key="startup.label.temp">حذف الملفات</text>
+		<text key="startup.label.title" acceptpunctuation="true">تحظير البرنامج</text>
+		<text key="startup.label.updates">التأكد من التحدبث</text>
+		<text key="Status">وضع الملف</text>
+		<text key="Suivant">التالي</text>
+		<text key="Supprimer">إحذف</text>
+		<text key="Supprimer le document">إحذف الملف</text>
+		<text key="Supprimer tout">إحذف كل الملفات</text>
+		<text key="Systéme">النظام</text>
+		<text key="Systémes">النظام</text>
+		<text key="Tableau de bord">الصفحة الاولى</text>
+		<text key="Tableau de Bord">عمليات</text>
+		<text key="Téléphone">الهاتف</text>
+		<text key="Terminé">إنتهى</text>
+		<text key="Terminée">إنتهى</text>
+		<text key="Terminer">إنتهى</text>
+		<text key="Un document avec le méme identifiant existe déja">هناك ملف أخر بنفس الإسم</text>
+		<text key="une erreur s'est produite voulez-vous annuler?" acceptpunctuation="true">حدث خطأ. هل تريد إيقاف العملية</text>
+		<text key="une erreur s'est produite!" acceptpunctuation="true">حدث خطأ</text>
+		<text key="Utilisateur">المستخدمين</text>
+		<text key="Utiliser en-téte">إستعمل معلومات الشركة</text>
+		<text key="Utiliser par default">إستعمل الملف دائما</text>
+		<text key="Valeurs">كلمة البحث</text>
+		<text key="validé">مثبتة</text>
+		<text key="Validé">مؤكد</text>
+		<text key="Valider">تأكيد</text>
+		<text key="Veuillez patienter" acceptpunctuation="true">...يرجى الإنتظار</text>
+		<text key="Voulez-vous Attacher le document">هل ترغب بربط الملف بالإيميل</text>
+		<text key="voulez-vous continuer!" acceptmissing="true">? أكمل العملة</text>
+		<text key="Voulez-vous exporter tous les documents?" acceptpunctuation="true">?هل تريد إستخراج كل البيانات</text>
+		<text key="Voulez-vous fermer la fenêtre ?" acceptpunctuation="true">هل تريد غلق النافذة</text>
+		<text key="Voulez-vous supprimer ces">هل تريد حذف</text>
+		<text key="Voulez-vous supprimer le document?">هل ترغب بحذف الملف</text>
+		<text key="Voullez-vous continuer">هل ترغب بإكمال العملية</text>
+		<text key="Vous devez annuler le document avant de le supprimer">يجب إلغاء الملف قبر حذفه</text>
+		<text key="Vous n'avez pas l'autorisation de supprimer!">لا يمكنك حذف الملف بلا ترخيص المستعملين</text>
+		<text key="Vous n'avez pas l'autorisation pour annuler!">ليس لديك ترخيص بإلغاء الملف</text>
+		<text key="Vous n'avez pas l'autorisation pour valider!">ليس لديك ترخيص لتثبيت الملف</text>
+		<text key="Vous ne pouvez pas supprimer un document non enregistré">لا يمكن حذف ملف غير مثبت</text>
+		<text key="Vous n'etes pas autorise a visualiser ce document">ليس لديك تصريح لرؤية الملف</text>
+		<text key="Vue / terminée">تمت معاينته</text>
+		<text key="words.actualiser">تحديث</text>
+		<text key="words.filtrer">البحث</text>
+		<text key="words.next">التالي</text>
+		<text key="words.previous">الرجوع</text>
+		<text key="words.selectall">إختيار كل</text>
+	</culture>
+	<culture name="en">
+		<text key="Action non autorisée">Unauthorised action</text>
+		<text key="Actions">Actions</text>
+		<text key="Actualiser">Refresh</text>
+		<text key="Adresse">Address</text>
+		<text key="Adresse email d'envoi">Sending email address</text>
+		<text key="Adresse serveur SMTP">Server address SMTP</text>
+		<text key="afficher.les.champs">Fields</text>
+		<text key="Afficher Tous">Show all</text>
+		<text key="Age">Age</text>
+		<text key="Agrandir le tableau">Extend size</text>
+		<text key="ajoutée au bureau">Icon added</text>
+		<text key="ajouter au bureau">Add to desktop</text>
+		<text key="Annulé">Cancelled</text>
+		<text key="Annulée">Cancelled</text>
+		<text key="Annuler">Cancel</text>
+		<text key="annuler les références avant d'annuler ce document">cancel linked documents befor this!</text>
+		<text key="ans">years</text>
+		<text key="app">App</text>
+		<text key="app.assist.promo">Find and install new plugins from the website
+www.ovresko.com</text>
+		<text key="app.name">Ovresko</text>
+		<text key="Application">Application</text>
+		<text key="assistant.tab.app">Startup</text>
+		<text key="Aucun document trouvé">Nothing found.</text>
+		<text key="Aujourd'hui">Today</text>
+		<text key="base.button.add">Add new</text>
+		<text key="base.button.add.hint">Create new document</text>
+		<text key="base.button.fermer">Close</text>
+		<text key="base.field.chercher">Search...</text>
+		<text key="base.tool.actions">Actions</text>
+		<text key="base.tool.outils">Tools</text>
+		<text key="Brouillon">Draft</text>
+		<text key="btn.assistant.precedent">Previous</text>
+		<text key="ce document fait référencer à un(e)">This document is linked to</text>
+		<text key="Chercher">Search...</text>
+		<text key="Choisir template à exporté">Choose a template</text>
+		<text key="Codes">Codes</text>
+		<text key="Condition">Condition</text>
+		<text key="Configuration">Settings</text>
+		<text key="Confirmation">Confirmation</text>
+		<text key="Contact">Contact</text>
+		<text key="Crée le">Created in</text>
+		<text key="Crée par">Created by</text>
+		<text key="créer.nouveau">Create new</text>
+		<text key="Créer nouveau">Create new</text>
+		<text key="Créer un nouveau document!" acceptpunctuation="true">Create new document</text>
+		<text key="Culture / Pays">Country / Culture</text>
+		<text key="Culture is empty">Culture is empty</text>
+		<text key="Date naissance">Birthdate</text>
+		<text key="documents trouvés">Documents found</text>
+		<text key="Données actualisées">Data updated...</text>
+		<text key="Dupliquer">Duplicate</text>
+		<text key="édition en masse">Bulk edit</text>
+		<text key="eléments">documents</text>
+		<text key="Email">Email</text>
+		<text key="Email envoyé">Email sent</text>
+		<text key="Email provider">Email provider</text>
+		<text key="En attente">Pending</text>
+		<text key="En cours">In progress</text>
+		<text key="Enregistré">Saved</text>
+		<text key="Enregistrer">Save</text>
+		<text key="entreprise">Business name</text>
+		<text key="entrepriseTab">My business</text>
+		<text key="Envoyer par email">Send Email</text>
+		<text key="Erreur">Error</text>
+		<text key="est invalide ou vide">is empty or invalid</text>
+		<text key="est requis">is required</text>
+		<text key="Exporter">Export data</text>
+		<text key="Exporter la base des données">Export database</text>
+		<text key="Exporter modéle">Export excel template</text>
+		<text key="Exporter/Imprimer Document Word">Create office word</text>
+		<text key="Exporter/Imprimer PDF">Export PDF</text>
+		<text key="exportexcelall">All fields</text>
+		<text key="exportexcelimportant">Document fields only</text>
+		<text key="Fax">Fax</text>
+		<text key="Femme">Female</text>
+		<text key="Fermer">Close</text>
+		<text key="Fermeture">Close</text>
+		<text key="Filter les résultats d'abord">Filter documents to include</text>
+		<text key="Filtrage">Filter</text>
+		<text key="Filtres Rapide">Fast search</text>
+		<text key="Général">Common info</text>
+		<text key="home.app.btn.home">Dashboard</text>
+		<text key="home.app.btn.modules">Install plugins</text>
+		<text key="home.app.btn.notification">Notification</text>
+		<text key="home.app.btn.retour">Back</text>
+		<text key="home.app.btn.settings">Settings</text>
+		<text key="home.app.init">Ovresko</text>
+		<text key="home.app.search">Search documents...</text>
+		<text key="home.btn.open">Edit</text>
+		<text key="home.btn.plus">New</text>
+		<text key="home.error.contactprovider">Navigation error!! please contact us to: help@ovresko.com</text>
+		<text key="Home">Home</text>
+		<text key="homemenumenu">Menu</text>
+		<text key="Homme">Male</text>
+		<text key="Identifiant existe!">Name exist</text>
+		<text key="Ignorer les modifications?" acceptpunctuation="true">Save changes ? choose "No" to leave.</text>
+		<text key="Importer">Import excel</text>
+		<text key="Imprimer">Print</text>
+		<text key="Infos supplémentaires">More infos</text>
+		<text key="Installer nouveau">Install new</text>
+		<text key="jours">days</text>
+		<text key="Lancer">Launch</text>
+		<text key="Lancer serveur API">Start API server at startup</text>
+		<text key="lang">Launguage</text>
+		<text key="Le champ">Field</text>
+		<text key="Libelle">Name</text>
+		<text key="login.button.connect">Login</text>
+		<text key="login.button.exit">Close</text>
+		<text key="login.label.title">Login</text>
+		<text key="login.label.user">User</text>
+		<text key="login.label.version">Version</text>
+		<text key="login.msg.select.user">Choose user!</text>
+		<text key="login.text.password">Password</text>
+		<text key="login.text.username">Username</text>
+		<text key="Logo entreprise">Logo</text>
+		<text key="Mobile">Mobile</text>
+		<text key="Model vide">Empty document</text>
+		<text key="Modifications enregistrées">Changes saved</text>
+		<text key="Modifier">Edited</text>
+		<text key="modifier module">Open module</text>
+		<text key="Module">Module</text>
+		<text key="mois">months</text>
+		<text key="Mot de passe email d'envoi">Sending email password</text>
+		<text key="Mots de pass administrateur">Admin password</text>
+		<text key="Mots de pass incorrect!">Wrong password</text>
+		<text key="Must choose a language!" acceptpunctuation="true">Must choose a language!</text>
+		<text key="N/A">Unknown</text>
+		<text key="Nom de champ">Field name</text>
+		<text key="Nom de série">Naming series</text>
+		<text key="Nom entreprise">Business name</text>
+		<text key="Nom et prénom">Full name</text>
+		<text key="Notifications">Notifications</text>
+		<text key="Nouveau">New</text>
+		<text key="Nouveau(elle)">New</text>
+		<text key="Ok">Ok</text>
+		<text key="OkAndNew">Apply and continue</text>
+		<text key="Opération annuler">Operation cancelled by user</text>
+		<text key="Opérations">Operations</text>
+		<text key="Ouvrir">Open</text>
+		<text key="Ouvrir.touts">Open all</text>
+		<text key="Ouvrir assistant">Open app startup</text>
+		<text key="Paramétres">Settings</text>
+		<text key="plugin.install.btn">Load</text>
+		<text key="plugin.install.file">Load .zip file</text>
+		<text key="plugin.install.install">Install</text>
+		<text key="plugin.install.subtitle">Visit www.ovresko.com for more plugins</text>
+		<text key="plugin.install.title">Install new plugin</text>
+		<text key="Plugin">Plugin</text>
+		<text key="Port serveur SMTP">SMTP server port</text>
+		<text key="pour">for</text>
+		<text key="Propriétés">Fields</text>
+		<text key="Recherche en cours">Searching...</text>
+		<text key="Réduire le tableau">Reduce size</text>
+		<text key="Réf">Ref</text>
+		<text key="Région">Region</text>
+		<text key="Règles d'autorisation">Access rule</text>
+		<text key="Remplacer les valeurs">Replace value</text>
+		<text key="Restaurer la base des données">Restore database</text>
+		<text key="Rôle">Role</text>
+		<text key="Saisir la valeur à remplacer">Put a value to replace</text>
+		<text key="Select date">Select date...</text>
+		<text key="Selectioner">Choose</text>
+		<text key="Selectioner document">Select a document</text>
+		<text key="Selectionner">Select</text>
+		<text key="Selectionner une image">Choose an image</text>
+		<text key="Selectionner une ligne à ajoutée, ou vérifier la déclaration">Select a document to add</text>
+		<text key="Selectionner une ligne!" acceptpunctuation="true">Select a document</text>
+		<text key="Sexe">Gender</text>
+		<text key="Si vous annuler, vous devez modifier les changements effectués">Must update referenced documents after cancelling</text>
+		<text key="Site web">Website</text>
+		<text key="Source Db">Data source</text>
+		<text key="Source DB">Data source</text>
+		<text key="startup.label.checkadmin">Loading accounts</text>
+		<text key="startup.label.checkingdb">Checking database</text>
+		<text key="startup.label.checkmodules">Updating modules</text>
+		<text key="startup.label.cultures">Translations</text>
+		<text key="startup.label.data">Chargement data types</text>
+		<text key="startup.label.init">Loading</text>
+		<text key="startup.label.initdb">Init database</text>
+		<text key="startup.label.lang">Languages</text>
+		<text key="startup.label.loadingdb">Loading database</text>
+		<text key="startup.label.loadingmodule">Loading modules</text>
+		<text key="startup.label.logging">Logging</text>
+		<text key="startup.label.series">Naming series</text>
+		<text key="startup.label.temp">Clear temp</text>
+		<text key="startup.label.title">Loading...</text>
+		<text key="startup.label.updates">Cheking updates</text>
+		<text key="Status">Status</text>
+		<text key="Suivant">Next</text>
+		<text key="Supprimer">Delete</text>
+		<text key="Supprimer le document">Delete the document</text>
+		<text key="Supprimer tout">Delete all</text>
+		<text key="Systéme">System</text>
+		<text key="Systémes">System</text>
+		<text key="Tableau de bord">Dashboard</text>
+		<text key="Tableau de Bord">Dashboard</text>
+		<text key="Téléphone">Phone</text>
+		<text key="Terminé">Completed</text>
+		<text key="Terminée">Finished</text>
+		<text key="Terminer">Finish</text>
+		<text key="Texte a remplacer">Text to replace</text>
+		<text key="Tx:date.month day">d/M</text>
+		<text key="Tx:date.month day.abbr">d MMM</text>
+		<text key="Tx:date.month day.long">d MMMM</text>
+		<text key="Tx:date.month day.tab">dd/MM</text>
+		<text key="Tx:date.year month">M/yyyy</text>
+		<text key="Tx:date.year month.abbr">MMM yyyy</text>
+		<text key="Tx:date.year month.tab">MM/yyyy</text>
+		<text key="Tx:date.year month day">d/M/yyyy</text>
+		<text key="Tx:date.year month day.abbr">d MMM yyyy</text>
+		<text key="Tx:date.year month day.long">d MMMM yyyy</text>
+		<text key="Tx:date.year month day.tab">dd/MM/yyyy</text>
+		<text key="Tx:enum.and.combiner">, </text>
+		<text key="Tx:enum.and.last combiner"> and </text>
+		<text key="Tx:enum.or.combiner">, </text>
+		<text key="Tx:enum.or.last combiner"> or </text>
+		<text key="Tx:number.group separator"> </text>
+		<text key="Tx:number.group separator threshold">1</text>
+		<text key="Tx:number.negative">−</text>
+		<text key="Tx:number.ordinal">{#}th</text>
+		<text key="Tx:number.ordinal" count="1" mod="10">{#}st</text>
+		<text key="Tx:number.ordinal" count="2" mod="10">{#}nd</text>
+		<text key="Tx:number.ordinal" count="3" mod="10">{#}rd</text>
+		<text key="Tx:number.ordinal" count="11" mod="100">{#}th</text>
+		<text key="Tx:number.ordinal" count="12" mod="100">{#}th</text>
+		<text key="Tx:number.ordinal" count="13" mod="100">{#}th</text>
+		<text key="Tx:number.unit separator"> </text>
+		<text key="Tx:quote begin">“</text>
+		<text key="Tx:quote end">”</text>
+		<text key="Tx:quote nested begin">‘</text>
+		<text key="Tx:quote nested end">’</text>
+		<text key="Tx:time.am">am</text>
+		<text key="Tx:time.hour">h tt</text>
+		<text key="Tx:time.hour.tab">hh tt</text>
+		<text key="Tx:time.hour minute">h:mm tt</text>
+		<text key="Tx:time.hour minute.tab">HH:mm</text>
+		<text key="Tx:time.hour minute second">h:mm:ss tt</text>
+		<text key="Tx:time.hour minute second.tab">HH:mm:ss</text>
+		<text key="Tx:time.hour minute second ms">h:mm:ss.fff tt</text>
+		<text key="Tx:time.hour minute second ms.tab">HH:mm:ss.fff</text>
+		<text key="Tx:time.never">never</text>
+		<text key="Tx:time.now">now</text>
+		<text key="Tx:time.pm">pm</text>
+		<text key="Tx:time.relative">in {interval}</text>
+		<text key="Tx:time.relative.days">{#} days</text>
+		<text key="Tx:time.relative.days" count="1">{#} day</text>
+		<text key="Tx:time.relative.days.single">{#} days</text>
+		<text key="Tx:time.relative.days.single" count="1">a day</text>
+		<text key="Tx:time.relative.hours">{#} hours</text>
+		<text key="Tx:time.relative.hours" count="1">{#} hour</text>
+		<text key="Tx:time.relative.hours.single">{#} hours</text>
+		<text key="Tx:time.relative.hours.single" count="1">an hour</text>
+		<text key="Tx:time.relative.minutes">{#} minutes</text>
+		<text key="Tx:time.relative.minutes" count="1">{#} minute</text>
+		<text key="Tx:time.relative.minutes.single">{#} minutes</text>
+		<text key="Tx:time.relative.minutes.single" count="1">a minute</text>
+		<text key="Tx:time.relative.months">{#} months</text>
+		<text key="Tx:time.relative.months" count="1">{#} month</text>
+		<text key="Tx:time.relative.months.single">{#} months</text>
+		<text key="Tx:time.relative.months.single" count="1">a month</text>
+		<text key="Tx:time.relative.seconds">{#} seconds</text>
+		<text key="Tx:time.relative.seconds" count="1">{#} second</text>
+		<text key="Tx:time.relative.seconds.single">{#} seconds</text>
+		<text key="Tx:time.relative.seconds.single" count="1">a second</text>
+		<text key="Tx:time.relative.years">{#} years</text>
+		<text key="Tx:time.relative.years" count="1">{#} year</text>
+		<text key="Tx:time.relative.years.single">{#} years</text>
+		<text key="Tx:time.relative.years.single" count="1">a year</text>
+		<text key="Tx:time.relative neg">{interval} ago</text>
+		<text key="Tx:time.relative neg.days">{#} days</text>
+		<text key="Tx:time.relative neg.days" count="1">{#} day</text>
+		<text key="Tx:time.relative neg.days.single">{#} days</text>
+		<text key="Tx:time.relative neg.days.single" count="1">a day</text>
+		<text key="Tx:time.relative neg.hours">{#} hours</text>
+		<text key="Tx:time.relative neg.hours" count="1">{#} hour</text>
+		<text key="Tx:time.relative neg.hours.single">{#} hours</text>
+		<text key="Tx:time.relative neg.hours.single" count="1">an hour</text>
+		<text key="Tx:time.relative neg.minutes">{#} minutes</text>
+		<text key="Tx:time.relative neg.minutes" count="1">{#} minute</text>
+		<text key="Tx:time.relative neg.minutes.single">{#} minutes</text>
+		<text key="Tx:time.relative neg.minutes.single" count="1">a minute</text>
+		<text key="Tx:time.relative neg.months">{#} months</text>
+		<text key="Tx:time.relative neg.months" count="1">{#} month</text>
+		<text key="Tx:time.relative neg.months.single">{#} months</text>
+		<text key="Tx:time.relative neg.months.single" count="1">a month</text>
+		<text key="Tx:time.relative neg.seconds">{#} seconds</text>
+		<text key="Tx:time.relative neg.seconds" count="1">{#} second</text>
+		<text key="Tx:time.relative neg.seconds.single">{#} seconds</text>
+		<text key="Tx:time.relative neg.seconds.single" count="1">a second</text>
+		<text key="Tx:time.relative neg.years">{#} years</text>
+		<text key="Tx:time.relative neg.years" count="1">{#} year</text>
+		<text key="Tx:time.relative neg.years.single">{#} years</text>
+		<text key="Tx:time.relative neg.years.single" count="1">a year</text>
+		<text key="Tx:time.relative span">{interval} later</text>
+		<text key="Tx:time.relative span.days">{#} days</text>
+		<text key="Tx:time.relative span.days" count="1">{#} day</text>
+		<text key="Tx:time.relative span.days.single">{#} days</text>
+		<text key="Tx:time.relative span.days.single" count="1">a day</text>
+		<text key="Tx:time.relative span.hours">{#} hours</text>
+		<text key="Tx:time.relative span.hours" count="1">{#} hour</text>
+		<text key="Tx:time.relative span.hours.single">{#} hours</text>
+		<text key="Tx:time.relative span.hours.single" count="1">an hour</text>
+		<text key="Tx:time.relative span.minutes">{#} minutes</text>
+		<text key="Tx:time.relative span.minutes" count="1">{#} minute</text>
+		<text key="Tx:time.relative span.minutes.single">{#} minutes</text>
+		<text key="Tx:time.relative span.minutes.single" count="1">a minute</text>
+		<text key="Tx:time.relative span.months">{#} months</text>
+		<text key="Tx:time.relative span.months" count="1">{#} month</text>
+		<text key="Tx:time.relative span.months.single">{#} months</text>
+		<text key="Tx:time.relative span.months.single" count="1">a month</text>
+		<text key="Tx:time.relative span.seconds">{#} seconds</text>
+		<text key="Tx:time.relative span.seconds" count="1">{#} second</text>
+		<text key="Tx:time.relative span.seconds.single">{#} seconds</text>
+		<text key="Tx:time.relative span.seconds.single" count="1">a second</text>
+		<text key="Tx:time.relative span.years">{#} years</text>
+		<text key="Tx:time.relative span.years" count="1">{#} year</text>
+		<text key="Tx:time.relative span.years.single">{#} years</text>
+		<text key="Tx:time.relative span.years.single" count="1">a year</text>
+		<text key="Tx:time.relative span neg">{interval} before</text>
+		<text key="Tx:time.relative span neg.days">{#} days</text>
+		<text key="Tx:time.relative span neg.days" count="1">{#} day</text>
+		<text key="Tx:time.relative span neg.days.single">{#} days</text>
+		<text key="Tx:time.relative span neg.days.single" count="1">a day</text>
+		<text key="Tx:time.relative span neg.hours">{#} hours</text>
+		<text key="Tx:time.relative span neg.hours" count="1">{#} hour</text>
+		<text key="Tx:time.relative span neg.hours.single">{#} hours</text>
+		<text key="Tx:time.relative span neg.hours.single" count="1">an hour</text>
+		<text key="Tx:time.relative span neg.minutes">{#} minutes</text>
+		<text key="Tx:time.relative span neg.minutes" count="1">{#} minute</text>
+		<text key="Tx:time.relative span neg.minutes.single">{#} minutes</text>
+		<text key="Tx:time.relative span neg.minutes.single" count="1">a minute</text>
+		<text key="Tx:time.relative span neg.months">{#} months</text>
+		<text key="Tx:time.relative span neg.months" count="1">{#} month</text>
+		<text key="Tx:time.relative span neg.months.single">{#} months</text>
+		<text key="Tx:time.relative span neg.months.single" count="1">a month</text>
+		<text key="Tx:time.relative span neg.seconds">{#} seconds</text>
+		<text key="Tx:time.relative span neg.seconds" count="1">{#} second</text>
+		<text key="Tx:time.relative span neg.seconds.single">{#} seconds</text>
+		<text key="Tx:time.relative span neg.seconds.single" count="1">a second</text>
+		<text key="Tx:time.relative span neg.years">{#} years</text>
+		<text key="Tx:time.relative span neg.years" count="1">{#} year</text>
+		<text key="Tx:time.relative span neg.years.single">{#} years</text>
+		<text key="Tx:time.relative span neg.years.single" count="1">a year</text>
+		<text key="Tx:time.span">for {interval}</text>
+		<text key="Tx:time.span.days">{#} days</text>
+		<text key="Tx:time.span.days" count="1">{#} day</text>
+		<text key="Tx:time.span.days.single">{#} days</text>
+		<text key="Tx:time.span.days.single" count="1">a day</text>
+		<text key="Tx:time.span.hours">{#} hours</text>
+		<text key="Tx:time.span.hours" count="1">{#} hour</text>
+		<text key="Tx:time.span.hours.single">{#} hours</text>
+		<text key="Tx:time.span.hours.single" count="1">an hour</text>
+		<text key="Tx:time.span.minutes">{#} minutes</text>
+		<text key="Tx:time.span.minutes" count="1">{#} minute</text>
+		<text key="Tx:time.span.minutes.single">{#} minutes</text>
+		<text key="Tx:time.span.minutes.single" count="1">a minute</text>
+		<text key="Tx:time.span.months">{#} months</text>
+		<text key="Tx:time.span.months" count="1">{#} month</text>
+		<text key="Tx:time.span.months.single">{#} months</text>
+		<text key="Tx:time.span.months.single" count="1">a month</text>
+		<text key="Tx:time.span.seconds">{#} seconds</text>
+		<text key="Tx:time.span.seconds" count="1">{#} second</text>
+		<text key="Tx:time.span.seconds.single">{#} seconds</text>
+		<text key="Tx:time.span.seconds.single" count="1">a second</text>
+		<text key="Tx:time.span.years">{#} years</text>
+		<text key="Tx:time.span.years" count="1">{#} year</text>
+		<text key="Tx:time.span.years.single">{#} years</text>
+		<text key="Tx:time.span.years.single" count="1">a year</text>
+		<text key="Tx:time.span neg">for {interval}</text>
+		<text key="Tx:time.span neg.days">{#} days</text>
+		<text key="Tx:time.span neg.days" count="1">{#} day</text>
+		<text key="Tx:time.span neg.days.single">{#} days</text>
+		<text key="Tx:time.span neg.days.single" count="1">a day</text>
+		<text key="Tx:time.span neg.hours">{#} hours</text>
+		<text key="Tx:time.span neg.hours" count="1">{#} hour</text>
+		<text key="Tx:time.span neg.hours.single">{#} hours</text>
+		<text key="Tx:time.span neg.hours.single" count="1">an hour</text>
+		<text key="Tx:time.span neg.minutes">{#} minutes</text>
+		<text key="Tx:time.span neg.minutes" count="1">{#} minute</text>
+		<text key="Tx:time.span neg.minutes.single">{#} minutes</text>
+		<text key="Tx:time.span neg.minutes.single" count="1">a minute</text>
+		<text key="Tx:time.span neg.months">{#} months</text>
+		<text key="Tx:time.span neg.months" count="1">{#} month</text>
+		<text key="Tx:time.span neg.months.single">{#} months</text>
+		<text key="Tx:time.span neg.months.single" count="1">a month</text>
+		<text key="Tx:time.span neg.seconds">{#} seconds</text>
+		<text key="Tx:time.span neg.seconds" count="1">{#} second</text>
+		<text key="Tx:time.span neg.seconds.single">{#} seconds</text>
+		<text key="Tx:time.span neg.seconds.single" count="1">a second</text>
+		<text key="Tx:time.span neg.years">{#} years</text>
+		<text key="Tx:time.span neg.years" count="1">{#} year</text>
+		<text key="Tx:time.span neg.years.single">{#} years</text>
+		<text key="Tx:time.span neg.years.single" count="1">a year</text>
+		<text key="Un document avec le méme identifiant existe déja">Another document with same name already exist</text>
+		<text key="une erreur s'est produite voulez-vous annuler?" acceptpunctuation="true">An error occurred! cancel operation ?</text>
+		<text key="une erreur s'est produite!" acceptpunctuation="true">An error occurred</text>
+		<text key="Utilisateur">User</text>
+		<text key="Utiliser en-téte">Use header</text>
+		<text key="Utiliser par default">Mark as default template</text>
+		<text key="Valeurs">Value</text>
+		<text key="validé">submited</text>
+		<text key="Validé">Submitted</text>
+		<text key="Valider">Submit</text>
+		<text key="Veuillez patienter">Please wait...</text>
+		<text key="Voulez-vous Attacher le document" acceptpunctuation="true">Attach document to the email?</text>
+		<text key="voulez-vous continuer!">Continue ?</text>
+		<text key="Voulez-vous exporter tous les documents?" acceptpunctuation="true">Include all documents ?</text>
+		<text key="Voulez-vous fermer la fenêtre ?" acceptpunctuation="true">Close this window?</text>
+		<text key="Voulez-vous supprimer ces">Are your sure you want to delete</text>
+		<text key="Voulez-vous supprimer le document?">Do you want to delete the document!</text>
+		<text key="Voullez-vous continuer">Continue?</text>
+		<text key="Vous devez annuler le document avant de le supprimer">You must cancel the document before you delete</text>
+		<text key="Vous n'avez pas l'autorisation de supprimer!">You don't have permission to delete this document!</text>
+		<text key="Vous n'avez pas l'autorisation pour annuler!">You don't have permission to cancel!</text>
+		<text key="Vous n'avez pas l'autorisation pour valider!">You don't have permission to submit!</text>
+		<text key="Vous ne pouvez pas supprimer un document non enregistré">This document is not saved</text>
+		<text key="Vous n'etes pas autorise a visualiser ce document">You're not allowed to view this document</text>
+		<text key="Vue / terminée">Closed</text>
+		<text key="words.actualiser">Refresh</text>
+		<text key="words.filtrer">Filter</text>
+		<text key="words.next">Next</text>
+		<text key="words.previous">Previous</text>
+		<text key="words.selectall">Select all</text>
+	</culture>
+	<culture name="fr" primary="true">
+		<text key="Action non autorisée">Action non autorisée</text>
+		<text key="Actions">Actions</text>
+		<text key="Actualiser">Actualiser</text>
+		<text key="Adresse">Adresse</text>
+		<text key="Adresse email d'envoi">Adresse email d'envoi</text>
+		<text key="Adresse serveur SMTP">Adresse serveur SMTP</text>
+		<text key="afficher.les.champs">Afficher les champs</text>
+		<text key="Afficher Tous">Afficher tous</text>
+		<text key="Age">Age</text>
+		<text key="Agrandir le tableau">Agrandir le tableau</text>
+		<text key="ajoutée au bureau">ajoutée au bureau</text>
+		<text key="ajouter au bureau">Ajouter au bureau</text>
+		<text key="Annulé">Annulé</text>
+		<text key="Annulée">Annulée</text>
+		<text key="Annuler">Annuler</text>
+		<text key="annuler les références avant d'annuler ce document">annuler les références avant d'annuler ce document</text>
+		<text key="ans">ans</text>
+		<text key="app">App</text>
+		<text key="app.assist.promo">Trouver et installer les modules complémentaires
+www.ovresko.com</text>
+		<text key="app.name">Ovresko</text>
+		<text key="Application">Application</text>
+		<text key="assistant.tab.app">Démarrage</text>
+		<text key="Aucun document trouvé">Aucun document trouvé.</text>
+		<text key="Aujourd'hui">Aujourd'hui</text>
+		<text key="base.button.add">Ajouter</text>
+		<text key="base.button.add.hint">Créer nouveau document</text>
+		<text key="base.button.fermer">Fermer</text>
+		<text key="base.field.chercher">Rechercher...</text>
+		<text key="base.tool.actions">Actions</text>
+		<text key="base.tool.outils">Outils</text>
+		<text key="Brouillon">Brouillon</text>
+		<text key="btn.assistant.precedent">Précédent</text>
+		<text key="ce document fait référencer à un(e)">ce document fait référencer à un(e)</text>
+		<text key="Chercher">Chercher...</text>
+		<text key="Choisir template à exporté">Choisir template à exporter</text>
+		<text key="Codes">Codes</text>
+		<text key="Condition">Condition</text>
+		<text key="Configuration">Configuration</text>
+		<text key="Confirmation">Confirmation</text>
+		<text key="Contact">Contact</text>
+		<text key="Crée le">Crée le</text>
+		<text key="Crée par">Crée par</text>
+		<text key="créer.nouveau">Nouveau</text>
+		<text key="Créer nouveau">Créer nouveau</text>
+		<text key="Créer un nouveau document!">Créer un nouveau document!</text>
+		<text key="Culture / Pays">Cûlture / Pays</text>
+		<text key="Culture is empty">Cûlture pays est obligatoire</text>
+		<text key="Date naissance">Date naissance</text>
+		<text key="documents trouvés">documents trouvés</text>
+		<text key="Données actualisées">Données actualisées...</text>
+		<text key="Dupliquer">Dupliquer</text>
+		<text key="édition en masse">Modification en masse</text>
+		<text key="eléments">documents</text>
+		<text key="Email">Email</text>
+		<text key="Email envoyé">Email envoyé</text>
+		<text key="Email provider">Sources email</text>
+		<text key="En attente">En attente</text>
+		<text key="En cours">En cours</text>
+		<text key="Enregistré">Enregistré</text>
+		<text key="Enregistrer">Enregistrer</text>
+		<text key="entreprise">L'entreprise</text>
+		<text key="entrepriseTab">Société</text>
+		<text key="Envoyer par email">Envoyer par email</text>
+		<text key="Erreur">Erreur</text>
+		<text key="est invalide ou vide">est invalide ou vide</text>
+		<text key="est requis">est requis</text>
+		<text key="Exporter">Exporter les données</text>
+		<text key="Exporter la base des données">Exporter la base des données</text>
+		<text key="Exporter modéle">Exporter modéle vide</text>
+		<text key="Exporter/Imprimer Document Word">Exporter/Imprimer Document Word</text>
+		<text key="Exporter/Imprimer PDF">Exporter/Imprimer PDF</text>
+		<text key="exportexcelall">Touts les champs</text>
+		<text key="exportexcelimportant">Champs importants seulement</text>
+		<text key="Fax">Fax</text>
+		<text key="Femme">Femme</text>
+		<text key="Fermer">Fermer</text>
+		<text key="Fermeture">Fermeture</text>
+		<text key="Filter les résultats d'abord">Filter les résultats d'abord</text>
+		<text key="Filtrage">Filtrage</text>
+		<text key="Filtres Rapide">Filtres Rapide</text>
+		<text key="Général">Général</text>
+		<text key="home.app.btn.home">Tableau de bord</text>
+		<text key="home.app.btn.modules">Installer modules</text>
+		<text key="home.app.btn.notification">Notification</text>
+		<text key="home.app.btn.retour">Arrière</text>
+		<text key="home.app.btn.settings">Configuration</text>
+		<text key="home.app.init">Ovresko</text>
+		<text key="home.app.search">Rechercher des documents...</text>
+		<text key="home.btn.open">Modifier</text>
+		<text key="home.btn.plus">Crée</text>
+		<text key="home.error.contactprovider">Erreur de navigation! Contactez help@ovresko.com</text>
+		<text key="Home">Accueil</text>
+		<text key="homemenumenu">Menu</text>
+		<text key="Homme">Homme</text>
+		<text key="Identifiant existe!">Identifiant existe!</text>
+		<text key="Ignorer les modifications?">Enregistrer les modifications? cliquer 'non' pour fermer</text>
+		<text key="Importer">Importer excel</text>
+		<text key="Imprimer">Imprimer</text>
+		<text key="Infos supplémentaires">Infos supplémentaires</text>
+		<text key="Installer nouveau">Installer nouveau</text>
+		<text key="jours">jours</text>
+		<text key="Lancer">Ouvrir document</text>
+		<text key="Lancer serveur API">Lancer serveur API</text>
+		<text key="lang">Langue</text>
+		<text key="Le champ">Le champ</text>
+		<text key="Libelle">Libellé</text>
+		<text key="login.button.connect">Connecter</text>
+		<text key="login.button.exit">Fermer</text>
+		<text key="login.label.title">Connection</text>
+		<text key="login.label.user">Utilisateur</text>
+		<text key="login.label.version">Version</text>
+		<text key="login.msg.select.user">Sélectionner utilisateur</text>
+		<text key="login.text.password">Mots de passe</text>
+		<text key="login.text.username">Nom d'utilisateur</text>
+		<text key="Logo entreprise">Logo d'entreprise</text>
+		<text key="Mobile">Mobile</text>
+		<text key="Model vide">Model vide</text>
+		<text key="Modifications enregistrées">Modifications enregistrées</text>
+		<text key="Modifier">Modifier</text>
+		<text key="modifier module">Ouvrir module</text>
+		<text key="Module">Module</text>
+		<text key="mois">mois</text>
+		<text key="Mot de passe email d'envoi">Mot de passe email d'envoi</text>
+		<text key="Mots de pass administrateur">Mots de pass administrateur</text>
+		<text key="Mots de pass incorrect!">Mots de pass incorrect!</text>
+		<text key="Must choose a language!">Il faut choisir une langue</text>
+		<text key="N/A">N/A</text>
+		<text key="Nom de champ">Nom de champ</text>
+		<text key="Nom de série">Nom de série</text>
+		<text key="Nom entreprise">Nom d'entreprise</text>
+		<text key="Nom et prénom">Nom et prénom</text>
+		<text key="Notifications">Notifications</text>
+		<text key="Nouveau">Nouveau</text>
+		<text key="Nouveau(elle)">Nouveau(elle)</text>
+		<text key="Ok">Ok</text>
+		<text key="OkAndNew">Ok et continuer</text>
+		<text key="Opération annuler">Opération annuler</text>
+		<text key="Opérations">Opérations</text>
+		<text key="Ouvrir">Ouvrir</text>
+		<text key="Ouvrir.touts">Ouvrir tous</text>
+		<text key="Ouvrir assistant">Ouvrir assistant</text>
+		<text key="Paramétres">Paramétres</text>
+		<text key="plugin.install.btn">Parcourir</text>
+		<text key="plugin.install.file">Charer [NomModule].zip ...</text>
+		<text key="plugin.install.install">Installer</text>
+		<text key="plugin.install.subtitle">Visiter www.ovresko.com pour trouver d'autres modules</text>
+		<text key="plugin.install.title">Installation de nouveau module</text>
+		<text key="Plugin">Plugin</text>
+		<text key="Port serveur SMTP">Port serveur SMTP</text>
+		<text key="pour">pour</text>
+		<text key="Propriétés">Propriétés</text>
+		<text key="Recherche en cours">Recherche en cours...</text>
+		<text key="Réduire le tableau">Réduire le tableau</text>
+		<text key="Réf">Réf</text>
+		<text key="Région">Région</text>
+		<text key="Règles d'autorisation">Régles d'autorisation</text>
+		<text key="Réles d'autorisations" />
+		<text key="Remplacer les valeurs">Remplacer les valeurs</text>
+		<text key="Restaurer la base des données">Restaurer la base des données</text>
+		<text key="Rôle">Rôle</text>
+		<text key="Saisir la valeur à remplacer">Saisir la valeur à remplacer</text>
+		<text key="Select date">Choisir une date...</text>
+		<text key="Selectioner">Selectioner</text>
+		<text key="Selectioner document">Selectionner un document</text>
+		<text key="Selectionner">Selectionner</text>
+		<text key="Selectionner une image">Selectionner une image</text>
+		<text key="Selectionner une ligne à ajoutée, ou vérifier la déclaration">Selectionner une ligne à ajoutée, ou vérifier la déclaration</text>
+		<text key="Selectionner une ligne!">Selectionner un document!</text>
+		<text key="Sexe">Sexe</text>
+		<text key="Si vous annuler, vous devez modifier les changements effectués">Si vous annuler, vous devez modifier les changements effectués</text>
+		<text key="Site web">Site web</text>
+		<text key="Source Db">Source données</text>
+		<text key="Source DB">Source DB</text>
+		<text key="startup.label.checkadmin">Creation admin</text>
+		<text key="startup.label.checkingdb">Vérification data</text>
+		<text key="startup.label.checkmodules">Vérification des modules</text>
+		<text key="startup.label.cultures">Init cûlture</text>
+		<text key="startup.label.data">Chargement data types</text>
+		<text key="startup.label.init">Démarrage</text>
+		<text key="startup.label.initdb">Init base de données</text>
+		<text key="startup.label.lang">Langue</text>
+		<text key="startup.label.loadingdb">Chargement base des données</text>
+		<text key="startup.label.loadingmodule">Chargement des modules</text>
+		<text key="startup.label.logging">Logging</text>
+		<text key="startup.label.series">Création des séries</text>
+		<text key="startup.label.temp">Libérer de l'espace supplémentaire</text>
+		<text key="startup.label.title">Démarrage...</text>
+		<text key="startup.label.updates">Vérification mise à jours</text>
+		<text key="Status">Status</text>
+		<text key="Suivant">Suivant</text>
+		<text key="Supprimer">Supprimer</text>
+		<text key="Supprimer le document">Supprimer le document</text>
+		<text key="Supprimer tout">Supprimer tout</text>
+		<text key="Systéme">Systéme</text>
+		<text key="Systémes">Systéme</text>
+		<text key="Tableau de bord">Tableau de bord</text>
+		<text key="Tableau de Bord">Tableau de Bord</text>
+		<text key="Téléphone">Téléphone</text>
+		<text key="Terminé">Terminé</text>
+		<text key="Terminée">Terminée</text>
+		<text key="Terminer">Terminer</text>
+		<text key="Texte a remplacer">Texte a remplacer</text>
+		<text key="Tx:byte unit" comment="Default: B">o</text>
+		<text key="Tx:colon" comment="Can be used to insert additional spacing like for French."> :</text>
+		<text key="Tx:date.day" comment="Default: %d" />
+		<text key="Tx:date.day.tab" comment="Default: dd" />
+		<text key="Tx:date.dow with date" comment="Combines a day of week with a date. Default: {dow}, {date}">{dow} {date}</text>
+		<text key="Tx:date.month.abbr" comment="Default: MMM" />
+		<text key="Tx:date.month.long" comment="Default: MMMM" />
+		<text key="Tx:date.month day" comment="Default: MM-dd">d/M</text>
+		<text key="Tx:date.month day.abbr" comment="Default: d MMM">d MMM</text>
+		<text key="Tx:date.month day.long" comment="Default: M">d MMMM</text>
+		<text key="Tx:date.month day.tab" comment="Default: MM-dd">dd/MM</text>
+		<text key="Tx:date.year" comment="Default: yyyy" />
+		<text key="Tx:date.year month" comment="Default: yyyy-MM">M/yyyy</text>
+		<text key="Tx:date.year month.abbr" comment="Default: MMM yyyy">MMM yyyy</text>
+		<text key="Tx:date.year month.long" comment="Default: Y" />
+		<text key="Tx:date.year month.tab" comment="Default: yyyy-MM">MM/yyyy</text>
+		<text key="Tx:date.year month day" comment="Default: d">d/M/yyyy</text>
+		<text key="Tx:date.year month day.abbr" comment="Default: d MMM yyyy">d MMM yyyy</text>
+		<text key="Tx:date.year month day.long" comment="Default: d MMMM yyyy">d MMMM yyyy</text>
+		<text key="Tx:date.year month day.tab" comment="Default: d">dd/MM/yyyy</text>
+		<text key="Tx:enum.and.combiner">, </text>
+		<text key="Tx:enum.and.last combiner"> et </text>
+		<text key="Tx:enum.or.combiner">, </text>
+		<text key="Tx:enum.or.last combiner"> ou </text>
+		<text key="Tx:number.group separator" comment="Number thousands group separator. International recommendation is a narrow non-breaking space."> </text>
+		<text key="Tx:number.group separator threshold" comment="The minimum value for thousands group separators to be used at all.">1</text>
+		<text key="Tx:number.negative" comment="Negative number prefix.">−</text>
+		<text key="Tx:number.ordinal" comment="Ordinal numbers, male or default.">{#}ᵉ</text>
+		<text key="Tx:number.ordinal" count="1">{#}ᵉʳ</text>
+		<text key="Tx:number.ordinal" count="2">{#}éme</text>
+		<text key="Tx:number.ordinal f" comment="Ordinal numbers, female if special." />
+		<text key="Tx:number.ordinal f" count="1">{#}ʳᵉ</text>
+		<text key="Tx:number.unit separator" comment="Separator between a number and its unit. Should be a non-breaking space. Should only be used for relatively short unit symbols, not longer names."> </text>
+		<text key="Tx:quote begin" comment="Opening regular quotation mark.">« </text>
+		<text key="Tx:quote end" comment="Closing regular quotation mark."> »</text>
+		<text key="Tx:quote nested begin" comment="Opening nested/secondary quotation mark.">“</text>
+		<text key="Tx:quote nested end" comment="Closing nested/secondary quotation mark.">”</text>
+		<text key="Tx:time.am" comment="a.m. (ante meridiem), used for 12-hour clocks." />
+		<text key="Tx:time.hour" comment="Default: %H">H "h"</text>
+		<text key="Tx:time.hour.tab" comment="Default: HH">HH "h"</text>
+		<text key="Tx:time.hour minute" comment="Default: t">H "h" mm</text>
+		<text key="Tx:time.hour minute.tab" comment="Default: t">HH "h" mm</text>
+		<text key="Tx:time.hour minute second" comment="Default: T" />
+		<text key="Tx:time.hour minute second.tab" comment="Default: T">HH:mm:ss</text>
+		<text key="Tx:time.hour minute second ms" comment="Default: H:mm:ss.fff" />
+		<text key="Tx:time.hour minute second ms.tab" comment="Default: HH:mm:ss.fff" />
+		<text key="Tx:time.never" comment="No point in time.">jamais</text>
+		<text key="Tx:time.now" comment="At the current time.">maintenant</text>
+		<text key="Tx:time.pm" comment="p.m. (post meridiem), used for 12-hour clocks." />
+		<text key="Tx:time.relative" comment="A point in time in the future.">en {interval}</text>
+		<text key="Tx:time.relative neg" comment="A point in time in the past.">il y a {interval}</text>
+		<text key="Tx:time.relative span" comment="A point in time after another unspecified time.">{interval} plus tard</text>
+		<text key="Tx:time.relative span neg" comment="A point in time before another unspecified time.">{interval} avant</text>
+		<text key="Tx:time.span" comment="A time span from now on into the future or based at an unspecified time.">pour {interval}</text>
+		<text key="Tx:time.span neg" comment="A time span from the past until now.">depuis {interval}</text>
+		<text key="Un document avec le méme identifiant existe déja">Un document avec le méme identifiant existe déja</text>
+		<text key="une erreur s'est produite voulez-vous annuler?">une erreur s'est produite voulez-vous annuler?</text>
+		<text key="une erreur s'est produite!">une erreur s'est produite!</text>
+		<text key="Utilisateur">Utilisateur</text>
+		<text key="Utiliser en-téte">Utiliser en-téte</text>
+		<text key="Utiliser par default">Toujours utiliser ce modéle</text>
+		<text key="Valeurs">Valeurs</text>
+		<text key="validé">validé</text>
+		<text key="Validé">Validé</text>
+		<text key="Valider">Valider</text>
+		<text key="Veuillez patienter">Veuillez patienter...</text>
+		<text key="Voulez-vous Attacher le document">Voulez-vous Attacher le document</text>
+		<text key="voulez-vous continuer!">voulez-vous continuer!</text>
+		<text key="Voulez-vous exporter tous les documents?">Voulez-vous exporter tous les documents?</text>
+		<text key="Voulez-vous fermer la fenêtre ?">Voulez-vous fermer la fenêtre ?</text>
+		<text key="Voulez-vous supprimer ces">Voulez-vous supprimer ces</text>
+		<text key="Voulez-vous supprimer le document?">Voulez-vous supprimer le document?</text>
+		<text key="Voullez-vous continuer">Voullez-vous continuer?</text>
+		<text key="Vous devez annuler le document avant de le supprimer">Vous devez annuler le document avant de le supprimer</text>
+		<text key="Vous n'avez pas l'autorisation de supprimer!">Vous n'avez pas l'autorisation de supprimer!</text>
+		<text key="Vous n'avez pas l'autorisation pour annuler!">Vous n'avez pas l'autorisation pour annuler!</text>
+		<text key="Vous n'avez pas l'autorisation pour valider!">Vous n'avez pas l'autorisation pour valider!</text>
+		<text key="Vous ne pouvez pas supprimer un document non enregistré">Vous ne pouvez pas supprimer un document non enregistré</text>
+		<text key="Vous n'etes pas autorise a visualiser ce document">Vous n'etes pas autorise a visualiser ce document</text>
+		<text key="Vue / terminée">Vue / terminée</text>
+		<text key="words.actualiser">Actualiser</text>
+		<text key="words.filtrer">Filtrer</text>
+		<text key="words.next">Suivant</text>
+		<text key="words.previous">Précédent</text>
+		<text key="words.selectall">Selectionner tous</text>
+	</culture>
+</translation>

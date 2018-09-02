@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Ovresko.Generix.Core.SpreadSheet.SpreadsheetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:reo="clr-namespace:unvell.ReoGrid;assembly=unvell.ReoGrid"
+             xmlns:local="clr-namespace:Ovresko.Generix.Core.SpreadSheet"
+             mc:Ignorable="d" 
+             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" 
+        xmlns:s="https://github.com/canton7/Stylet"
+               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+          
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFEEF0F2" Offset="1"/>
+                <GradientStop Color="#FFEEF0F2" Offset=".09"/>
+                <GradientStop Color="White"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <ContentControl BorderThickness="1" BorderBrush="Black"  Content="{Binding ReoGrid}" Margin="0,47,0,0">
+
+        </ContentControl>
+        <Button Padding="0" Command="{s:Action Undo}" Style="{StaticResource ToolBarButton}" ToolTip="Annuler"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="33">
+            <materialDesign:PackIcon Kind="UndoVariant" Width="32" Height="22"/>
+        </Button>
+        <Button Padding="0" Command="{s:Action Redo}"  Style="{StaticResource ToolBarButton}" ToolTip="Rétablir"  HorizontalAlignment="Left" Margin="48,10,0,0" VerticalAlignment="Top" Width="33">
+            <materialDesign:PackIcon Kind="RedoVariant" Height="23" Width="23"/>
+        </Button>
+        <Button Padding="0" Command="{s:Action Excel}"  Style="{StaticResource ToolBarButton}" ToolTip="Rétablir"  HorizontalAlignment="Left" Margin="121,10,0,0" VerticalAlignment="Top" Width="33">
+            <materialDesign:PackIcon Kind="FileExcel" Height="23" Width="23"/>
+        </Button>
+        <TextBox Text="{Binding FunctionBar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}" Margin="171,-1,115,0" Height="40" VerticalAlignment="Top"/>
+        <Button Command="{s:Action Close}" 
+                      
+                    x:Name="button_Copy1" Focusable="False" 
+                        Style="{StaticResource ToolBarButton}"
+                    
+                    Content="{Binding FermerLabel}"
+                    Margin="0,10,10,0" 
+                    Padding="0"
+                    VerticalAlignment="Top"   
+                    Custom:ControlsHelper.ContentCharacterCasing="Normal"
+                    FontWeight="Normal" FontSize="12" Height="30" HorizontalAlignment="Right" Width="90"  />
+    </Grid>
+</UserControl>

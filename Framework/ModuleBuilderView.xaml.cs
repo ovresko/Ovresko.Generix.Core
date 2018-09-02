@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ErpAlgerie.Framework
+namespace Ovresko.Generix.Core.Framework
 {
     /// <summary>
     /// Logique d'interaction pour ModuleBuilderView.xaml

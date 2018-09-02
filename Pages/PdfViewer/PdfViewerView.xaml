@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Ovresko.Generix.Core.Pages.PdfViewer.PdfViewerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+               xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart" 
+             xmlns:local="clr-namespace:Ovresko.Generix.Core.Pages.PdfViewer"
+             mc:Ignorable="d"  MinHeight="250"  VerticalAlignment="Stretch" Height="374.699"  MinWidth="850" Background="White">
+    <Grid>
+        <chart:ClusteredColumnChart    ChartTitle="Chart test N°01" ChartSubTitle="Testing a new chart library" Name="MyChart"
+                                  ChartLegendVisibility="Visible" ChartTitleVisibility="Visible"  
+                              IsRowColumnSwitched="True"    >
+            <chart:ClusteredColumnChart.Series>
+                <chart:ChartSeries
+                        SeriesTitle="{Binding SeriesTitle}"
+                        DisplayMember="{Binding DisplayMember}"
+                        ValueMember="{Binding ValueMember}"
+                        ItemsSource="{Binding Path=ItemsSource}" /> 
+            </chart:ClusteredColumnChart.Series>
+        </chart:ClusteredColumnChart>
+
+    </Grid>
+</UserControl>

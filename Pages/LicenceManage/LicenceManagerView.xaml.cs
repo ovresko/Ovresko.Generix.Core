@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ErpAlgerie.Pages.LicenceManage
+namespace Ovresko.Generix.Core.Pages.LicenceManage
 {
     /// <summary>
     /// Logique d'interaction pour LicenceManagerView.xaml

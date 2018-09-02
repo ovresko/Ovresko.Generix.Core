@@ -1,18 +1,17 @@
-﻿using ErpAlgerie.Modules.Core.Helpers;
-using ErpAlgerie.Modules.Core.Module;
-using ICSharpCode.AvalonEdit.Document;
+﻿using Ovresko.Generix.Core.Modules.Core.Data;
+using Ovresko.Generix.Core.Modules.Core.Helpers;
+using Ovresko.Generix.Core.Modules.Core.Module;
+using Ovresko.Generix.Datasource.Models;
 using Stylet;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection; 
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Controls; 
 
-namespace ErpAlgerie.Pages
+namespace Ovresko.Generix.Core.Pages
 {
     class PrintWindowViewModel : Screen, IDisposable
     {
@@ -54,7 +53,21 @@ namespace ErpAlgerie.Pages
                 "SubModule",
                 "DocCardOne",
                 "DocCardTow",
+                "DocCardThree",
+                "DocCardFor",
+                "GroupeProperties",
+                "QualifiedNameSpace",
+                "Submitable",
+                "ModuleName",
                 "IconName",
+                "CollectionName",
+                "DocOpenMod",
+                "IconName",
+                "ShowInDesktop",
+                "NameSearch",
+                "PropertiesToHide",
+                "PropertyChangedDispatcher",
+                "SubModule",
                 "ForceIgniorValidatUnique",
                 "Index",
                 "NameField",
@@ -73,12 +86,12 @@ namespace ErpAlgerie.Pages
             }
         }
         public List<CheckBox> checkBoxes { get; set; } = new List<CheckBox>();
-        public PrintWindowViewModel(IEnumerable<dynamic> items)
+        public PrintWindowViewModel(IEnumerable<IDocument> items)
         {
             Items = items;
             props = new WrapPanel();
 
-            ExtendedDocument one = items.FirstOrDefault() ;
+            IDocument one = items.FirstOrDefault() ;
 
             if(one != null)
             {
@@ -94,14 +107,18 @@ namespace ErpAlgerie.Pages
                         || column.FieldType == ModelFieldType.BaseButton
                         || column.FieldType == ModelFieldType.Button
                         || column.FieldType == ModelFieldType.LienButton
-                        || column.FieldType == ModelFieldType.OpsButton
+                        || column.FieldType == ModelFieldType.OpsButton 
+                        || column.FieldType == ModelFieldType.BaseFilter
                         || column.FieldType == ModelFieldType.Table
-                        || column.FieldType == ModelFieldType.WeakTable 
+                        || column.FieldType == ModelFieldType.WeakTable
                         ))
                         continue;
 
-                    if (dispaly != null)
-                        name = dispaly.DisplayName;
+                    if (dispaly == null)
+                        continue;
+                    //
+
+                    name = dispaly.DisplayName;
 
                     CheckBox check = new CheckBox();
                     check.Tag = item;
@@ -134,14 +151,14 @@ namespace ErpAlgerie.Pages
             ChoosedPrperties.Add(property);
         }
 
-        public IEnumerable<dynamic> Items { get; set; }
+        public IEnumerable<IDocument> Items { get; set; }
         public string Titre { get; set; } = "Rapport : ";
 
         public void Ok()
         {
             if (string.IsNullOrWhiteSpace(Titre))
             {
-                MessageBox.Show("Insérer un titre");
+                 DataHelpers.ShowMessage( "Insérer un titre");
                 return;
             }
             PrintHelper.GenerateExcel(Items, ChoosedPrperties, Titre, out StatusText);

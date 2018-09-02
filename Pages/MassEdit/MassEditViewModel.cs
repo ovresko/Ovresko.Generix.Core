@@ -1,5 +1,5 @@
-﻿using ErpAlgerie.Modules.Core.Helpers;
-using ErpAlgerie.Modules.Core.Module;
+﻿using Ovresko.Generix.Core.Modules.Core.Helpers;
+using Ovresko.Generix.Core.Modules.Core.Module;
 using MongoDB.Bson;
 using Stylet;
 using System;
@@ -10,8 +10,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Ovresko.Generix.Core.Modules.Core.Data;
+using static Ovresko.Generix.Core.Translations.OvTranslate;
+using Ovresko.Generix.Datasource.Models;
 
-namespace ErpAlgerie.Pages.MassEdit
+namespace Ovresko.Generix.Core.Pages.MassEdit
 {
 
     class CustomProperty
@@ -56,7 +59,7 @@ namespace ErpAlgerie.Pages.MassEdit
             }
         }
 
-        public string HintTextBox { get; set; } = "Valeur";
+        public string HintTextBox { get; set; } = _("Valeurs");
         public string SelectedValue { get; set; }
         public Type aType { get; set; }
 
@@ -111,7 +114,7 @@ namespace ErpAlgerie.Pages.MassEdit
                 {
                     if (string.IsNullOrEmpty(ReplaceValue))
                     {
-                        MessageBox.Show("Saisir la valeur à remplacer");
+                         DataHelpers.ShowMessage( _("Saisir la valeur à remplacer"));
                         return;
                     }
 
@@ -133,9 +136,9 @@ namespace ErpAlgerie.Pages.MassEdit
                    
 
 
-                    if (aType == typeof(ObjectId))
+                    if (aType == typeof(Guid))
                     {
-                        try { propValue = ObjectId.Parse(SelectedValue); } catch { }
+                        try { propValue = Guid.Parse(SelectedValue); } catch { }
                     }
                     else
                     {
@@ -167,17 +170,17 @@ namespace ErpAlgerie.Pages.MassEdit
                         
                      
                         SelectedProp.aProperty.SetValue(item, propValue);
-                        (item as ExtendedDocument).ForceIgniorValidatUnique = true;
+                        (item as IDocument).ForceIgniorValidatUnique = true;
                         item.Save();
                     
                 }
 
-                MessageBox.Show("Modifications enregistrées");
+                 DataHelpers.ShowMessage( "Modifications enregistrées");
                 return;
             }
             catch (Exception s)
             {
-                MessageBox.Show(s.Message);
+                 DataHelpers.ShowMessage( s.Message);
                 return;
             }
         }

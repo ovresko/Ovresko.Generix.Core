@@ -4,7 +4,7 @@
           xmlns:s="https://github.com/canton7/Stylet" 
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
          
-                    xmlns:local="clr-namespace:ErpAlgerie.Pages.Reports">
+                    xmlns:local="clr-namespace:Ovresko.Generix.Core.Pages.Reports">
 
     <!--Converter for Indentation of items-->
     <local:TreeListViewConverter x:Key="TreeListViewConverter"/>

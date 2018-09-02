@@ -1,24 +1,27 @@
-﻿<Window x:Class="ErpAlgerie.Pages.Export.ExportManagerView"
+﻿<Window x:Class="Ovresko.Generix.Core.Pages.Export.ExportManagerView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:s="https://github.com/canton7/Stylet" 
-    Language="ar-DZ"
+       xmlns:Tx="http://unclassified.software/source/txtranslation"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         FontFamily="{StaticResource LatoRegular}"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ErpAlgerie.Pages.Export"
+        xmlns:local="clr-namespace:Ovresko.Generix.Core.Pages.Export"
         mc:Ignorable="d" Background="#FAFAFA"
-        Title="Choisir template à exporté" Height="220.829" Width="400.969">
+        Title="{Tx:T  Choisir template à exporté}" Height="235.906" Width="400.969" Icon="/Ovresko.Generix.Core;component/Images/logo ovresko_128.ico">
     <Grid Margin="10">
         <StackPanel>
            
             <ComboBox IsEditable="True" ItemsSource="{Binding Models, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Model, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Text="{Binding CurrentText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      materialDesign:HintAssist.Hint="Choisir un modéle..."
+                      materialDesign:HintAssist.Hint="{Tx:T Choisir template à exporté}"
                       Margin="0 5" Style="{StaticResource MaterialDesignFloatingHintComboBoxWhite}"
                       ></ComboBox>
-            <Button Command="{s:Action Create}" Margin="0 10 0 15" Content="Lancer"/>
+            <Button Command="{s:Action Create}" Margin="0 10 0 15" Content="{Tx:T  Lancer}" />
+            <Button Command="{s:Action Print}" Margin="0 0 0 15" materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+                    Content="{Tx:T  Imprimer}"/>
             <StackPanel Orientation="Horizontal">
                 <Button Margin="0 0 10 0" Background="WhiteSmoke" Foreground="Black" BorderThickness="0" Command="{s:Action DeleteModel}" Padding="5">
                     <materialDesign:PackIcon Kind="Delete" Height="20" Width="20"/>
@@ -26,18 +29,18 @@
                 <Button Margin="0 0 10 0" Background="WhiteSmoke" Foreground="Black" BorderThickness="0" Command="{s:Action OpenModel}" Padding="5">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="OpenInNew" Margin="0 0 5 0" Height="20" Width="20"/>
-                        <TextBlock Text="Ouvrir"/>
+                        <TextBlock Text="{Tx:T  home.btn.open}"/>
                     </StackPanel>
                 </Button>
                 <Button Margin="0 0 10 0" Background="WhiteSmoke" Foreground="Black" BorderThickness="0" Command="{s:Action CreateModel}" Padding="5">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="PlusCircle" Margin="0 0 5 0" Height="20" Width="20"/>
-                        <TextBlock Text="Créer"/>
+                        <TextBlock Text="{Tx:T  home.btn.plus}"/>
                     </StackPanel>
                 </Button>
                 <StackPanel Orientation="Vertical">
-                    <CheckBox Content="Utiliser par default" IsChecked="{Binding DefaultTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <CheckBox Content="Utiliser en-téte" IsChecked="{Binding UseHeader, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <CheckBox Content="{Tx:T  Utiliser par default}" IsChecked="{Binding DefaultTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <CheckBox Content="{Tx:T  Utiliser en-téte}" IsChecked="{Binding UseHeader, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

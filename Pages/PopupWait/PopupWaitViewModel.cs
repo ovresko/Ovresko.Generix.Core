@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace ErpAlgerie.Pages.PopupWait
+namespace Ovresko.Generix.Core.Pages.PopupWait
 {
     class PopupWaitViewModel : Screen, IDisposable
     {

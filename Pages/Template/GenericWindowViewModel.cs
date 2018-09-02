@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace ErpAlgerie.Pages.Template
+namespace Ovresko.Generix.Core.Pages.Template
 {
     class GenericWindowViewModel : Screen, IDisposable
     {

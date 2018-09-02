@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ErpAlgerie.Pages.Template
+namespace Ovresko.Generix.Core.Pages.Template
 {
     /// <summary>
     /// Logique d'interaction pour DetailView.xaml
@@ -28,8 +28,10 @@ namespace ErpAlgerie.Pages.Template
         private void button_Copy1_Click(object sender, RoutedEventArgs e)
         {
 
-            var win = Window.GetWindow(this);
+           // var win = Window.GetWindow(this);
             //if(win.)
         }
+
+        
     }
 }

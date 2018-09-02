@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 
-namespace ErpAlgerie.Pages.Reports
+namespace Ovresko.Generix.Core.Pages.Reports
 {
     class TreeListView : TreeView
     {
@@ -103,7 +103,7 @@ namespace ErpAlgerie.Pages.Reports
             }
             //Type conversion is not supported
             throw new NotSupportedException(
-                string.Format("Cannot convert from <{0}> to <{1}> using <TreeListViewConverter>.",
+                string.Format("Cannot convert from <{0:N}> to <{1}> using <TreeListViewConverter>.",
                 value.GetType(), targetType));
         }
 

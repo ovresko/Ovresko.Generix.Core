@@ -1,6 +1,6 @@
-﻿using ErpAlgerie.Modules.Core.Data;
-using ErpAlgerie.Modules.Core.Module;
-using ErpAlgerie.Modules.CRM;
+﻿using Ovresko.Generix.Core.Modules.Core.Data;
+using Ovresko.Generix.Core.Modules.Core.Module;
+using Ovresko.Generix.Core.Modules;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,14 +11,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TemplateEngine.Docx;
+using Ovresko.Generix.Datasource.Models;
 
-namespace ErpAlgerie.Pages.Helpers
+namespace Ovresko.Generix.Core.Pages.Helpers
 {
     class DocEngine
     {
 
 
-        public static void Generate(ExtendedDocument model)
+        public static void Generate(IDocument model)
         {
             switch (model.CollectionName)
             {
@@ -63,7 +64,7 @@ namespace ErpAlgerie.Pages.Helpers
         // }
 
 
-        public static void DefaultSet(ExtendedDocument model)
+        public static void DefaultSet(IDocument model)
         {
 
             //    var doc = $"templates/{model.Name}.docx";
@@ -96,7 +97,7 @@ namespace ErpAlgerie.Pages.Helpers
             //    }
             //    else
             //    {
-            //        var resul = MessageBox.Show($"Le document {model.Name} n'a pas un template, créer un template word avec le nom '{model.CollectionName}', Voulez-vous ouvrir les repertoir en question","Aucune template!",MessageBoxButton.YesNo);
+            //        var resul =  DataHelpers.ShowMessage( $"Le document {model.Name} n'a pas un template, créer un template word avec le nom '{model.CollectionName}', Voulez-vous ouvrir les repertoir en question","Aucune template!",MessageBoxButton.YesNo);
 
             //       if(resul == MessageBoxResult.Yes)
             //        {
@@ -118,7 +119,7 @@ namespace ErpAlgerie.Pages.Helpers
             //    }
             //    catch (Exception s)
             //    {
-            //        MessageBox.Show(s.Message);
+            //         DataHelpers.ShowMessage( s.Message);
             //    }
             //}
         }

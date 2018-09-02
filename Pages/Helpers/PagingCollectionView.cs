@@ -1,4 +1,4 @@
-﻿using MongoDbGenericRepository.Models;
+﻿using Ovresko.Generix.Datasource.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace ErpAlgerie.Pages.Helpers
+namespace Ovresko.Generix.Core.Pages.Helpers
 {
     public class PagingCollectionView : Collection<IDocument>, ITypedList,INotifyPropertyChanged
     {

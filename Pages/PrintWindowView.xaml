@@ -1,24 +1,26 @@
-﻿<Window x:Class="ErpAlgerie.Pages.PrintWindowView"
+﻿<Window x:Class="Ovresko.Generix.Core.Pages.PrintWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:s="https://github.com/canton7/Stylet"
+          xmlns:Tx="http://unclassified.software/source/txtranslation"
+         FontFamily="{StaticResource LatoRegular}"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ErpAlgerie.Pages"
+        xmlns:local="clr-namespace:Ovresko.Generix.Core.Pages"
         mc:Ignorable="d"
-        Title="Exporter excel" Height="auto" Width="600" VerticalAlignment="Stretch" Icon="/ErpAlgerie;component/bridge_1DY_icon.ico">
+        Title="{Tx:T Exporter}" Height="auto" Width="600" VerticalAlignment="Stretch" Icon="/Ovresko.Generix.Core;component/Images/logo ovresko_128.ico" >
     <ScrollViewer>
         <StackPanel Margin="10">
-            <Button Content="Touts" Command="{s:Action SelectAll}" Margin="5 10"/>
+            <Button Content="{Tx:T exportexcelall}" Command="{s:Action SelectAll}" Margin="5 10"/>
 
-            <Button Content="Importants seulement" Command="{s:Action ImportantSelectAll}" Margin="5 0 5 20"/>
+            <Button Content="{Tx:T exportexcelimportant}" Command="{s:Action ImportantSelectAll}" Margin="5 0 5 20"/>
             <ContentControl Content="{Binding props, Mode=OneWay,     UpdateSourceTrigger=PropertyChanged}"></ContentControl>
             <Label Content="{Binding StatusText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" 
                  Text="{Binding Titre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="272"/>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
                 <Button Content="Ok" Command="{s:Action Ok}" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="auto" Background="#FF27A8F7" BorderBrush="#FF27A8F7" Foreground="White"/>
-                <Button Content="Annuler" BorderBrush="Black" Command="{s:Action Annuler}" HorizontalAlignment="Left"
+                <Button Content="{Tx:T Annuler}" BorderBrush="Black" Command="{s:Action Annuler}" HorizontalAlignment="Left"
                      Background="White" Foreground="Black"  Margin="5 " VerticalAlignment="Top" Width="auto"/>
 
             </StackPanel>

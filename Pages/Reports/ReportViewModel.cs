@@ -1,4 +1,6 @@
-﻿using ErpAlgerie.Modules.CRM;
+﻿using Ovresko.Generix.Core.Modules;
+using LiveCharts;
+using LiveCharts.Wpf;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -10,10 +12,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
+using Ovresko.Generix.Core.Modules.Core.Data;
+using Ovresko.Generix.Core.Modules.Base;
+using MaterialDesignThemes.Wpf;
 
-namespace ErpAlgerie.Pages.Reports
+namespace Ovresko.Generix.Core.Pages.Reports
 {
-
+    public class AChartValue
+    {
+        public string xValue { get; set; }
+        public decimal yValue { get; set; }
+        public Brush Color { get; set; }
+    }
 
     public abstract class IOvReport
     {
@@ -21,7 +32,7 @@ namespace ErpAlgerie.Pages.Reports
         public abstract string[] GetHeaders();
         public abstract string ReportName { get; set; }
         public virtual string BG { get; set; } = "White";
-
+        public abstract List<AChartValue> GetChartValues();
     }
 
 
@@ -34,16 +45,87 @@ namespace ErpAlgerie.Pages.Reports
         public string CL3 { get; set; }
         public string CL4 { get; set; }
         public string CL5 { get; set; }
+
+        public FontWeight CL1FontWeight { get; set; } = FontWeights.Normal;
+        public FontWeight CL2FontWeight { get; set; } = FontWeights.Normal;
+        
     }
 
     class ReportViewModel : Screen, IDisposable
     {
-        private IEnumerable<OvTreeItem> lines;
 
+        public IEnumerable<IReportViewModel> Reports { get; set; }
+        public WrapPanel RepportsContent { get; set; }
+        public ReportViewModel(List<IReportViewModel> reports)
+        {
+            RepportsContent = new WrapPanel();
+            Reports = reports;
+            Setup();
+        }
+
+        private void Setup()
+        {
+            foreach (var item in Reports)
+            {
+                Card card = new Card();
+                card.UniformCornerRadius = 4;
+                var view = DataHelpers.container.Get<ViewManager>().CreateAndBindViewForModelIfNecessary(item);
+                card.Content = view;
+                card.Width = 600;
+                card.Height = 350;
+                RepportsContent.Children.Add(card);
+            }
+
+            NotifyOfPropertyChange("RepportsContent");
+        }
+
+        public ReportViewModel()
+        {
+
+        }
+
+        #region CHART 
+
+        public SeriesCollection ReportSeries { get; set; }
+       // public IEnumerable<AChartValue> aChartValues { get; private set; }
+        public string TitleX { get; set; } = ""; 
+        public string[] Labels { get; set; }
+        public Func<decimal,string> Formatter { get; set; }
+
+        public void LoadChart()
+        {
+
+            //var values = Report.GetChartValues();
+            //ReportSeries = new SeriesCollection()
+            //{
+            //    new ColumnSeries
+            //    {
+            //        Title = TitleX,
+            //        Values = new ChartValues<decimal>(values.Select(z => z.yValue)),
+                    
+            //    }
+            //};
+
+            //Labels = values.Select(z => z.xValue).ToArray();
+            //Formatter = v => v.ToString("N");
+
+            NotifyOfPropertyChange("ReportSeries");
+        }
+
+        #endregion
+
+
+        private IEnumerable<OvTreeItem> lines;
+        
         public ReportViewModel(IOvReport report)
         {
+
+            ReportSeries = new SeriesCollection();
             Report = report;
+
+           // LoadChart();
         }
+
 
         public string CL1 { get { return Report.GetHeaders()[0]; } }
         public string CL2 { get { return Report.GetHeaders()[1]; } }
@@ -56,15 +138,14 @@ namespace ErpAlgerie.Pages.Reports
         {
             get
             {
-                return Report.GetReport();
+                var result =  Report.GetReport();
+                Execute.OnUIThread(LoadChart);
+                return result;
             }
         }
-
-
+        
         public IOvReport Report { get; set; }
-
-
-
+        
         public void refresh()
         {
 
@@ -87,10 +168,10 @@ namespace ErpAlgerie.Pages.Reports
         public void PrintReport()
         {
 
-            var posPrinter = PosSettings.getInstance().POSPrinter;
+            var posPrinter = ElvaSettings.getInstance().ImprimanteDefault;
             if (string.IsNullOrEmpty(posPrinter))
             {
-                MessageBox.Show("Imprimante introuvable, vérifier les paramétres");
+                 DataHelpers.ShowMessage( "Imprimante introuvable, vérifier les paramétres");
                 return;
             }
 
@@ -98,7 +179,7 @@ namespace ErpAlgerie.Pages.Reports
             
             using (var file = new StreamWriter("report.txt", true))
             {
-                var typeRepor = MessageBox.Show("Inclure les quantités vendues", "Type rapport", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var typeRepor =  DataHelpers.ShowMessage( "Inclure les quantités vendues", "Type rapport", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if(typeRepor == MessageBoxResult.Yes)
                 {
                      lines = Report.GetReport().SelectMany(z => z.Children);
@@ -136,15 +217,14 @@ namespace ErpAlgerie.Pages.Reports
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                     DataHelpers.ShowMessage( e.Message);
                 }
 
             }
 
 
         }
-
-
+        
         public void Dispose()
         {
 

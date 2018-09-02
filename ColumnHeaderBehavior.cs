@@ -1,7 +1,5 @@
-﻿using ErpAlgerie;
-using ErpAlgerie.Modules.Core.Data;
-using ErpAlgerie.Modules.Core.Helpers;
-using ErpAlgerie.Modules.Core.Module;
+﻿using Ovresko.Generix.Core;
+using Ovresko.Generix.Core.Modules.Core.Helpers;
 using MongoDB.Bson;
 using System;
 using System.ComponentModel;
@@ -12,149 +10,65 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Interactivity; 
+using System.Windows.Interactivity;
+using Ovresko.Generix.Core.Modules.Core.Module;
+using Ovresko.Generix.Core.Modules.Core.Data;
+using static Ovresko.Generix.Core.Translations.OvTranslate;
+using Ovresko.Generix.Datasource.Services.Queries;
+using Ovresko.Generix.Datasource.Models;
 
 namespace AttributtedDataColumn
 {
     public class ColumnHeaderBehavior : Behavior<DataGrid>
     {
-          
-        public static string GetPropertyDisplayName(object descriptor)
-        {
-            PropertyDescriptor pd = descriptor as PropertyDescriptor;
-            if (pd != null)
-            {
-                DisplayNameAttribute attr = pd.Attributes[typeof(DisplayNameAttribute)] as DisplayNameAttribute;
-                if ((attr != null) && (attr != DisplayNameAttribute.Default))
-                {
-                    return attr.DisplayName;
-                }
-            }
-            else
-            {
-                PropertyInfo pi = descriptor as PropertyInfo;
-                if (pi != null)
-                {
-                    Object[] attrs = pi.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-                    foreach (var att in attrs)
-                    {
-                        DisplayNameAttribute attribute = att as DisplayNameAttribute;
-                        if ((attribute != null) && (attribute != DisplayNameAttribute.Default))
-                        {
-                            return attribute.DisplayName;
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-
-        public static bool GetPropertyIsBold(object descriptor)
-        {
-            PropertyDescriptor pd = descriptor as PropertyDescriptor;
-            if (pd != null)
-            {
-                IsBoldAttribute attr = pd.Attributes[typeof(IsBoldAttribute)] as IsBoldAttribute;
-                if ((attr != null))
-                {
-                    return attr.IsBod;
-                }
-            }
-            else
-            {
-                PropertyInfo pi = descriptor as PropertyInfo;
-                if (pi != null)
-                {
-                    Object[] attrs = pi.GetCustomAttributes(typeof(IsBoldAttribute), true);
-                    foreach (var att in attrs)
-                    {
-                        IsBoldAttribute attribute = att as IsBoldAttribute;
-                        if ((attribute != null))
-                        {
-                            return attribute.IsBod;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        public static bool GetPropertyIsShowTable(object descriptor)
-        {
-            PropertyDescriptor pd = descriptor as PropertyDescriptor;
-            if (pd != null)
-            {
-                ShowInTableAttribute attr = pd.Attributes[typeof(ShowInTableAttribute)] as ShowInTableAttribute;
-                if ((attr != null))
-                {
-                    return attr.IsShow;
-                }
-            }
-            else
-            {
-                PropertyInfo pi = descriptor as PropertyInfo;
-                if (pi != null)
-                {
-                    Object[] attrs = pi.GetCustomAttributes(typeof(ShowInTableAttribute), true);
-                    foreach (var att in attrs)
-                    {
-                        ShowInTableAttribute attribute = att as ShowInTableAttribute;
-                        if ((attribute != null))
-                        {
-                            return attribute.IsShow;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        static ObjectIdConv objectIdConv = new ObjectIdConv();
+           
+        static GuidConv objectIdConv = new GuidConv();
 
 
         public static void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            //Style style1 = new Style()
-            //{
-            //    TargetType = typeof(DataGridCell)
-            //};
-            //style1.Setters.Add(new Setter(property: DataGridCell.FontSizeProperty, value: 20));
-            //e.Column.CellStyle = style1;
-           // if (e.Column.DisplayIndex == 0)
-              
-            string displayName = GetPropertyDisplayName(e.PropertyDescriptor);
-            bool isShow = GetPropertyIsShowTable(e.PropertyDescriptor);
+        { 
+            var displayName = (e.PropertyDescriptor as PropertyDescriptor)?.Attributes[typeof(ExDisplayName)] as ExDisplayName ;// GetPropertyDisplayName(e.PropertyDescriptor);
+            if (displayName == null)
+            {
+                e.Cancel=true;
+                return;
+            }
+
+            
+            var isShow = (e.PropertyDescriptor as PropertyDescriptor)?.Attributes[typeof(ShowInTableAttribute)] as ShowInTableAttribute; ;// GetPropertyDisplayName(e.PropertyDescriptor);
+            if(isShow == null)
+            {
+                e.Cancel = true;
+                return;
+            }
+
             var columnAttr = (e.PropertyDescriptor as PropertyDescriptor)?.Attributes[typeof(ColumnAttribute)] as ColumnAttribute;
             bool estDevise = false;
             if (columnAttr != null) {
 
                 if (columnAttr?.FieldType == ModelFieldType.Devise
-                || (columnAttr.FieldType == ModelFieldType.ReadOnly && columnAttr.Options == "{0} DA"))
-                estDevise = true;
-
-                
+                || (columnAttr.FieldType == ModelFieldType.ReadOnly && columnAttr.Options != ""))
+                estDevise = true;                
             }
 
              
            
 
-            if (!string.IsNullOrEmpty(displayName) && isShow)
+            if (displayName != null && !string.IsNullOrEmpty(displayName.DisplayName) && isShow.IsShow)
             {
 
                 // IF IS EDITABLE DETAIL TABLE
                 if ((sender as DataGrid).Name != "datagrid")
                 {
-
-
-                  if(  e.PropertyType == typeof(ObjectId?))
+                  if(  e.PropertyType == typeof(Guid))
                     {
                         e.Cancel = true;
                     }
 
                     if (e.Column.DependencyObjectType.SystemType == typeof(DataGridCheckBoxColumn)
-                     || e.PropertyType == typeof(ObjectId)
-                        || e.PropertyType == typeof(ObjectId?)
-                        || displayName == "Réf")
+                     || e.PropertyType == typeof(Guid)
+                        || e.PropertyType == typeof(Guid)
+                        || displayName.DisplayName == _("Réf"))
                     {
                         e.Column.IsReadOnly = true;
                     }
@@ -172,7 +86,7 @@ namespace AttributtedDataColumn
                     if (!String.IsNullOrWhiteSpace(attrisSource.source))
                     {
                         var cb = new DataGridComboBoxColumn();
-                        cb.ItemsSource = DataHelpers.GetMongoDataSync(attrisSource.source);
+                        cb.ItemsSource = DS.Generic(attrisSource.source)?.GetAll();
                         cb.DisplayMemberPath = $"Name";
 
                         cb.SelectedValuePath = "Id";
@@ -185,33 +99,48 @@ namespace AttributtedDataColumn
                     DataGridTextColumn dataGridTextColumn = e.Column as DataGridTextColumn;
                     if (dataGridTextColumn != null)
                     { 
-                        dataGridTextColumn.Binding.StringFormat = "{0} DA";
+                        dataGridTextColumn.Binding.StringFormat = "N";
                     }
                 }
-                if (e.PropertyType == typeof(DateTime))
-                {
-                    DataGridTextColumn dataGridTextColumn = e.Column as DataGridTextColumn;
-                    if (dataGridTextColumn != null)
-                    {
-                        dataGridTextColumn.Binding.StringFormat = "d";
-                    }
-                }
-                e.Column.Header = displayName;
+                //if (e.PropertyType == typeof(DateTime))
+                //{
+                //    DataGridTextColumn dataGridTextColumn = e.Column as DataGridTextColumn;
+                //    if (dataGridTextColumn != null)
+                //    {
+                //        dataGridTextColumn.Binding.StringFormat = "d";
+                //    }
+                //}
+                e.Column.Header = displayName.DisplayName;
                 e.Column.Width = DataGridLength.Auto;
-                if (displayName == "Crée le" && (sender as DataGrid).Name != "datagrid")
-                    e.Cancel = true;
-                if (  displayName == "Status") //|| displayName == "Crée le"
+                if (displayName.DisplayName == _("Crée le")
+                    && ((sender as DataGrid).Name != "datagrid" || (sender as DataGrid).Tag?.ToString() == "report"))
                 {
-                    if ((sender as DataGrid).Name == "datagrid")
+                    e.Cancel = true;
+                    return;
+                }
+                if (displayName.DisplayName == _("Crée par")
+                    && ((sender as DataGrid).Name != "datagrid" || (sender as DataGrid).Tag?.ToString() == "report"))
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                if (  displayName.DisplayName == _("Status")) //|| displayName == "Crée le"
+                {
+                    if ((sender as DataGrid).Name == "datagrid" && (sender as DataGrid).Tag?.ToString() != "report")
                     {
+
                         Style style = new Style()
                         {
                             TargetType = typeof(DataGridCell)
                         };
+
+
                        // style.Setters.Add(new Setter(property: DataGridCell.ForegroundProperty, value: Brushes.Black));
                         style.Setters.Add(new Setter(property: DataGridCell.MarginProperty, value: new Thickness(10, 2, 2, 2)));
                         style.Setters.Add(new Setter(property: DataGridCell.BackgroundProperty, value: new Binding { Converter = new BackColorConv() }));
-       
+                        style.Setters.Add(new Setter(property: DataGridCell.ForegroundProperty, value: System.Windows.Media.Brushes.White));
+
                         e.Column.CellStyle = style;
                     }
                     else
@@ -222,7 +151,7 @@ namespace AttributtedDataColumn
 
                 if ((sender as DataGrid).Name == "datagrid" )
                 {
-                    if (displayName == "Réf")
+                    if (displayName.DisplayName == _("Réf"))
                     {
                         e.Column.DisplayIndex = 0;
                         Style style = new Style()
@@ -240,7 +169,9 @@ namespace AttributtedDataColumn
                         e.Column.CellStyle = style; 
                     }
 
-                    if (columnAttr != null && columnAttr.FieldType == ModelFieldType.Lien)
+                    if (columnAttr != null
+                        && !string.IsNullOrWhiteSpace(columnAttr.Options)
+                        && (columnAttr.FieldType == ModelFieldType.Lien))
                     {
                         var c = ((e.Column as DataGridTextColumn).Binding as Binding);
 
@@ -250,7 +181,7 @@ namespace AttributtedDataColumn
 
                 }
 
-                if (displayName == "Retard")
+                if (displayName.DisplayName == "Retard")
                 {
                     //Style style = new Style()
                     //{
@@ -298,15 +229,16 @@ namespace AttributtedDataColumn
         }
 
 
-        private class ObjectIdConv : IValueConverter
+        private class GuidConv : IValueConverter
         {
             public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
             {
                 try
                 {
-                    var v = (ObjectId)value;
+
+                    var v = GuidParser.Convert(value);// as Guid;
                     var param = parameter.ToString();
-                    return v.GetObject(param)?.Name;
+                    return v.GetObject(param)?.NameSearch;
                 }
                 catch
                 {
@@ -328,7 +260,7 @@ namespace AttributtedDataColumn
             {
                 try
                 {
-                    var v = (ExtendedDocument)value;                    
+                    var v = (IDocument)value;                    
                     return v.StatusColor;
                 }
                 catch
