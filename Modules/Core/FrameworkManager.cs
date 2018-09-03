@@ -301,7 +301,7 @@ namespace Ovresko.Generix.Core.Modules.Core
                         pluginPackage.Save();
 
                       
-                        DataHelpers.ShowMessage("Module installé, redémarrer l'application");
+                        DataHelpers.ShowMessage(_("Plugin installé, redémarrer l'application"));
                     }
                     catch (Exception s)
                     {

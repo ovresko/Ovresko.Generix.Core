@@ -36,6 +36,7 @@ www.ovresko.com</text>
 		<text key="Brouillon">مؤقت</text>
 		<text key="btn.assistant.precedent">الخلف</text>
 		<text key="ce document fait référencer à un(e)">هذا الملف مرتبط بملفات اخرى</text>
+		<text key="Charger un module '.zip' pour l'installer">حمل ملف الإظافة</text>
 		<text key="Chercher" acceptpunctuation="true">...إبحث</text>
 		<text key="Choisir template à exporté">إختر قالب الطبع</text>
 		<text key="Codes">الرموز</text>
@@ -159,6 +160,7 @@ www.ovresko.com</text>
 		<text key="Réf">الملف</text>
 		<text key="Région">المنطقة</text>
 		<text key="Règles d'autorisation">قواعد الوصول</text>
+		<text key="Relancer">إعادة التشغيل</text>
 		<text key="Remplacer les valeurs">تبديل الحروف</text>
 		<text key="Restaurer la base des données">إسترجع قاعدة البيانات</text>
 		<text key="Rôle">دور المستخدم</text>
@@ -167,6 +169,7 @@ www.ovresko.com</text>
 		<text key="Selectioner">إختر</text>
 		<text key="Selectioner document">إختر ملف</text>
 		<text key="Selectionner" acceptmissing="true">إختر</text>
+		<text key="Selectionner un module .ZIP">حمل ملف .zip</text>
 		<text key="Selectionner une image">إختر صورة</text>
 		<text key="Selectionner une ligne à ajoutée, ou vérifier la déclaration">يجب إختيار ملف لإضافته</text>
 		<text key="Selectionner une ligne!" acceptpunctuation="true">إختر ملف</text>
@@ -214,6 +217,7 @@ www.ovresko.com</text>
 		<text key="Validé">مؤكد</text>
 		<text key="Valider">تأكيد</text>
 		<text key="Veuillez patienter" acceptpunctuation="true">...يرجى الإنتظار</text>
+		<text key="Veuillez relancer l'application pour activer le module">.يرجى إعادة تشغيل البرنامج</text>
 		<text key="Voulez-vous Attacher le document">هل ترغب بربط الملف بالإيميل</text>
 		<text key="voulez-vous continuer!" acceptmissing="true">? أكمل العملة</text>
 		<text key="Voulez-vous exporter tous les documents?" acceptpunctuation="true">?هل تريد إستخراج كل البيانات</text>
@@ -269,6 +273,7 @@ www.ovresko.com</text>
 		<text key="Brouillon">Draft</text>
 		<text key="btn.assistant.precedent">Previous</text>
 		<text key="ce document fait référencer à un(e)">This document is linked to</text>
+		<text key="Charger un module '.zip' pour l'installer">Load plugin file ".zip" to install.</text>
 		<text key="Chercher">Search...</text>
 		<text key="Choisir template à exporté">Choose a template</text>
 		<text key="Codes">Codes</text>
@@ -392,6 +397,7 @@ www.ovresko.com</text>
 		<text key="Réf">Ref</text>
 		<text key="Région">Region</text>
 		<text key="Règles d'autorisation">Access rule</text>
+		<text key="Relancer">Restart</text>
 		<text key="Remplacer les valeurs">Replace value</text>
 		<text key="Restaurer la base des données">Restore database</text>
 		<text key="Rôle">Role</text>
@@ -400,6 +406,7 @@ www.ovresko.com</text>
 		<text key="Selectioner">Choose</text>
 		<text key="Selectioner document">Select a document</text>
 		<text key="Selectionner">Select</text>
+		<text key="Selectionner un module .ZIP">Select plugin file .zip</text>
 		<text key="Selectionner une image">Choose an image</text>
 		<text key="Selectionner une ligne à ajoutée, ou vérifier la déclaration">Select a document to add</text>
 		<text key="Selectionner une ligne!" acceptpunctuation="true">Select a document</text>
@@ -640,6 +647,7 @@ www.ovresko.com</text>
 		<text key="Validé">Submitted</text>
 		<text key="Valider">Submit</text>
 		<text key="Veuillez patienter">Please wait...</text>
+		<text key="Veuillez relancer l'application pour activer le module">Please restart the application to activate the plugin.</text>
 		<text key="Voulez-vous Attacher le document" acceptpunctuation="true">Attach document to the email?</text>
 		<text key="voulez-vous continuer!">Continue ?</text>
 		<text key="Voulez-vous exporter tous les documents?" acceptpunctuation="true">Include all documents ?</text>
@@ -695,6 +703,7 @@ www.ovresko.com</text>
 		<text key="Brouillon">Brouillon</text>
 		<text key="btn.assistant.precedent">Précédent</text>
 		<text key="ce document fait référencer à un(e)">ce document fait référencer à un(e)</text>
+		<text key="Charger un module '.zip' pour l'installer">Charger un module '.zip' pour l'installer</text>
 		<text key="Chercher">Chercher...</text>
 		<text key="Choisir template à exporté">Choisir template à exporter</text>
 		<text key="Codes">Codes</text>
@@ -818,6 +827,7 @@ www.ovresko.com</text>
 		<text key="Réf">Réf</text>
 		<text key="Région">Région</text>
 		<text key="Règles d'autorisation">Régles d'autorisation</text>
+		<text key="Relancer">Relancer</text>
 		<text key="Réles d'autorisations" />
 		<text key="Remplacer les valeurs">Remplacer les valeurs</text>
 		<text key="Restaurer la base des données">Restaurer la base des données</text>
@@ -827,6 +837,7 @@ www.ovresko.com</text>
 		<text key="Selectioner">Selectioner</text>
 		<text key="Selectioner document">Selectionner un document</text>
 		<text key="Selectionner">Selectionner</text>
+		<text key="Selectionner un module .ZIP">Selectionner un module .ZIP</text>
 		<text key="Selectionner une image">Selectionner une image</text>
 		<text key="Selectionner une ligne à ajoutée, ou vérifier la déclaration">Selectionner une ligne à ajoutée, ou vérifier la déclaration</text>
 		<text key="Selectionner une ligne!">Selectionner un document!</text>
@@ -930,6 +941,7 @@ www.ovresko.com</text>
 		<text key="Validé">Validé</text>
 		<text key="Valider">Valider</text>
 		<text key="Veuillez patienter">Veuillez patienter...</text>
+		<text key="Veuillez relancer l'application pour activer le module">Veuillez relancer l'application pour activer le module.</text>
 		<text key="Voulez-vous Attacher le document">Voulez-vous Attacher le document</text>
 		<text key="voulez-vous continuer!">voulez-vous continuer!</text>
 		<text key="Voulez-vous exporter tous les documents?">Voulez-vous exporter tous les documents?</text>

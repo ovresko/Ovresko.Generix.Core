@@ -49,13 +49,13 @@ namespace Ovresko.Generix.Core.Pages.ModulesManager
                 {
 
                     FrameworkManager.InstallPlugin(ModulePath,_safeFileName, FrameworkManager.InstallMode.Zip);
-                    var _doRestart = _windowManager.ShowMessageBox("Voulez-vous relancer l'application maintenant?", "Relancer", System.Windows.MessageBoxButton.YesNo);
+                    var _doRestart = _windowManager.ShowMessageBox(_("Veuillez relancer l'application pour activer le module"), _("Relancer"), System.Windows.MessageBoxButton.YesNo);
 
-                    if (_doRestart == System.Windows.MessageBoxResult.Yes)
-                    {
-                        System.Windows.Forms.Application.Restart();
-                        System.Windows.Application.Current.Shutdown();
-                    }
+                    //if (_doRestart == System.Windows.MessageBoxResult.Yes)
+                    //{
+                    //    System.Windows.Forms.Application.Restart();
+                    //    System.Windows.Application.Current.Shutdown();
+                    //}
                 }
                 catch (Exception s)
                 {
@@ -65,7 +65,7 @@ namespace Ovresko.Generix.Core.Pages.ModulesManager
             }
             else
             {
-                _windowManager.ShowMessageBox("Charger un module '.zip' pour l'installer");
+                _windowManager.ShowMessageBox(_("Charger un module '.zip' pour l'installer"));
                 return;
             }
         }
