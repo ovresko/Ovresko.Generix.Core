@@ -4080,7 +4080,7 @@ Sent by www.ovresko.com
                     var sp = new StackPanel ();
                     sp.HorizontalAlignment = HorizontalAlignment.Left;
                    
-                    sp.Children.Add(new TextBlock { Text = item.Key, FontSize= 16, Foreground=Brushes.Blue, FontWeight = FontWeights.Bold });
+                    sp.Children.Add(new TextBlock { Text = _(item.Key), FontSize= 16, Foreground=Brushes.Blue, FontWeight = FontWeights.Bold });
                     sp.Children.Add(new TextBlock { Text = item.Value, FontSize = 14 });
 
                     InfoCards.Add(new MenuItem() { Header = sp,Height = 55 });
