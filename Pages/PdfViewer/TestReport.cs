@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Ovresko.Generix.Core.Translations.OvTranslate;
 
-namespace Ovresko.Generix.Core.Modules
+namespace Ovresko.Generix.Core.Modules.Test
 {
     public class ValueObject
     {
