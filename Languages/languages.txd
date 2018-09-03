@@ -99,7 +99,7 @@ www.ovresko.com</text>
 		<text key="homemenumenu">القائمة</text>
 		<text key="Homme">ذكر</text>
 		<text key="Identifiant existe!">إسم مستعمل</text>
-		<text key="Ignorer les modifications?" acceptpunctuation="true"> إختر 'لا' للخروج ?هل تريد حفظ التغييرات</text>
+		<text key="Ignorer les modifications?" acceptpunctuation="true"> ?هل تريد حفظ التغييرات</text>
 		<text key="Importer">إستيراد البيانات</text>
 		<text key="Imprimer">اطبع</text>
 		<text key="Infos supplémentaires">معلومات إضافية</text>
@@ -336,7 +336,7 @@ www.ovresko.com</text>
 		<text key="homemenumenu">Menu</text>
 		<text key="Homme">Male</text>
 		<text key="Identifiant existe!">Name exist</text>
-		<text key="Ignorer les modifications?" acceptpunctuation="true">Save changes ? choose "No" to leave.</text>
+		<text key="Ignorer les modifications?" acceptpunctuation="true">Save changes ?</text>
 		<text key="Importer">Import excel</text>
 		<text key="Imprimer">Print</text>
 		<text key="Infos supplémentaires">More infos</text>
@@ -766,7 +766,7 @@ www.ovresko.com</text>
 		<text key="homemenumenu">Menu</text>
 		<text key="Homme">Homme</text>
 		<text key="Identifiant existe!">Identifiant existe!</text>
-		<text key="Ignorer les modifications?">Enregistrer les modifications? cliquer 'non' pour fermer</text>
+		<text key="Ignorer les modifications?">Enregistrer les modifications?</text>
 		<text key="Importer">Importer excel</text>
 		<text key="Imprimer">Imprimer</text>
 		<text key="Infos supplémentaires">Infos supplémentaires</text>
