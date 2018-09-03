@@ -35,7 +35,10 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.ComponentModel;
+
 using static Ovresko.Generix.Core.Translations.OvTranslate;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ovresko.Generix.Core.Pages.Template
 {
@@ -2307,6 +2310,9 @@ Sent by www.ovresko.com
                 {
                     name = dd.DisplayName;
                 }
+                var requiredAtt = prop.GetCustomAttribute(typeof(RequiredAttribute)) as RequiredAttribute;
+
+                bool IsRequired = (requiredAtt != null);
 
                 bool DoRefresh = true;
                 //var refresh = prop.GetCustomAttribute(typeof(RefreshViewAttribute)) as RefreshViewAttribute;
@@ -2329,17 +2335,20 @@ Sent by www.ovresko.com
                     label.FontSize = 13;
                     label.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#535864");
                     Grid.SetColumn(label, 0);
-                    Border border = new Border()
-                    {
-                        CornerRadius = new CornerRadius(2),
-                        BorderThickness = new Thickness(1),
-                        BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#eceff1")
-                    };
-                    border.Width = elementWidth;
-                    border.Height = 28;
-                    border.Padding = new Thickness(0);
-                    border.Margin = new Thickness(3);
-                    border.HorizontalAlignment = HorizontalAlignment.Left;
+                    //Border border = new Border()
+                    //{
+                    //    CornerRadius = new CornerRadius(2),
+                    //    BorderThickness = new Thickness(1),
+                    //    BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#eceff1")
+                    //};
+
+                    
+
+                    //border.Width = elementWidth;
+                    //border.Height = 28;
+                    //border.Padding = new Thickness(0);
+                    //border.Margin = new Thickness(3);
+                    //border.HorizontalAlignment = HorizontalAlignment.Left;
 
                     StackPanel sp = new StackPanel();
                     sp.Width = elementWidth;
@@ -2384,6 +2393,9 @@ Sent by www.ovresko.com
                                     HintAssist.SetHint(tb, name);
                                     //HintAssist.SetFloatingScale(tb, 1);
                                     tb.Style = App.Current.FindResource("MaterialDesignFloatingHintTextBoxWhite") as Style;
+                                    if (IsRequired)
+                                        tb.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#2196F3"); //  Brushes.Black;
+
                                     tb.Width = elementWidth;
                                     var myBinding = new Binding(prop.Name);
                                     myBinding.Source = model;
@@ -2426,6 +2438,7 @@ Sent by www.ovresko.com
                                 {
                                     var optionDate = attributes.Options;
                                     var datePicker = new Xceed.Wpf.Toolkit.DateTimePicker();//..f DateTimePicker();
+                                  
                                     datePicker.AutoCloseCalendar = true;
                                     if (CultureInfo.CurrentCulture.Name.Contains("ar"))
                                     {
@@ -2462,6 +2475,8 @@ Sent by www.ovresko.com
                                     brDate.Padding = new Thickness(1);
                                     brDate.Background = Brushes.White;
                                     brDate.Width = elementWidth;
+                                    if (IsRequired)
+                                        brDate.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#2196F3"); //  Brushes.Black;
 
                                     datePicker.Style = App.Current.FindResource("MaterialDesignFloatingHintDateTimePickerEx") as Style;
 
@@ -2577,6 +2592,9 @@ Sent by www.ovresko.com
                                     //  border.Child = tbDevise;
 
                                     // sp.Children.Add(label);
+                                    if (IsRequired)
+                                        tbDevise.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#2196F3"); //  Brushes.Black;
+
                                     sp.Children.Add(tbDevise);
                                     //if (indexRox >= grid.RowDefinitions.Count)
                                     //{
@@ -2629,6 +2647,9 @@ Sent by www.ovresko.com
                                         tbNumero.FontWeight = FontWeights.Bold;
                                     //border.Child = tbNumero;
                                     tbNumero.KeyUp += Tb_KeyUp;
+                                    if (IsRequired)
+                                        tbNumero.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#2196F3"); //  Brushes.Black;
+
                                     // sp.Children.Add(label);
                                     sp.Children.Add(tbNumero);
 
@@ -2752,6 +2773,8 @@ Sent by www.ovresko.com
 
                                     bindVisibilitySelectLabel.ConverterParameter = boxSelect;
                                     label.SetBinding(Label.VisibilityProperty, bindVisibilitySelectLabel);
+                                    if (IsRequired)
+                                        brSelect.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#2196F3"); //  Brushes.Black;
 
                                     brSelect.Child = boxSelect;
                                     sp.Width = elementWidth;
@@ -3023,6 +3046,8 @@ Sent by www.ovresko.com
                                     sp1.Children.Add(btnView);
                                     // sp.Children.Add(label);
                                     br.Child = sp1;
+                                    if (IsRequired)
+                                        br.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#2196F3"); //  Brushes.Black;
 
                                     //if (box.Text == "")
                                     //    label.Content = "";
@@ -3887,9 +3912,9 @@ Sent by www.ovresko.com
                                     newMenuButton.Tag = optionButtonn;
                                     newMenuButton.Click += NewMenuButton_Click; ;
                                     newMenuButton.TouchDown += NewMenuButton_Click; ;
-                                    border.Child = newMenuButton;
+                                  //  border.Child = newMenuButton;
                                     sp.Children.Add(label);
-                                    sp.Children.Add(border); 
+                                    sp.Children.Add(newMenuButton); 
                                     masterWrap.Children.Add(sp);
 
                                 }
