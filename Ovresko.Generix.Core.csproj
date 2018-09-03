@@ -509,25 +509,25 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="templates\.gitignore.txt" />
+    <Content Include="templates\.gitignore.txt" />
     <Resource Include="Images\stand logo menu.png" />
-    <Resource Include="Database\images\.gitignore.txt">
+    <Content Include="Database\images\.gitignore.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <Content Include="Database\.gitignore.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Database\init\.gitignore.txt">
+    <Content Include="Database\init\.gitignore.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Database\data86\.gitignore.txt" />
-    <Resource Include="Database\data64\.gitignore.txt" />
-    <Resource Include="Plugins\.gitignore.txt">
+    </Content>
+    <Content Include="Database\data86\.gitignore.txt" />
+    <Content Include="Database\data64\.gitignore.txt" />
+    <Content Include="Plugins\.gitignore.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Reports\.gitignore.txt">
+    </Content>
+    <Content Include="Reports\.gitignore.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <Content Include="Restheart\LICENSE.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
