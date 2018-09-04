@@ -689,7 +689,7 @@ namespace Ovresko.Generix.Core.Pages.Template
                     newOps.Content = attribDisplay.DisplayName;
                     newOps.Click += NewOps_Click1;
                     newOps.Style = App.Current.FindResource("MaterialDesignFlatButton") as Style;
-                    newOps.Foreground = Brushes.Blue;
+                 //   newOps.Foreground = Brushes.#3F51B5;
                     newOps.Margin = new Thickness(2, 5, 0, 0);
                     newOps.Tag = attrib.Options;  // <= the name of the function
                     Filtres.Children.Add(newOps);

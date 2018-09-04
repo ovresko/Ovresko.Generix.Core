@@ -26,7 +26,7 @@
 
 
         <materialDesign:Card  UniformCornerRadius="10" HorizontalAlignment="Left"  FlowDirection="{Binding GetFlowDirection}"  
-                  Margin="10 5" Width="940" Foreground="#263238" Background="#eceff1" Padding="-3" materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                  Margin="10 5" Width="940" Foreground="#9FACBD" Background="#ECF0F1" Padding="-3" materialDesign:ShadowAssist.ShadowDepth="Depth0"
                 DockPanel.Dock="Top"  >
             <DockPanel  >
                 <StackPanel DockPanel.Dock="Left" Margin="10 10" Orientation="Horizontal">
@@ -41,7 +41,7 @@
 
 
                         <materialDesign:Chip  Margin="3">
-                            <TextBox  Text="{Binding model.NameSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                            <TextBox Foreground="#9FACBD" Text="{Binding model.NameSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                               BorderThickness="0" Width="auto" Height="auto" />
                         </materialDesign:Chip>
                         <materialDesign:Chip   Margin="3">
@@ -71,7 +71,7 @@
                     <!--<materialDesign:Card Margin="0 4  5 4" Height="40"  Visibility="{Binding SaveVisible ,Converter={StaticResource boolToVisConverter}}"
                              Custom:VisibilityHelper.IsVisible="{Binding opsVisible, Mode=OneWay, 
                         UpdateSourceTrigger=PropertyChanged}" materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                            Background="White"  BorderThickness="1" BorderBrush="#000051" RenderTransformOrigin="0.5,0.5" Width="194" >
+                            Background="White"  BorderThickness="1" BorderBrush="#3F51B5" RenderTransformOrigin="0.5,0.5" Width="194" >
                         
                         <Menu  IsMainMenu="True"  HorizontalAlignment="Stretch"  Background="Transparent"   BorderBrush="Transparent"  BorderThickness="0" Padding="5 0">
                             <MenuItem Margin="0"     Width="350"
@@ -235,8 +235,8 @@
                     </materialDesign:Card>
 
                     <StackPanel Margin="10 10">
-                        <Border CornerRadius="8" BorderThickness="1" Background="WhiteSmoke" BorderBrush="#eceff1">
-                            <ListBox  ItemsSource="{Binding InfoCards}">
+                        <Border CornerRadius="8" BorderThickness="1" Background="#ECF0F1" BorderBrush="#ECF0F1">
+                            <ListBox Background="#ECF0F1" ItemsSource="{Binding InfoCards}">
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="{x:Type ListBoxItem}" >
                                         <Setter Property="Cursor" Value="Hand"/> 
@@ -254,7 +254,7 @@
                         </Border>
                        
                             <ContentControl Margin="0 0 0 0"  Content="{Binding DocImageContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Border CornerRadius="8" BorderThickness="1" Margin="0 10" Background="White" BorderBrush="#F5F5F5">
+                        <Border CornerRadius="8" BorderThickness="1" Margin="0 10" Background="White" BorderBrush="#ECF0F1">
                             <ListBox  ItemsSource="{Binding opeartionButtons}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="{x:Type ListBoxItem}" >
@@ -270,8 +270,8 @@
                             </ListBox.ItemContainerStyle>
                         </ListBox>
                         </Border>
-                        <Border  BorderThickness="1" Width="300" CornerRadius="8" Background="White" Padding="30 10 0 20" BorderBrush="#F5F5F5">
-                            <ContentControl    Foreground="White" Content="{Binding linkButtons, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Border  BorderThickness="1" Width="300" CornerRadius="8" Background="White" Padding="30 10 0 20" BorderBrush="#ECF0F1">
+                            <ContentControl    Foreground="#ECF0F1" Content="{Binding linkButtons, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
                     </StackPanel>
                 </StackPanel>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ovresko.Generix.Core.Pages.LicenceManage"
         mc:Ignorable="d"
-        Background="WhiteSmoke"
+        Background="#ECF0F1"
         
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
           xmlns:s="https://github.com/canton7/Stylet"

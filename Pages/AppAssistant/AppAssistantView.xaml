@@ -120,9 +120,9 @@
                          Text="{Binding PasswordAdmin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="26,151,23,0" Height="auto" Grid.ColumnSpan="2" />
 
                     <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}"
-                        VerticalAlignment="Top" IsReadOnly="True" Background="WhiteSmoke" AcceptsReturn="True" Text="{Binding LogoPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        VerticalAlignment="Top" IsReadOnly="True" Background="#ECF0F1" AcceptsReturn="True" Text="{Binding LogoPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                         TextWrapping="Wrap" MaxWidth="400" materialDesign:HintAssist.Hint="{Tx:T Logo entreprise}" Margin="26,209,56,0" Height="auto" Grid.ColumnSpan="2" />
-                    <Button Content="+"  Command="{s:Action AddLogo}" Background="White" FontSize="18" BorderBrush="LightGray" Foreground="Blue" Padding="0" Margin="0,222,23,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="28"/>
+                    <Button Content="+"  Command="{s:Action AddLogo}" Background="White" FontSize="18" BorderBrush="LightGray" Foreground="#3F51B5" Padding="0" Margin="0,222,23,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="28"/>
 
                 </Grid>
             </TabItem>

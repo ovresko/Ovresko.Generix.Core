@@ -607,6 +607,10 @@ namespace Ovresko.Generix.Core.Pages.Startup
             SetDefaultCultureOnThread();
             Worker.ReportProgress(40);
 
+            SetNote("startup.label.lang");
+            CheckDefaultLang();
+            Worker.ReportProgress(55);
+
             SetNote("startup.label.checkmodules");
             ReloadAllModules();
 
@@ -676,9 +680,7 @@ namespace Ovresko.Generix.Core.Pages.Startup
             CheckForUpdates();
             Worker.ReportProgress(95);
 
-            SetNote("startup.label.lang");
-            CheckDefaultLang();
-            Worker.ReportProgress(100);
+         
 
           
         }
@@ -696,7 +698,7 @@ namespace Ovresko.Generix.Core.Pages.Startup
             var setting = ElvaSettings.getInstance();
             if(string.IsNullOrWhiteSpace( setting?.Pays))
             {
-                Execute.OnUIThread(() =>
+                Execute.OnUIThreadSync(() =>
                 {
                     try
                     {

@@ -15,8 +15,8 @@
         Title="{Tx:T plugin.install.title}" Height="230.833" Width="486" WindowStartupLocation="CenterScreen"
         WindowState="Normal" Icon="/Ovresko.Generix.Core;component/Images/logo ovresko_128.ico">
 
-    <Grid Background="#F5F5F5">
-        <TextBox IsReadOnly="True" materialDesign:HintAssist.Hint="{Tx:T plugin.install.file}" Background="WhiteSmoke"  
+    <Grid Background="#ECF0F1">
+        <TextBox IsReadOnly="True" materialDesign:HintAssist.Hint="{Tx:T plugin.install.file}" Background="#ECF0F1"  
                  Margin="19,85,96,0" Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}"
                  TextWrapping="NoWrap" Text="{Binding ModulePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
         <Button Padding="2" FontSize="12" Style="{StaticResource MaterialDesignFlatButton}" Background="White"

@@ -167,7 +167,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
             get
             {
                 if (isLocal)
-                    return _("Nouveau");//, "#2196F3"); new Tuple<string, string>( , "#FFC400") new Tuple<string, string>(, "#00E676"), "#00E676")
+                    return _("Nouveau");//, "#3F51B5"); new Tuple<string, string>( , "#FFC400") new Tuple<string, string>(, "#00E676"), "#00E676")
                 if (DocStatus == 2)
                     return _("Annulé");
 
@@ -187,7 +187,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
             get
             {
                 if (isLocal)
-                    return "#2196F3";//, "#2196F3"); new Tuple<string, string>( , "#FFC400") new Tuple<string, string>(, "#00E676"), "#00E676")
+                    return "#3F51B5";//, "#3F51B5"); new Tuple<string, string>( , "#FFC400") new Tuple<string, string>(, "#00E676"), "#00E676")
                 if (DocStatus == 2)
                     return "Red";
 
@@ -195,7 +195,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
                 {
                     return DocStatus == 0 ? "Orange" : "#2FCC71";// "#AEEA00";// "#2FCC71";
                 }
-                return "#2196F3";
+                return "#3F51B5";
             }
         }
 

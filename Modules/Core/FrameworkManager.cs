@@ -385,7 +385,7 @@ namespace Ovresko.Generix.Core.Modules.Core
             // return;
             var modules = DS.db.GetAll<ModuleErp>();// DataHelpers.GetMongoDataSync("ModuleErp") as IEnumerable<ModuleErp>;
             DataHelpers.Modules = modules as IEnumerable<ModuleErp>;
-            var collections = modules.Select(z => z.Libelle).ToList();
+            var collections = modules.Select(z => z.ClassName).ToList(); 
             string nspace = "Ovresko.Generix.Core.Modules";
             string plugins = "Ovresko.Generix.Extentions";
             var asm = AppDomain.CurrentDomain.GetAssemblies();
@@ -422,8 +422,8 @@ namespace Ovresko.Generix.Core.Modules.Core
                     {
                     Console.Write(t.Name);
                     var instance = Activator.CreateInstance(t);
-                    var collection = t.GetProperty("CollectionName").GetValue(instance)?.ToString();
-                    AssemblyCollection.Add(collection);
+                    var CollectionName = t.GetProperty("CollectionName").GetValue(instance)?.ToString();
+                    AssemblyCollection.Add(t.FullName);
                     //Install
                     IDocument extended = (instance as IDocument);
                     if (extended.MyModule() != null && (extended.MyModule() as ModuleErp).SeriesDefault.IsValide() == false)
@@ -434,7 +434,7 @@ namespace Ovresko.Generix.Core.Modules.Core
 
                     (instance as IDocument).InstallWithBootstrap();
 
-                    if (!collections.Contains(collection))
+                    if (!collections.Contains(t.FullName))
                     {
                         var moduleName = t.GetProperty("ModuleName").GetValue(instance)?.ToString();
                         var iconName = t.GetProperty("IconName").GetValue(instance)?.ToString();
@@ -446,7 +446,7 @@ namespace Ovresko.Generix.Core.Modules.Core
                             Console.Write("EXIT");
                         }
                         var moduleErp = new ModuleErp();
-                        moduleErp.Libelle = collection;
+                        moduleErp.Libelle = CollectionName;
                         moduleErp.EstAcceRapide = showInDesktop.Value;
                         moduleErp.ClassName = t.FullName;// t.AssemblyQualifiedName;// $"{nspace}.{t.Name}";
                         moduleErp.GroupeModule = moduleName;
@@ -456,7 +456,7 @@ namespace Ovresko.Generix.Core.Modules.Core
                         moduleErp.ModuleMenuIndex = indexMnu;
                         moduleErp.Save();
 
-                        try { DataHelpers.GetTypesModule.Add(collection, t); } catch { }
+                        try { DataHelpers.GetTypesModule.Add(CollectionName, t); } catch { }
                         try { DataHelpers.GetTypesModule.Add(moduleErp.ClassName, t); } catch { }
                         try { DataHelpers.GetTypesModule.Add(t.FullName, t); } catch { }
                         try { DataHelpers.GetTypesModule.Add(t.Name, t); } catch { }
@@ -474,7 +474,7 @@ namespace Ovresko.Generix.Core.Modules.Core
 
             foreach (var item in modules)
             {
-                if (!AssemblyCollection.Contains(item.Libelle))
+                if (!AssemblyCollection.Contains(item.ClassName))
                     item.Delete(false);
             }
 
