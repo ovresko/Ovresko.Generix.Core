@@ -19,12 +19,35 @@ namespace Ovresko.Generix.Core.Pages
 
         public LoginViewModel()
         {
-           
+            
         }
-        public string pwd { get; set; }
-        public User user { get; set; }
-        public bool Logedin { get; set; }
 
+       
+
+        public string pwd { get; set; }
+      //  public User user { get; set; }
+
+        private User _user;
+
+        public User user
+        {
+            get { return _user; }
+            set { _user = value;
+                this.NotifyOfPropertyChange(nameof(this.DefaultPassword));
+            }
+        }
+
+
+        public bool Logedin { get; set; }
+        public string DefaultPassword { get
+            {
+                if (user != null && user.Password == "admin")
+                    return _("Mot de passe par default : admin");
+                return "";
+            }
+        }
+         
+            
         public string AppVersion { get
             {
                 return $"{Assembly.GetExecutingAssembly().GetName().Version}";

@@ -25,6 +25,7 @@ www.ovresko.com</text>
 		<text key="app.name">أوفريسكو</text>
 		<text key="Application">البرنامج</text>
 		<text key="assistant.tab.app">إعدادات</text>
+		<text key="AssistPasswordHelp"> "admin" اترك فارغ لإستعمال كلمة السر</text>
 		<text key="Aucun document trouvé" acceptmissing="true" acceptpunctuation="true">.لا يوجد أي ملف</text>
 		<text key="Aujourd'hui">اليوم</text>
 		<text key="base.button.add">أظف</text>
@@ -127,6 +128,7 @@ www.ovresko.com</text>
 		<text key="Module">ملفات النظام</text>
 		<text key="mois">شهر</text>
 		<text key="Mot de passe email d'envoi">Sending email password</text>
+		<text key="Mot de passe par default : admin">admin : كلمة السر </text>
 		<text key="Mots de pass administrateur">كلمة السر</text>
 		<text key="Mots de pass incorrect!">كلمة سر خاطئة</text>
 		<text key="Must choose a language!">يجب إختيار لغة</text>
@@ -262,6 +264,7 @@ www.ovresko.com</text>
 		<text key="app.name">Ovresko</text>
 		<text key="Application">Application</text>
 		<text key="assistant.tab.app">Startup</text>
+		<text key="AssistPasswordHelp">Leave empty to use default password "admin"</text>
 		<text key="Aucun document trouvé">Nothing found.</text>
 		<text key="Aujourd'hui">Today</text>
 		<text key="base.button.add">Add new</text>
@@ -364,6 +367,7 @@ www.ovresko.com</text>
 		<text key="Module">Module</text>
 		<text key="mois">months</text>
 		<text key="Mot de passe email d'envoi">Sending email password</text>
+		<text key="Mot de passe par default : admin">Default password : admin</text>
 		<text key="Mots de pass administrateur">Admin password</text>
 		<text key="Mots de pass incorrect!">Wrong password</text>
 		<text key="Must choose a language!" acceptpunctuation="true">Must choose a language!</text>
@@ -692,6 +696,7 @@ www.ovresko.com</text>
 		<text key="app.name">Ovresko</text>
 		<text key="Application">Application</text>
 		<text key="assistant.tab.app">Démarrage</text>
+		<text key="AssistPasswordHelp">Laissez le champ vide pour ne pas modifier</text>
 		<text key="Aucun document trouvé">Aucun document trouvé.</text>
 		<text key="Aujourd'hui">Aujourd'hui</text>
 		<text key="base.button.add">Ajouter</text>
@@ -794,6 +799,7 @@ www.ovresko.com</text>
 		<text key="Module">Module</text>
 		<text key="mois">mois</text>
 		<text key="Mot de passe email d'envoi">Mot de passe email d'envoi</text>
+		<text key="Mot de passe par default : admin">Mot de passe par default : admin</text>
 		<text key="Mots de pass administrateur">Mots de pass administrateur</text>
 		<text key="Mots de pass incorrect!">Mots de pass incorrect!</text>
 		<text key="Must choose a language!">Il faut choisir une langue</text>

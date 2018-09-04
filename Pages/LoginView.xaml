@@ -21,20 +21,21 @@
             <Border BorderThickness="1" BorderBrush="#9FACBD" CornerRadius="5" Background="White" Padding="1">
                 <ComboBox  Background="Transparent" BorderThickness="0"
                       materialDesign:HintAssist.Hint="{Tx:T login.text.username}"  
-                      ItemsSource="{Binding users, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                      ItemsSource="{Binding users, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"
+                      SelectedItem="{Binding user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged , NotifyOnTargetUpdated=True}"
                       DisplayMemberPath="Name"  />
             </Border>
             <xceed:WatermarkPasswordBox Style="{StaticResource MaterialDesignFloatingHintTextBoxWhite}"
                        Name="pwdBox" TextChanged="pwdBox_TextChanged" PasswordChar="*"
                      materialDesign:HintAssist.Hint="{Tx:T login.text.password}" 
                      />
+            <TextBlock TextWrapping="Wrap" Text="{Binding DefaultPassword, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Button BorderThickness="1"   
                     Margin="0 30 0 10"        
                     Command="{s:Action Connecter}" 
                     Custom:ControlsHelper.ContentCharacterCasing="Normal" 
                     Content="{Tx:T login.button.connect}" BorderBrush="{x:Null}"  >
-               
+
             </Button>
             <Button Command="{s:Action Close}" Background="White"
                     Foreground="Black" BorderBrush="{x:Null}"
