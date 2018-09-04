@@ -49,7 +49,7 @@ namespace Ovresko.Generix.Core.Pages.ModulesManager
                 {
 
                     FrameworkManager.InstallPlugin(ModulePath,_safeFileName, FrameworkManager.InstallMode.Zip);
-                    var _doRestart = _windowManager.ShowMessageBox(_("Veuillez relancer l'application pour activer le module"), _("Relancer"), System.Windows.MessageBoxButton.YesNo);
+                    var _doRestart = _windowManager.ShowMessageBox(_("Veuillez relancer l'application pour activer le module"), _("Relancer"), System.Windows.MessageBoxButton.OK);
 
                     //if (_doRestart == System.Windows.MessageBoxResult.Yes)
                     //{
