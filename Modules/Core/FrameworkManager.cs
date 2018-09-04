@@ -426,11 +426,7 @@ namespace Ovresko.Generix.Core.Modules.Core
                     AssemblyCollection.Add(t.FullName);
                     //Install
                     IDocument extended = (instance as IDocument);
-                    if (extended.MyModule() != null && (extended.MyModule() as ModuleErp).SeriesDefault.IsValide() == false)
-                    {
-                        FrameworkManager.CreateSeries(extended.MyModule() as ModuleErp, 1,true);
-                    }
-
+                  
 
                     (instance as IDocument).InstallWithBootstrap();
 
@@ -463,6 +459,12 @@ namespace Ovresko.Generix.Core.Modules.Core
 
                        
                     }
+
+                    if (extended.MyModule() != null && (extended.MyModule() as ModuleErp).SeriesDefault.IsValide() == false)
+                    {
+                        FrameworkManager.CreateSeries(extended.MyModule() as ModuleErp, 1, true);
+                    }
+
                 }
                 catch (Exception s)
                 {
