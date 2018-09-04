@@ -171,11 +171,11 @@ namespace Ovresko.Generix.Core.Modules
         [ExDisplayName("Base des données en ligne")]
         public string ActiveDB { get; set; }
 
-        [ShowInTableAttribute(false)]
-        [IsBold(false)]
-        [ColumnAttribute(ModelFieldType.OpsButton, "SubmitDB")]
-        [ExDisplayName("Transférer DB")]
-        public double AddFactureBtn { get; set; }
+        //[ShowInTableAttribute(false)]
+        //[IsBold(false)]
+        //[ColumnAttribute(ModelFieldType.OpsButton, "SubmitDB")]
+        //[ExDisplayName("Transférer DB")]
+        //public double AddFactureBtn { get; set; }
 
         [ColumnAttribute(ModelFieldType.Check, "Utiliser BD embarqué")]
         [ExDisplayName("Utiliser BD locale")]
@@ -373,15 +373,15 @@ namespace Ovresko.Generix.Core.Modules
         public int MaxLinesFetch { get; internal set; } = 100;
 
 
-        [LongDescription("Exporter la base des données")]
-        [ExDisplayName("Exporter")]
-        [Column(ModelFieldType.OpsButton, "ExportData")]
-        public string ExportDataBtn { get; set; }
+        //[LongDescription("Exporter la base des données")]
+        //[ExDisplayName("Exporter")]
+        //[Column(ModelFieldType.OpsButton, "ExportData")]
+        //public string ExportDataBtn { get; set; }
 
 
-        [ExDisplayName("Restaurer la base des données")]
-        [Column(ModelFieldType.OpsButton, "RestorData")]
-        public string RestorDataBtn { get; set; }
+        //[ExDisplayName("Restaurer la base des données")]
+        //[Column(ModelFieldType.OpsButton, "RestorData")]
+        //public string RestorDataBtn { get; set; }
 
 
         public void ExportData()
