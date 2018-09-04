@@ -29,7 +29,7 @@
                        Name="pwdBox" TextChanged="pwdBox_TextChanged" PasswordChar="*"
                      materialDesign:HintAssist.Hint="{Tx:T login.text.password}" 
                      />
-            <TextBlock TextWrapping="Wrap" Text="{Binding DefaultPassword, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock TextWrapping="Wrap" Margin="5" Foreground="#E74C3C" Text="{Binding DefaultPassword, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Button BorderThickness="1"   
                     Margin="0 30 0 10"        
                     Command="{s:Action Connecter}" 
