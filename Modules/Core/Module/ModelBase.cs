@@ -52,7 +52,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
         [BsonIgnore]
         public override Action<Action> PropertyChangedDispatcher { get => base.PropertyChangedDispatcher; set => base.PropertyChangedDispatcher = value; }
 
-        public void Open(OpenMode mode = OpenMode.Attach)
+        public override void Open(OpenMode mode = OpenMode.Attach)
         {
             switch (mode)
             {
@@ -70,7 +70,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
         [LiteDB.BsonIgnore]
         [BsonIgnore]
         public bool DoRefresh { get; set; }
-        public async virtual Task  NotifyUpdates()
+        public async override Task  NotifyUpdates()
         {
            await Execute.PostToUIThreadAsync(() =>
             {
@@ -99,7 +99,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
             });
         }
 
-        public virtual void NotifyUpdates(string source)
+        public override void NotifyUpdates(string source)
         { 
                 try
                 {
@@ -197,7 +197,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
                            
                             this.Index = serie.Indexe++;                           
                             this.Name = $"{finaluffix}{this.Index.ToString($"D{trailingZeroz}")}";
-                            (index as IModel).Save();
+                            (index).Save();
                             named = true;
                         }
                         else
@@ -207,14 +207,14 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
                             {
                                 
                                 this.Name = $"{finaluffix}{this.Index.ToString($"D{trailingZeroz}")}";
-                                (index as IModel).Save();
+                                (index).Save();
                                 named = true;
                             }
                             else
                             {
                                 this.Index = serie.Indexe++;
                                 this.Name = $"{finaluffix}{this.Index.ToString($"D{trailingZeroz}")}";
-                                (index as IModel).Save();
+                                (index ).Save();
                                 named = true;
                             }
                         }
@@ -236,7 +236,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
                // GenericName = this.Name; //TR-0000055
             }
         }
-        public virtual bool Save()
+        public override bool Save()
         {
 
             if (this.isLocal)
@@ -291,7 +291,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
             }
         }
         
-        public virtual bool Delete(bool ConfirmFromUser = true)
+        public override bool Delete(bool ConfirmFromUser = true)
         {
             if (FrameworkManager.CanDelete(type))
             {
@@ -318,7 +318,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
             return false;
         }
 
-        public virtual bool Cancel()
+        public override bool Cancel()
         {
             if (FrameworkManager.CanCancel(type))
             {
@@ -344,7 +344,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
             }
         }
 
-        public virtual bool Submit()
+        public override bool Submit()
         {
             if (FrameworkManager.CanValidate(type))
             {

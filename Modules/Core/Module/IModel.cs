@@ -12,13 +12,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
      
     public interface IModel  
     {
-        bool Save();
-        bool Delete(bool ConfirmFromUser = true);
-        bool Submit();
-        bool Cancel();
-        Task NotifyUpdates();
-        void NotifyUpdates(string source);
-        void Open(OpenMode mode);
+       
 
         // bool DoRefresh { get; set; }
 

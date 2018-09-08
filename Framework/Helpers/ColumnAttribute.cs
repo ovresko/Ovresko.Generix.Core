@@ -136,7 +136,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Helpers
     {
         public LongDescriptionAttribute(string text)
         {
-            this.text = text;
+            this.text = _(text);
         }
 
         public string text { get; set; }

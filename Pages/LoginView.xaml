@@ -19,7 +19,7 @@
         <StackPanel Margin="10" Width="232">
             <TextBlock Text="{Tx:TC Key=login.label.user }" Margin="0 10" Foreground="Black"/>
             <Border BorderThickness="1" BorderBrush="#9FACBD" CornerRadius="5" Background="White" Padding="1">
-                <ComboBox  Background="Transparent" BorderThickness="0"
+                <ComboBox  Background="Transparent" BorderThickness="0" Padding="8 5"
                       materialDesign:HintAssist.Hint="{Tx:T login.text.username}"  
                       ItemsSource="{Binding users, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"
                       SelectedItem="{Binding user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged , NotifyOnTargetUpdated=True}"

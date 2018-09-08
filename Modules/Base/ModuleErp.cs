@@ -132,7 +132,7 @@ namespace Ovresko.Generix.Core.Modules
                     foreach (IDocument item in items)
                     {
                         item.ForceIgniorValidatUnique = true;
-                        if (!(item as IModel).Save())
+                        if (!(item).Save())
                             return;
                     }
 

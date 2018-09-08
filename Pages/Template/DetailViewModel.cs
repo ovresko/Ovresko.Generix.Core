@@ -224,6 +224,16 @@ namespace Ovresko.Generix.Core.Pages.Template
 
         public string DocTowValue { get; set; }
 
+        public bool linkButtonsVisible { get
+            {
+                return linkButtons?.Children.Count > 0;// != UIElement.nul;
+            }
+        }
+        public bool opeartionButtonsVisible { get
+            {
+                return opeartionButtons?.Any()==true;
+            }
+        }
         public HashSet<string> ElementToHide
         {
             get
@@ -354,8 +364,25 @@ namespace Ovresko.Generix.Core.Pages.Template
             return modelBase;
         }
 
+
+
+        private Thickness _SidePanelMargin = new Thickness(20);
+        public Thickness SidePanelMargin
+        {
+            get { return _SidePanelMargin; }
+            set
+            {
+                _SidePanelMargin = value;
+                NotifyOfPropertyChange("SidePanelMargin");
+            }
+        }
+
+        //  public Thickness SidePanelMargin { get; set; } = new Thickness(10, 10, 10, 10);
+
+
         public async Task Actualiser(int delay = 0)
         {
+             
             //FinishLoaded = true;
             try
             {
@@ -467,7 +494,7 @@ namespace Ovresko.Generix.Core.Pages.Template
                 var origin = model as IDocument;
                 if (origin.Submitable && origin.DocStatus == 0 && origin.isLocal == false)
                 {
-                    if ((model as IModel).Delete())
+                    if ((model ).Delete())
                         DataHelpers.Shell.CloseScreen(this);
                 }
                 else if (origin.isLocal == true)
@@ -480,7 +507,7 @@ namespace Ovresko.Generix.Core.Pages.Template
                 }
                 else
                 {
-                    if ((model as IModel).Delete())
+                    if ((model ).Delete())
                         DataHelpers.Shell.CloseScreen(this);
                 }
 
@@ -555,7 +582,7 @@ namespace Ovresko.Generix.Core.Pages.Template
 
         public void NotifySpecificProperty(string propertyName)
         {
-            (model as IModel).NotifyUpdates(propertyName);
+            (model ).NotifyUpdates(propertyName);
             NotifyOfPropertyChange("ElementToHide");
         }
 
@@ -589,7 +616,7 @@ namespace Ovresko.Generix.Core.Pages.Template
             bool result = true;
             await Execute.OnUIThreadAsync(() =>
             { 
-                if((model is IReportView) == true)
+                if((model is IReportView) == true )
                 {
                     result = true;
                 }
@@ -602,7 +629,7 @@ namespace Ovresko.Generix.Core.Pages.Template
                         // try { model?.Open(); } catch { }
                     }
                     else
-                    {
+                    { 
                         result = model.Save();
                       //  result = true;
                     }
@@ -621,15 +648,19 @@ namespace Ovresko.Generix.Core.Pages.Template
 
                                 //if ((item.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute)?.FieldType == ModelFieldType.WeakTable)
                                 //    continue;
+                                if (DataHelpers.NotAllowedProperties.Contains(item.Name)) {
+                                    continue;
+                                }
 
+            
                                 if (item.Name == "AddedAtUtc"
                                     || item.Name == "EditedAtUtc"
                                      || item.Name == "MyModule"
                                     || item.Name == "CollectionName" || item.Name == "Index")
                                     continue;
 
-                                string modelvalue = "";
-                                string originalValue = "";
+                                string modelvalue = null;
+                                string originalValue = null;
                                 try
                                 {
                                     modelvalue = item.GetValue(model)?.ToString();
@@ -640,7 +671,7 @@ namespace Ovresko.Generix.Core.Pages.Template
                                     // DataHelpers.ShowMessage(item?.Name);
                                     continue;
                                 }
-                                if (modelvalue != originalValue)
+                                if (  StringExtentions.AreEquals(modelvalue ,originalValue) == false)
                                 {
                                     var response = DataHelpers.ShowMessage(_("Ignorer les modifications?") + $" pour {this.model?.CollectionName}", _("Confirmation"), MessageBoxButton.YesNo);
                                     if (response == MessageBoxResult.No)
@@ -774,7 +805,7 @@ namespace Ovresko.Generix.Core.Pages.Template
             base.NotifyOfPropertyChange(propertyName);
             if (propertyName == "model")
             {
-                await (model as IModel).NotifyUpdates();
+                await (model ).NotifyUpdates();
                 NotifyOfPropertyChange("ElementToHide");
             }
         }
@@ -914,7 +945,7 @@ namespace Ovresko.Generix.Core.Pages.Template
 
             var doc = (IDocument) DS.Generic(source)?.GetById(tableModel)   ;
             // DataHelpers.GetById(source, tableModel);
-            var mapped = doc.Map(mapFunction);
+            var mapped = model.Map(mapFunction,doc);
 
             if (afterMap != null)
                 mapped = (model as IDocument).GetType().GetMethod(afterMap)?.Invoke(model, new[] { mapped });
@@ -928,7 +959,7 @@ namespace Ovresko.Generix.Core.Pages.Template
             var selected = table.GetValue(DataGrid.ItemsSourceProperty);
 
             var doc = item;
-            var mapped = doc.Map(mapFunction);
+            var mapped = model.Map(mapFunction,doc);
 
             if (afterMap != null)
             {
@@ -966,16 +997,20 @@ namespace Ovresko.Generix.Core.Pages.Template
         private void Box_KeyUp1(object sender, KeyEventArgs e)
         {
             var box = (sender as ComboBox);
+
             if (e.Key == Key.Back || string.IsNullOrWhiteSpace(box.Text))
             {
-                if (box.SelectedItem != null)
-                {
-                    var txt = box.Text;
-                    box.SelectedItem = null;
-                    box.Text = txt;
-                }
-                //return;
+                 
+                    box.SelectedValue = Guid.Empty;
+                    return;
+                
             }
+
+            //if (e.Key == Key.Back)
+            //{
+               
+            //    //return;
+            //}
 
             box.Items.Filter = ((a) =>
             {
@@ -1248,13 +1283,11 @@ namespace Ovresko.Generix.Core.Pages.Template
             }
         }
 
-        private async void BtnReload_Click(object sender, RoutedEventArgs e)
+        private async Task ReloadLienField(ArrayList data)
         {
-            // { box, modelValuesId, mytypeAttr ,}
             try
             {
-                var data = (sender as Button).Tag as ArrayList;
-
+               
                 dynamic box = data[0];
                 dynamic optionLienField = data[1];
                 dynamic mytypeAttr = data[2];
@@ -1357,6 +1390,13 @@ namespace Ovresko.Generix.Core.Pages.Template
             await Setup();
         }
 
+        private async void BtnReload_Click(object sender, RoutedEventArgs e)
+        {
+            // { box, modelValuesId, mytypeAttr ,}
+            var data = (sender as Button).Tag as ArrayList;
+           await ReloadLienField(data);
+        }
+
         private async void BtnSelect_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1450,22 +1490,25 @@ namespace Ovresko.Generix.Core.Pages.Template
                 var dic = (ArrayList)(sender as Button).Tag;
                 if (dic.Count < 3)
                 {
-                     DataHelpers.ShowMessage(_("Selectionner une ligne à ajoutée, ou vérifier la déclaration"));
+                    DataHelpers.ShowMessage(_("Selectionner une ligne à ajoutée, ou vérifier la déclaration"));
                     return;
                 }
 
                 var data = dic;
                 var s = data[0] as ComboBox;
 
-                Type type  = DataHelpers.GetTypesModule.Resolve(data[1].ToString());
+                Type type = DataHelpers.GetTypesModule.Resolve(data[1].ToString());
                 if (type == null)
                     return;
 
                 var docList = await DataHelpers.Shell.OpenScreenFind(type, _("Selectioner document"));
                 var doc = docList?.FirstOrDefault();
-                (this.model as IDocument).GetType().GetProperty(dic[2].ToString()).SetValue(this.model, doc.Id);
-                s.SelectedItem = doc.Id;
-                await Setup();
+                if (doc != null)
+                {
+                    (this.model as IDocument).GetType().GetProperty(dic[2].ToString()).SetValue(this.model, doc.Id);
+                    s.SelectedItem = doc.Id;
+                    await Setup();
+                }
             }
             catch (Exception s)
             {
@@ -1952,7 +1995,7 @@ Sent by www.ovresko.com
                 var origin = model as IDocument;
                 if (origin.Submitable && origin.DocStatus == 0 && origin.isLocal == false && IsEdited == false)
                 {
-                    if ((model as IModel).Submit())
+                    if ((model ).Submit())
                         IsEdited = false;
                     //await Setup();
                 }
@@ -1967,7 +2010,7 @@ Sent by www.ovresko.com
                         }
                         else
                         {
-                            if ((model as IModel).Cancel())
+                            if ((model ).Cancel())
                             {
                                 IsEdited = false;
                                 await Actualiser();
@@ -1980,7 +2023,7 @@ Sent by www.ovresko.com
                 }
                 else
                 {
-                    if ((model as IModel).Save())
+                    if ((model ).Save())
                         IsEdited = false;
                     // await Setup();
                 }
@@ -2095,7 +2138,7 @@ Sent by www.ovresko.com
                 var expanders = stackContent.FindChildren<Expander>();
                 foreach (var item in expanders)
                 {
-                    ExpanderStatus.Add(item.Header.ToString(), item.IsExpanded);
+                    try { ExpanderStatus.Add(item.Header?.ToString(), item.IsExpanded); } catch { }
                 }
             }
 
@@ -2394,7 +2437,7 @@ Sent by www.ovresko.com
                                     //HintAssist.SetFloatingScale(tb, 1);
                                     tb.Style = App.Current.FindResource("MaterialDesignFloatingHintTextBoxWhite") as Style;
                                     if (IsRequired)
-                                        tb.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#3F51B5"); //  Brushes.Black;
+                                        tb.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#c0392b"); //  Brushes.Black;
 
                                     tb.Width = elementWidth;
                                     var myBinding = new Binding(prop.Name);
@@ -2405,6 +2448,7 @@ Sent by www.ovresko.com
                                     if (DoRefresh)
                                     {
                                         tb.KeyUp += Tb_KeyUp;
+                                        tb.LostKeyboardFocus += Tb_LostKeyboardFocus;
                                     }
                                     if (isBold?.IsBod == true)
                                         tb.FontWeight = FontWeights.Bold;
@@ -2476,7 +2520,7 @@ Sent by www.ovresko.com
                                     brDate.Background = Brushes.White;
                                     brDate.Width = elementWidth;
                                     if (IsRequired)
-                                        brDate.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#3F51B5"); //  Brushes.Black;
+                                        brDate.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#c0392b"); //  Brushes.Black;
 
                                     datePicker.Style = App.Current.FindResource("MaterialDesignFloatingHintDateTimePickerEx") as Style;
 
@@ -2588,12 +2632,14 @@ Sent by www.ovresko.com
                                     if (DoRefresh)
                                     {
                                         tbDevise.KeyUp += Tb_KeyUp;
+                                        tbDevise.LostKeyboardFocus += Tb_LostKeyboardFocus;
+
                                     }
                                     //  border.Child = tbDevise;
 
                                     // sp.Children.Add(label);
                                     if (IsRequired)
-                                        tbDevise.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#3F51B5"); //  Brushes.Black;
+                                        tbDevise.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#c0392b"); //  Brushes.Black;
 
                                     sp.Children.Add(tbDevise);
                                     //if (indexRox >= grid.RowDefinitions.Count)
@@ -2647,8 +2693,10 @@ Sent by www.ovresko.com
                                         tbNumero.FontWeight = FontWeights.Bold;
                                     //border.Child = tbNumero;
                                     tbNumero.KeyUp += Tb_KeyUp;
+                                    tbNumero.LostKeyboardFocus += Tb_LostKeyboardFocus;
+
                                     if (IsRequired)
-                                        tbNumero.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#3F51B5"); //  Brushes.Black;
+                                        tbNumero.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#c0392b"); //  Brushes.Black;
 
                                     // sp.Children.Add(label);
                                     sp.Children.Add(tbNumero);
@@ -2668,7 +2716,8 @@ Sent by www.ovresko.com
                                     if (sp.Children.Count > 0)
                                         masterWrap.Children.Add(sp);
                                     expander.Content = masterWrap;
-                                    stackContent.Children.Add(expander);
+                                    if(masterWrap.Children.Count > 0)
+                                        stackContent.Children.Add(expander);
                                     masterWrap = new UniformGrid();
                                     masterWrap.Margin = new Thickness(10, 5, 10, 5);
                                     masterWrap.Columns = 2;
@@ -2774,7 +2823,7 @@ Sent by www.ovresko.com
                                     bindVisibilitySelectLabel.ConverterParameter = boxSelect;
                                     label.SetBinding(Label.VisibilityProperty, bindVisibilitySelectLabel);
                                     if (IsRequired)
-                                        brSelect.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#3F51B5"); //  Brushes.Black;
+                                        brSelect.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#c0392b"); //  Brushes.Black;
 
                                     brSelect.Child = boxSelect;
                                     sp.Width = elementWidth;
@@ -2869,9 +2918,12 @@ Sent by www.ovresko.com
 
                                     bool expandedTextLarge = CollapseAll;
                                     try { expandedTextLarge = bool.Parse(attributes.Options); } catch { }
-
-                                    expander.Content = masterWrap;
-                                    stackContent.Children.Add(expander);
+                                    if(masterWrap.Children.Count > 0)
+                                    {
+                                        expander.Content = masterWrap;
+                                        stackContent.Children.Add(expander);
+                                    }
+                                  
                                     masterWrap = new UniformGrid();
                                     masterWrap.Margin = new Thickness(10, 5, 10, 5);
                                     masterWrap.Columns = 1;
@@ -2901,6 +2953,7 @@ Sent by www.ovresko.com
                                     TextBox rtb = new TextBox();
                                     rtb.Name = prop.Name;
                                     rtb.KeyUp += Tb_KeyUp;
+                                    rtb.LostKeyboardFocus += Tb_LostKeyboardFocus;
                                     var bindVisibilityTextLarge = new Binding("ElementToHide");
                                     bindVisibilityTextLarge.Mode = System.Windows.Data.BindingMode.OneWay;
                                     bindVisibilityTextLarge.Converter = _UiVisibilityConverter;
@@ -3047,7 +3100,7 @@ Sent by www.ovresko.com
                                     // sp.Children.Add(label);
                                     br.Child = sp1;
                                     if (IsRequired)
-                                        br.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#3F51B5"); //  Brushes.Black;
+                                        br.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#c0392b"); //  Brushes.Black;
 
                                     //if (box.Text == "")
                                     //    label.Content = "";
@@ -3098,6 +3151,7 @@ Sent by www.ovresko.com
                                     TextBox tbReadOnly = new TextBox();
                                     tbReadOnly.Name = prop.Name;
                                     tbReadOnly.KeyUp += Tb_KeyUp;
+
                                     tbReadOnly.Width = elementWidth;
                                     HintAssist.SetHint(tbReadOnly, name);
                                     // HintAssist.SetFloatingScale(tbReadOnly, 0.8);
@@ -3439,8 +3493,13 @@ Sent by www.ovresko.com
                                         // NO SEPARATION
                                         if (sp.Children.Count > 0)
                                             masterWrap.Children.Add(sp);
-                                        expander.Content = masterWrap;
-                                        stackContent.Children.Add(expander);
+
+                                        if(masterWrap.Children.Count > 0)
+                                        {
+                                            expander.Content = masterWrap;
+                                            stackContent.Children.Add(expander);
+                                        }
+                                       
                                         masterWrap = new UniformGrid();
                                         masterWrap.Margin = new Thickness(10, 5, 10, 5);
                                         masterWrap.Columns = 1;
@@ -3506,7 +3565,7 @@ Sent by www.ovresko.com
                                     listview.SetBinding(DataGrid.VisibilityProperty, bindVisibilityTable);
                                     listview.FlowDirection = DataHelpers.GetFlowDirection;
                                     listview.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#9FACBD"); ;
-                                    listview.BorderThickness = new Thickness(1);
+                                    listview.BorderThickness = new Thickness(0);
                                     listview.FontSize = 14;
                                     listview.ContextMenu = cm;
                                     listview.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -3535,7 +3594,7 @@ Sent by www.ovresko.com
                                     listview.AutoGeneratingColumn += ColumnHeaderBehavior.OnAutoGeneratingColumn;
                                     listview.MinHeight = 150;
                                     listview.MinWidth = 655;
-                                    listview.Margin = new Thickness(25, 0, 20, 20);
+                                  
                                     label.Visibility = Visibility.Hidden;
                                     listview.SetBinding(DataGrid.ItemsSourceProperty, myBindingTable);
                                     DataGridAssist.SetCellPadding(listview, new Thickness(4, 2, 2, 2));
@@ -3558,8 +3617,7 @@ Sent by www.ovresko.com
                                     spsTable.RowDefinitions.Add(rowTable);
                                     spsTable.RowDefinitions.Add(rowTable2);
 
-                                    Grid.SetColumn(listview, 0);
-                                    Grid.SetRow(listview, 1);
+                                  
 
                                     // Add buttons in stackpanel
                                     var stackForButtons = new StackPanel();
@@ -3585,7 +3643,7 @@ Sent by www.ovresko.com
                                     Tablebox.ItemsPanel = (ItemsPanelTemplate)Application.Current.FindResource("VSP");
                                     Tablebox.SetValue(VirtualizingStackPanel.IsVirtualizingProperty, true);
                                     Tablebox.SetValue(VirtualizingStackPanel.VirtualizationModeProperty, VirtualizationMode.Recycling);
-                                    Tablebox.Margin = new Thickness(0, 0, 10, 0);
+                                  
                                     Tablebox.IsEditable = true;
                                     var tagTable = new ArrayList() { listview, type.Name, optionTable };
                                     Tablebox.Tag = tagTable;
@@ -3611,6 +3669,8 @@ Sent by www.ovresko.com
                                     var textChercher = new TextBlock { Text = _("Chercher") };
                                     stp.Children.Add(icn);
                                     stp.Children.Add(textChercher);
+                                    btnSelect.ToolTip = _("Chercher des") + model.CollectionName;
+ 
                                     btnSelect.Content = stp;
                                     btnSelect.Margin = new Thickness(2);
                                     btnSelect.Padding = new Thickness(2);
@@ -3632,7 +3692,7 @@ Sent by www.ovresko.com
                                     btnNewModel.Tag = new ArrayList() { type.Name, prop.Name, listview };
                                     btnNewModel.Click += BtnNewModel_Click; ;
                                     btnNewModel.TouchDown += BtnNewModel_Click; ;
-
+                                        btnNewModel.ToolTip = _("Créer nouveau");
                                     // Button add
                                     btnAddModel = new Button();
                                     btnAddModel.Style = App.Current.FindResource("ToolButton") as Style;
@@ -3645,8 +3705,9 @@ Sent by www.ovresko.com
                                     btnAddModel.Tag = tag2;
                                     btnAddModel.Click += BtnAddModel_Click;
                                     btnAddModel.TouchDown += BtnAddModel_Click;
+                                        btnAddModel.ToolTip = _("Ajouter");
 
-                                    // Button delete all
+                                                                            // Button delete all
                                     Button btnDeleteall = new Button();
                                     btnDeleteall.Content = new PackIcon() { Kind = PackIconKind.DeleteForever };
                                     btnDeleteall.Style = App.Current.FindResource("ToolButton") as Style;
@@ -3655,7 +3716,7 @@ Sent by www.ovresko.com
                                     btnDeleteall.HorizontalAlignment = HorizontalAlignment.Right;
                                     btnDeleteall.Tag = listview;
                                     btnDeleteall.IsEnabled = !isFreezed;
-
+                                        btnDeleteall.ToolTip = _("Supprimer tout");
                                     // Button UP
                                     Button btnUP = new Button();
                                     btnUP.Content = new PackIcon() { Kind = PackIconKind.ArrowUpBoldCircle };
@@ -3667,7 +3728,7 @@ Sent by www.ovresko.com
                                     btnUP.IsEnabled = !isFreezed;
                                     btnUP.Click += BtnDOWN_Click;
                                     btnUP.TouchDown += BtnDOWN_Click;
-
+                                        btnUP.ToolTip = _("Déplacer vers le haut");
                                     // Button DOWN
                                     Button btnDOWN = new Button();
                                     btnDOWN.Content = new PackIcon() { Kind = PackIconKind.ArrowDownBoldCircle };
@@ -3679,8 +3740,16 @@ Sent by www.ovresko.com
                                     btnDOWN.IsEnabled = !isFreezed;
                                     btnDOWN.Click += BtnUP_Click;
                                     btnDOWN.TouchDown += BtnUP_Click;
+                                        btnDOWN.ToolTip = _("Déplacer vers le bas");
+                                        Border brTablebox = new Border();
+                                        brTablebox.Padding = new Thickness(2,1,2,1);
+                                        brTablebox.Margin = new Thickness(0, 0, 10, 0);
+                                        brTablebox.CornerRadius = new CornerRadius(5);
+                                        brTablebox.Child = Tablebox;
+                                        brTablebox.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#9FACBD"); // # Brushes.Gray;
+                                        brTablebox.BorderThickness = new Thickness(1);
+                                        stackForButtons.Children.Add(brTablebox);
 
-                                    stackForButtons.Children.Add(Tablebox);
 
                                     stackForButtons.Children.Add(btnAddModel);
                                     stackForButtons.Children.Add(btnSelect);
@@ -3693,11 +3762,20 @@ Sent by www.ovresko.com
                                         btnDeleteall.TouchDown += Btnaddline_Click;
 
                                     }
-
+                                    Border brTable = new Border();
+                                    brTable.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#F5F5F5");
+                                    //(SolidColorBrush)BrushConverter.ConvertFromString("#F5F5F5");XXX
+                                    brTable.Padding = new Thickness(2);
+                                    Grid.SetColumn(brTable, 0);
+                                    Grid.SetRow(brTable, 1);
                                     Grid.SetColumn(stackForButtons, 0);
                                     Grid.SetRow(stackForButtons, 0);
-                                  
-                                    spsTable.Children.Add(listview);
+                                    brTable.Margin = new Thickness(25, 0, 20, 20);
+                                    brTable.CornerRadius = new CornerRadius(5);
+                                    brTable.BorderThickness = new Thickness(1);
+                                    brTable.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#9FACBD"); // # Brushes.Gray;
+                                    brTable.Child = listview;
+                                    spsTable.Children.Add(brTable);
                                     spsTable.Children.Add(stackForButtons);
                                     spsTable.Margin = new Thickness(0);
                                     masterWrap.Children.Clear();
@@ -3815,7 +3893,7 @@ Sent by www.ovresko.com
 
                                     btnReload.Tag = new ArrayList { boxLienField, optionLienField, mytypeAttr, allatt, prop.Name };
                                     btnReload.Click += BtnReload_Click;
-
+                                    await ReloadLienField(btnReload.Tag as ArrayList);
                                     brField.Width = elementWidth;
                                     boxLienField.Width = elementWidth - 35;
 
@@ -3849,6 +3927,7 @@ Sent by www.ovresko.com
                                     bindVisibilityLienField.Source = this;
                                     bindVisibilityLienField.ConverterParameter = prop.Name;
                                     boxLienField.SetBinding(ComboBox.VisibilityProperty, bindVisibilityLienField);
+                                    boxLienField.KeyUp += Box_KeyUp1;
 
                                 }
                                 catch (Exception s)
@@ -3875,7 +3954,7 @@ Sent by www.ovresko.com
                                     {
                                         StackPanel spops = new StackPanel();
                                         spops.Children.Add(new TextBlock() { Text = name, FontSize = 16,Foreground= (SolidColorBrush)new BrushConverter().ConvertFromString("#3F51B5"),FontWeight=FontWeights   .DemiBold});
-                                        spops.Children.Add(new TextBlock() { Text = longDescription.text, FontSize = 12, Foreground=Brushes.LightGray });
+                                        spops.Children.Add(new TextBlock() { Text = longDescription.text, FontSize = 12, Foreground= (SolidColorBrush)new BrushConverter().ConvertFromString("#9FACBD") });
                                         newOps.Header = spops;
                                     }
                                     else
@@ -4077,10 +4156,19 @@ Sent by www.ovresko.com
                 foreach (var item in expanders)
                 {
                     try { item.IsExpanded = ExpanderStatus[item.Header.ToString()]; } catch { }
+                    //if (!item.HasContent)
+                    //    stackContent.Children.Remove(item);f
                 }
             }
             // stopwatch.Stop();
             //  DataHelpers.ShowMessage( $"Temp d'execution SETUP : {stopwatch.ElapsedMilliseconds} ms");
+        }
+
+        private async void Tb_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            //TODO replace with actualiser
+            NotifySpecificProperty((sender as TextBox).Name);
+            await Setup();
         }
 
         private async void DatePicker_LostFocus(object sender, RoutedEventArgs e)

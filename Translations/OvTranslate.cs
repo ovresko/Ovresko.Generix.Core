@@ -17,8 +17,8 @@ namespace Ovresko.Generix.Core.Translations
 
         public static string _(string value)
         {
-            if (string.IsNullOrWhiteSpace(value))
-                return value;
+            //if (string.IsNullOrWhiteSpace(value))
+            //    return value;
             try
             { 
                 return Tx.SafeText(value); 

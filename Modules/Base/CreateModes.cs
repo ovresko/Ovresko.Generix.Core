@@ -20,7 +20,7 @@ namespace Ovresko.Generix.Core.Modules.Base
 
     public class CreateModesHandler
     {
-        public static IModel Handle(IModel es,CreateModes mode)
+        public static IDocument Handle(IDocument es,CreateModes mode)
         {
             switch (mode)
             {

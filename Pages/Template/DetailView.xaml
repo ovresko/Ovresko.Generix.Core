@@ -25,8 +25,8 @@
 
 
 
-        <materialDesign:Card  UniformCornerRadius="10" HorizontalAlignment="Left"  FlowDirection="{Binding GetFlowDirection}"  
-                  Margin="10 5" Width="940" Foreground="#9FACBD" Background="#ECF0F1" Padding="-3" materialDesign:ShadowAssist.ShadowDepth="Depth0"
+        <materialDesign:Card  UniformCornerRadius="5" HorizontalAlignment="Left"  FlowDirection="{Binding GetFlowDirection}"  
+                  Margin="10 5" Width="940" Foreground="#9FACBD" Background="White"  Padding="-3" materialDesign:ShadowAssist.ShadowDepth="Depth1"
                 DockPanel.Dock="Top"  >
             <DockPanel  >
                 <StackPanel DockPanel.Dock="Left" Margin="10 10" Orientation="Horizontal">
@@ -151,7 +151,7 @@
 
         </materialDesign:Card>
 
-        <ProgressBar  Width="950"  HorizontalAlignment="Left" Visibility="{Binding ProgressValueVisible ,Converter={StaticResource hideWhenTrue}}" 
+        <ProgressBar Margin="20 0 0 0"  Width="910"  HorizontalAlignment="Left" Visibility="{Binding ProgressValueVisible ,Converter={StaticResource hideWhenTrue}}" 
                     IsIndeterminate="True"   DockPanel.Dock="Top" />
 
 
@@ -198,7 +198,7 @@
 
         </Grid>
 
-        <ScrollViewer Panel.ZIndex="-10" Margin="0 0 0 0"   VerticalAlignment="Stretch"  
+        <ScrollViewer Panel.ZIndex="-10" Margin="0 0 0 0" ScrollChanged="ScrollViewer_ScrollChanged" Name="scroller" VerticalAlignment="Stretch"  
                         HorizontalAlignment="Stretch"  Padding="0 0">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch">
 
@@ -234,8 +234,8 @@
 
                     </materialDesign:Card>
 
-                    <StackPanel Margin="10 10">
-                        <Border CornerRadius="8" BorderThickness="1" Background="#ECF0F1" BorderBrush="#ECF0F1">
+                    <StackPanel Margin="{Binding SidePanelMargin, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                        <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1" UniformCornerRadius="5" BorderThickness="1" Background="#ECF0F1" BorderBrush="#ECF0F1">
                             <ListBox Background="#ECF0F1" ItemsSource="{Binding InfoCards}">
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="{x:Type ListBoxItem}" >
@@ -251,10 +251,15 @@
                                 </ListBox.ItemContainerStyle>
                             </ListBox>
  
-                        </Border>
+                        </materialDesign:Card>
                        
                             <ContentControl Margin="0 0 0 0"  Content="{Binding DocImageContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Border CornerRadius="8" BorderThickness="1" Margin="0 10" Background="White" BorderBrush="#ECF0F1">
+
+                        <TextBlock Foreground="#9FACBD" Margin="0 10" Visibility="{Binding opeartionButtonsVisible ,Converter={StaticResource boolToVisConverter}}" Text="{Tx:T Opérations}"/>
+
+                        <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                             Visibility="{Binding opeartionButtonsVisible ,Converter={StaticResource boolToVisConverter}}"
+                                             UniformCornerRadius="5" BorderThickness="1" Margin="0 0" Background="White" BorderBrush="#ECF0F1">
                             <ListBox  ItemsSource="{Binding opeartionButtons}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="{x:Type ListBoxItem}" >
@@ -269,10 +274,11 @@
                                 </DataTemplate>-->
                             </ListBox.ItemContainerStyle>
                         </ListBox>
-                        </Border>
-                        <Border  BorderThickness="1" Width="300" CornerRadius="8" Background="White" Padding="30 10 0 20" BorderBrush="#ECF0F1">
+                        </materialDesign:Card>
+                        <TextBlock Foreground="#9FACBD" Margin="0 10" Visibility="{Binding linkButtonsVisible ,Converter={StaticResource boolToVisConverter}}" Text="{Tx:T Références}"/>
+                        <materialDesign:Card Visibility="{Binding linkButtonsVisible ,Converter={StaticResource boolToVisConverter}}" materialDesign:ShadowAssist.ShadowDepth="Depth1"  BorderThickness="1" Width="300" UniformCornerRadius="5" Background="White" Padding="30 10 0 20" BorderBrush="#ECF0F1">
                             <ContentControl    Foreground="#ECF0F1" Content="{Binding linkButtons, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Border>
+                        </materialDesign:Card>
                     </StackPanel>
                 </StackPanel>
 

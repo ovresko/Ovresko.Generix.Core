@@ -612,11 +612,11 @@ _______________
                     {"",
                       _(  "Sortie de Matériel"),
                        _( "Réception Matériel"),
-                       _( "Transfert de Matériel"),
-                       _( "Transfert de Matériel pour la Fabrication"),
-                      _(  "Fabrication"),
-                      _(  "Ré-emballer"),
-                       _( "Sous-traiter")
+                       _( "Transfert de Matériel")
+                      // _( "Transfert de Matériel pour la Fabrication"),
+                      //_(  "Fabrication"),
+                      //_(  "Ré-emballer"),
+                      // _( "Sous-traiter")
                     };
                 case "TypeColumn":
                     return new List<string>()
@@ -693,7 +693,7 @@ _______________
                 case "TypeClient":
                     return new List<string>()
                     {"",
-                       _( "Contact"),
+                       _( "Personne"),
                       _(  "Société")
                     };
 
@@ -848,7 +848,7 @@ _______________
         //    selected = MapProperties(selected, original,true, fetchValue);
         //}
 
-        public static IDocument MapProperties(IDocument selected, dynamic original, bool OnlyIfNull = false, string selectedProeprty = null)
+        public static IDocument MapProperties(IDocument toDocument, dynamic fromDocument, bool OnlyIfNull = false, string selectedProeprty = null)
         {
             try
             {
@@ -859,15 +859,15 @@ _______________
                 List<PropertyInfo> propsSelected = new List<PropertyInfo>(); 
                 if (!string.IsNullOrWhiteSpace(selectedProeprty))
                 {
-                    propsSelected.Add( selected.GetType().GetProperty(selectedProeprty));
+                    propsSelected.Add(toDocument.GetType().GetProperty(selectedProeprty));
                 }
                 else
                 {
-                    propsSelected =  selected.GetType().GetProperties().Where(z => z.GetCustomAttribute(typeof(DisplayNameAttribute)) != null).ToList();
+                    propsSelected = toDocument.GetType().GetProperties().Where(z => z.GetCustomAttribute(typeof(DisplayNameAttribute)) != null).ToList();
 
                 }
 
-                var propsModel = (original.GetType().GetProperties() as PropertyInfo[]).Select(z => z.Name);
+                var propsModel = (fromDocument.GetType().GetProperties() as PropertyInfo[]).Select(z => z.Name);
 
                 var commun = propsSelected.Where(a => propsModel.Contains(a.Name)
                 && !notAlloewd.Contains(a.Name)
@@ -880,23 +880,23 @@ _______________
                     {
                         try
                         {
-                            var propModel = (original as IDocument).GetType().GetProperty(prop.Name);
+                            var propModel = (fromDocument as IDocument).GetType().GetProperty(prop.Name);
                             Type typeModel = propModel?.PropertyType;
                             Type typeSelected = prop.PropertyType;
                             if (typeSelected.Equals(typeModel) == true)
                             {
-                                var value = propModel.GetValue(original);
-                                dynamic meValue = prop.GetValue(selected);
+                                var value = propModel.GetValue(fromDocument);
+                                dynamic meValue = prop.GetValue(toDocument);
                                 if (OnlyIfNull)
                                 {
                                     var type = prop.GetCustomAttribute(typeof(ColumnAttribute)) as ColumnAttribute;
 
                                     if((type != null && type.FieldType == ModelFieldType.ReadOnly) )
-                                        prop.SetValue(selected, value);
+                                        prop.SetValue(toDocument, value);
                                 }
                                 else
                                 {
-                                    prop.SetValue(selected, value);
+                                    prop.SetValue(toDocument, value);
                                 }
                               
                             }
@@ -912,7 +912,7 @@ _______________
 
                 //selected = original.MapRefsTo(selected);
 
-                return selected;
+                return toDocument;
             }
             catch (Exception s)
             {

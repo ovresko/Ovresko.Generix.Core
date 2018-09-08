@@ -551,6 +551,8 @@ namespace Ovresko.Generix.Core.Modules.Core
             return true;
         }
 
+        
+
         public static void UpdateModules(bool DoUpdate = true)
         {
             var users = DS.db.GetAll<User>();
@@ -569,7 +571,7 @@ namespace Ovresko.Generix.Core.Modules.Core
 
             foreach (var module in modules)
             {
-                (module as IModel).Delete(false);
+                (module ).Delete(false);
             }
 
             //Ovresko.Generix.Core.Modules.

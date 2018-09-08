@@ -471,6 +471,7 @@ namespace Ovresko.Generix.Core.Pages.Startup
                 DataHelpers.Settings = setting;
 
                 DataHelpers.NotAllowedProperties = typeof(ModelBase<>).GetProperties().Select(z => z.Name).ToList();
+                DataHelpers.NotAllowedProperties = typeof(Document).GetProperties().Select(z => z.Name).ToList();
             }
             catch (Exception s)
             {

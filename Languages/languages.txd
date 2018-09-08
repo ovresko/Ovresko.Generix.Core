@@ -13,7 +13,9 @@
 		<text key="Age">العمر</text>
 		<text key="Agrandir le tableau">تكبير</text>
 		<text key="ajoutée au bureau">أظيف الى الصفحة الرئيسية</text>
+		<text key="Ajouter">أظف</text>
 		<text key="ajouter au bureau">أضف الى الرئيسية</text>
+		<text key="and">and</text>
 		<text key="Annulé">ملغى</text>
 		<text key="Annulée">ملغى</text>
 		<text key="Annuler">إلغاء</text>
@@ -34,11 +36,13 @@ www.ovresko.com</text>
 		<text key="base.field.chercher" acceptpunctuation="true">...إبحث</text>
 		<text key="base.tool.actions">عمليات</text>
 		<text key="base.tool.outils">أدوات</text>
+		<text key="Billion"> Billion </text>
 		<text key="Brouillon">مؤقت</text>
 		<text key="btn.assistant.precedent">الخلف</text>
 		<text key="ce document fait référencer à un(e)">هذا الملف مرتبط بملفات اخرى</text>
 		<text key="Charger un module '.zip' pour l'installer">حمل ملف الإظافة</text>
 		<text key="Chercher" acceptpunctuation="true">...إبحث</text>
+		<text key="Chercher des">إبحث عن </text>
 		<text key="Choisir template à exporté">إختر قالب الطبع</text>
 		<text key="Codes">الرموز</text>
 		<text key="Condition">العملية</text>
@@ -53,11 +57,20 @@ www.ovresko.com</text>
 		<text key="Culture / Pays">البلد</text>
 		<text key="Culture is empty">إسم البلد مطلوب</text>
 		<text key="Date naissance">تاريخ الميلاد</text>
+		<text key="déffirent de">مختلف عن</text>
+		<text key="Déplacer vers le bas">الى الأسفل</text>
+		<text key="Déplacer vers le haut">إلى الأعلى</text>
 		<text key="documents trouvés">تم العثور على بيانات</text>
 		<text key="Données actualisées" acceptpunctuation="true">...تم التحديث</text>
 		<text key="Dupliquer">إنسخ</text>
+		<text key="Éditer le">أخر تغيير</text>
 		<text key="édition en masse">تعديل البيانات</text>
+		<text key="égale">يساوي</text>
+		<text key="Eight">Eight</text>
+		<text key="Eighteen">Eighteen</text>
+		<text key="Eighty">Eighty</text>
 		<text key="eléments">ملف</text>
+		<text key="Eleven">Eleven</text>
 		<text key="Email">إيميل</text>
 		<text key="Email envoyé">تم إرسال الإيميل</text>
 		<text key="Email provider">إعدادات الإيميل</text>
@@ -82,9 +95,15 @@ www.ovresko.com</text>
 		<text key="Femme">أنثى</text>
 		<text key="Fermer">إغلق</text>
 		<text key="Fermeture">غلق</text>
+		<text key="Fifteen">Fifteen</text>
+		<text key="Fifty">Fifty</text>
 		<text key="Filter les résultats d'abord">قم بإختيار الملفات اولا عن طريق البحث</text>
 		<text key="Filtrage">البحث</text>
 		<text key="Filtres Rapide">بحث سريع</text>
+		<text key="Five">Five</text>
+		<text key="Four">Four</text>
+		<text key="Fourteen">Fourteen</text>
+		<text key="Fourty">Fourty</text>
 		<text key="Général">معلومات عامة</text>
 		<text key="home.app.btn.home">الصفحة الاولى</text>
 		<text key="home.app.btn.modules">تثبيت إظافات</text>
@@ -99,10 +118,12 @@ www.ovresko.com</text>
 		<text key="Home">الرئيسية</text>
 		<text key="homemenumenu">القائمة</text>
 		<text key="Homme">ذكر</text>
+		<text key="Hundred"> Hundred </text>
 		<text key="Identifiant existe!">إسم مستعمل</text>
 		<text key="Ignorer les modifications?" acceptpunctuation="true"> ?هل تريد حفظ التغييرات</text>
 		<text key="Importer">إستيراد البيانات</text>
 		<text key="Imprimer">اطبع</text>
+		<text key="inférieur à">أصغر من</text>
 		<text key="Infos supplémentaires">معلومات إضافية</text>
 		<text key="Installer nouveau">تثبيت جديد</text>
 		<text key="jours">يوم</text>
@@ -120,6 +141,7 @@ www.ovresko.com</text>
 		<text key="login.text.password">كلمة السر</text>
 		<text key="login.text.username">إسم المستخدم</text>
 		<text key="Logo entreprise">صورة</text>
+		<text key="Million"> Million </text>
 		<text key="Mobile">الهاتف النقال</text>
 		<text key="Model vide">الملف غير موجود</text>
 		<text key="Modifications enregistrées">تم حفظ التغييرات</text>
@@ -133,6 +155,9 @@ www.ovresko.com</text>
 		<text key="Mots de pass incorrect!">كلمة سر خاطئة</text>
 		<text key="Must choose a language!">يجب إختيار لغة</text>
 		<text key="N/A">غير معلوم</text>
+		<text key="Nine">Nine</text>
+		<text key="Nineteen">Nineteen</text>
+		<text key="Ninety">Ninety</text>
 		<text key="Nom de champ">إسم الحقل</text>
 		<text key="Nom de série">ترقيم الملفات</text>
 		<text key="Nom entreprise">إسم الشركة</text>
@@ -142,6 +167,8 @@ www.ovresko.com</text>
 		<text key="Nouveau(elle)">جديد</text>
 		<text key="Ok">Ok</text>
 		<text key="OkAndNew">Ok et continuer</text>
+		<text key="One">One</text>
+		<text key="Only">Only</text>
 		<text key="Opération annuler">تم إلغاء العملية</text>
 		<text key="Opérations">عمليات</text>
 		<text key="Ouvrir">إفتح</text>
@@ -160,10 +187,12 @@ www.ovresko.com</text>
 		<text key="Recherche en cours" acceptpunctuation="true">يتم البحث</text>
 		<text key="Réduire le tableau">تصغير</text>
 		<text key="Réf">الملف</text>
+		<text key="Références">مراجع</text>
 		<text key="Région">المنطقة</text>
 		<text key="Règles d'autorisation">قواعد الوصول</text>
 		<text key="Relancer">إعادة التشغيل</text>
 		<text key="Remplacer les valeurs">تبديل الحروف</text>
+		<text key="ressemble">يحتوي على</text>
 		<text key="Restaurer la base des données">إسترجع قاعدة البيانات</text>
 		<text key="Rôle">دور المستخدم</text>
 		<text key="Saisir la valeur à remplacer">ضع الحروف التي تريد تبديلها</text>
@@ -175,9 +204,15 @@ www.ovresko.com</text>
 		<text key="Selectionner une image">إختر صورة</text>
 		<text key="Selectionner une ligne à ajoutée, ou vérifier la déclaration">يجب إختيار ملف لإضافته</text>
 		<text key="Selectionner une ligne!" acceptpunctuation="true">إختر ملف</text>
+		<text key="Seven">Seven</text>
+		<text key="Seventeen">Seventeen</text>
+		<text key="Seventy">Seventy</text>
 		<text key="Sexe">الجنس</text>
 		<text key="Si vous annuler, vous devez modifier les changements effectués">عليك تعديل الملفات المرتبطة بهذا الملف</text>
 		<text key="Site web">الموقع الإلكتروني</text>
+		<text key="Six">Six</text>
+		<text key="Sixteen">Sixteen</text>
+		<text key="Sixty">Sixty</text>
 		<text key="Source Db">مصدر البيانات</text>
 		<text key="Source DB">قاعدة البيانات</text>
 		<text key="startup.label.checkadmin">يرجى الاإنتظار</text>
@@ -197,6 +232,7 @@ www.ovresko.com</text>
 		<text key="startup.label.updates">التأكد من التحدبث</text>
 		<text key="Status">وضع الملف</text>
 		<text key="Suivant">التالي</text>
+		<text key="supérieur à">أكبر من</text>
 		<text key="Supprimer">إحذف</text>
 		<text key="Supprimer le document">إحذف الملف</text>
 		<text key="Supprimer tout">إحذف كل الملفات</text>
@@ -205,9 +241,17 @@ www.ovresko.com</text>
 		<text key="Tableau de bord">الصفحة الاولى</text>
 		<text key="Tableau de Bord">عمليات</text>
 		<text key="Téléphone">الهاتف</text>
+		<text key="Ten">Ten</text>
 		<text key="Terminé">إنتهى</text>
 		<text key="Terminée">إنتهى</text>
 		<text key="Terminer">إنتهى</text>
+		<text key="Thirteen" acceptmissing="true">Thirteen</text>
+		<text key="Thirty">Thirty</text>
+		<text key="Thousand"> Thousand </text>
+		<text key="Three">Three</text>
+		<text key="Twelve">Twelve</text>
+		<text key="Twenty">Twenty</text>
+		<text key="Two">Two</text>
 		<text key="Un document avec le méme identifiant existe déja">هناك ملف أخر بنفس الإسم</text>
 		<text key="une erreur s'est produite voulez-vous annuler?" acceptpunctuation="true">حدث خطأ. هل تريد إيقاف العملية</text>
 		<text key="une erreur s'est produite!" acceptpunctuation="true">حدث خطأ</text>
@@ -239,6 +283,7 @@ www.ovresko.com</text>
 		<text key="words.next">التالي</text>
 		<text key="words.previous">الرجوع</text>
 		<text key="words.selectall">إختيار كل</text>
+		<text key="Zero">صفر</text>
 	</culture>
 	<culture name="en">
 		<text key="Action non autorisée">Unauthorised action</text>
@@ -252,7 +297,9 @@ www.ovresko.com</text>
 		<text key="Age">Age</text>
 		<text key="Agrandir le tableau">Extend size</text>
 		<text key="ajoutée au bureau">Icon added</text>
+		<text key="Ajouter">Add</text>
 		<text key="ajouter au bureau">Add to desktop</text>
+		<text key="and">and</text>
 		<text key="Annulé">Cancelled</text>
 		<text key="Annulée">Cancelled</text>
 		<text key="Annuler">Cancel</text>
@@ -273,11 +320,13 @@ www.ovresko.com</text>
 		<text key="base.field.chercher">Search...</text>
 		<text key="base.tool.actions">Actions</text>
 		<text key="base.tool.outils">Tools</text>
+		<text key="Billion"> Billion </text>
 		<text key="Brouillon">Draft</text>
 		<text key="btn.assistant.precedent">Previous</text>
 		<text key="ce document fait référencer à un(e)">This document is linked to</text>
 		<text key="Charger un module '.zip' pour l'installer">Load plugin file ".zip" to install.</text>
 		<text key="Chercher">Search...</text>
+		<text key="Chercher des">Search for </text>
 		<text key="Choisir template à exporté">Choose a template</text>
 		<text key="Codes">Codes</text>
 		<text key="Condition">Condition</text>
@@ -292,11 +341,20 @@ www.ovresko.com</text>
 		<text key="Culture / Pays">Country / Culture</text>
 		<text key="Culture is empty">Culture is empty</text>
 		<text key="Date naissance">Birthdate</text>
+		<text key="déffirent de">Not equals</text>
+		<text key="Déplacer vers le bas">Move down</text>
+		<text key="Déplacer vers le haut">Move up</text>
 		<text key="documents trouvés">Documents found</text>
 		<text key="Données actualisées">Data updated...</text>
 		<text key="Dupliquer">Duplicate</text>
+		<text key="Éditer le">Last change</text>
 		<text key="édition en masse">Bulk edit</text>
+		<text key="égale">Equals</text>
+		<text key="Eight">Eight</text>
+		<text key="Eighteen">Eighteen</text>
+		<text key="Eighty">Eighty</text>
 		<text key="eléments">documents</text>
+		<text key="Eleven">Eleven</text>
 		<text key="Email">Email</text>
 		<text key="Email envoyé">Email sent</text>
 		<text key="Email provider">Email provider</text>
@@ -321,9 +379,15 @@ www.ovresko.com</text>
 		<text key="Femme">Female</text>
 		<text key="Fermer">Close</text>
 		<text key="Fermeture">Close</text>
+		<text key="Fifteen">Fifteen</text>
+		<text key="Fifty">Fifty</text>
 		<text key="Filter les résultats d'abord">Filter documents to include</text>
 		<text key="Filtrage">Filter</text>
 		<text key="Filtres Rapide">Fast search</text>
+		<text key="Five">Five</text>
+		<text key="Four">Four</text>
+		<text key="Fourteen">Fourteen</text>
+		<text key="Fourty">Fourty</text>
 		<text key="Général">Basic Informations</text>
 		<text key="home.app.btn.home">Dashboard</text>
 		<text key="home.app.btn.modules">Install plugins</text>
@@ -338,10 +402,12 @@ www.ovresko.com</text>
 		<text key="Home">Home</text>
 		<text key="homemenumenu">Menu</text>
 		<text key="Homme">Male</text>
+		<text key="Hundred"> Hundred </text>
 		<text key="Identifiant existe!">Name exist</text>
 		<text key="Ignorer les modifications?" acceptpunctuation="true">Save changes ?</text>
 		<text key="Importer">Import excel</text>
 		<text key="Imprimer">Print</text>
+		<text key="inférieur à">Less than</text>
 		<text key="Infos supplémentaires">More infos</text>
 		<text key="Installer nouveau">Install new</text>
 		<text key="jours">days</text>
@@ -359,6 +425,7 @@ www.ovresko.com</text>
 		<text key="login.text.password">Password</text>
 		<text key="login.text.username">Username</text>
 		<text key="Logo entreprise">Logo</text>
+		<text key="Million"> Million </text>
 		<text key="Mobile">Mobile</text>
 		<text key="Model vide">Empty document</text>
 		<text key="Modifications enregistrées">Changes saved</text>
@@ -372,6 +439,9 @@ www.ovresko.com</text>
 		<text key="Mots de pass incorrect!">Wrong password</text>
 		<text key="Must choose a language!" acceptpunctuation="true">Must choose a language!</text>
 		<text key="N/A">Unknown</text>
+		<text key="Nine">Nine</text>
+		<text key="Nineteen">Nineteen</text>
+		<text key="Ninety">Ninety</text>
 		<text key="Nom de champ">Field name</text>
 		<text key="Nom de série">Naming series</text>
 		<text key="Nom entreprise">Business name</text>
@@ -381,6 +451,8 @@ www.ovresko.com</text>
 		<text key="Nouveau(elle)">New</text>
 		<text key="Ok">Ok</text>
 		<text key="OkAndNew">Apply and continue</text>
+		<text key="One">One</text>
+		<text key="Only">Only</text>
 		<text key="Opération annuler">Operation cancelled by user</text>
 		<text key="Opérations">Operations</text>
 		<text key="Ouvrir">Open</text>
@@ -399,10 +471,12 @@ www.ovresko.com</text>
 		<text key="Recherche en cours">Searching...</text>
 		<text key="Réduire le tableau">Reduce size</text>
 		<text key="Réf">Ref</text>
+		<text key="Références">References</text>
 		<text key="Région">Region</text>
 		<text key="Règles d'autorisation">Access rule</text>
 		<text key="Relancer">Restart</text>
 		<text key="Remplacer les valeurs">Replace value</text>
+		<text key="ressemble">Like</text>
 		<text key="Restaurer la base des données">Restore database</text>
 		<text key="Rôle">Role</text>
 		<text key="Saisir la valeur à remplacer">Put a value to replace</text>
@@ -414,9 +488,15 @@ www.ovresko.com</text>
 		<text key="Selectionner une image">Choose an image</text>
 		<text key="Selectionner une ligne à ajoutée, ou vérifier la déclaration">Select a document to add</text>
 		<text key="Selectionner une ligne!" acceptpunctuation="true">Select a document</text>
+		<text key="Seven">Seven</text>
+		<text key="Seventeen">Seventeen</text>
+		<text key="Seventy">Seventy</text>
 		<text key="Sexe">Gender</text>
 		<text key="Si vous annuler, vous devez modifier les changements effectués">Must update referenced documents after cancelling</text>
 		<text key="Site web">Website</text>
+		<text key="Six">Six</text>
+		<text key="Sixteen">Sixteen</text>
+		<text key="Sixty">Sixty</text>
 		<text key="Source Db">Data source</text>
 		<text key="Source DB">Data source</text>
 		<text key="startup.label.checkadmin">Loading accounts</text>
@@ -436,6 +516,7 @@ www.ovresko.com</text>
 		<text key="startup.label.updates">Cheking updates</text>
 		<text key="Status">Status</text>
 		<text key="Suivant">Next</text>
+		<text key="supérieur à">Greater than</text>
 		<text key="Supprimer">Delete</text>
 		<text key="Supprimer le document">Delete the document</text>
 		<text key="Supprimer tout">Delete all</text>
@@ -444,10 +525,18 @@ www.ovresko.com</text>
 		<text key="Tableau de bord">Dashboard</text>
 		<text key="Tableau de Bord">Dashboard</text>
 		<text key="Téléphone">Phone</text>
+		<text key="Ten">Ten</text>
 		<text key="Terminé">Completed</text>
 		<text key="Terminée">Finished</text>
 		<text key="Terminer">Finish</text>
 		<text key="Texte a remplacer">Text to replace</text>
+		<text key="Thirteen">Thirteen</text>
+		<text key="Thirty">Thirty</text>
+		<text key="Thousand"> Thousand </text>
+		<text key="Three">Three</text>
+		<text key="Twelve">Twelve</text>
+		<text key="Twenty">Twenty</text>
+		<text key="Two">Two</text>
 		<text key="Tx:date.month day">d/M</text>
 		<text key="Tx:date.month day.abbr">d MMM</text>
 		<text key="Tx:date.month day.long">d MMMM</text>
@@ -671,6 +760,7 @@ www.ovresko.com</text>
 		<text key="words.next">Next</text>
 		<text key="words.previous">Previous</text>
 		<text key="words.selectall">Select all</text>
+		<text key="Zero">Zero</text>
 	</culture>
 	<culture name="fr" primary="true">
 		<text key="Action non autorisée">Action non autorisée</text>
@@ -684,7 +774,9 @@ www.ovresko.com</text>
 		<text key="Age">Age</text>
 		<text key="Agrandir le tableau">Agrandir le tableau</text>
 		<text key="ajoutée au bureau">ajoutée au bureau</text>
+		<text key="Ajouter">Ajouter</text>
 		<text key="ajouter au bureau">Ajouter au bureau</text>
+		<text key="and">and</text>
 		<text key="Annulé">Annulé</text>
 		<text key="Annulée">Annulée</text>
 		<text key="Annuler">Annuler</text>
@@ -705,11 +797,13 @@ www.ovresko.com</text>
 		<text key="base.field.chercher">Rechercher...</text>
 		<text key="base.tool.actions">Actions</text>
 		<text key="base.tool.outils">Outils</text>
+		<text key="Billion"> Milliards </text>
 		<text key="Brouillon">Brouillon</text>
 		<text key="btn.assistant.precedent">Précédent</text>
 		<text key="ce document fait référencer à un(e)">ce document fait référencer à un(e)</text>
 		<text key="Charger un module '.zip' pour l'installer">Charger un module '.zip' pour l'installer</text>
 		<text key="Chercher">Chercher...</text>
+		<text key="Chercher des">Chercher des </text>
 		<text key="Choisir template à exporté">Choisir template à exporter</text>
 		<text key="Codes">Codes</text>
 		<text key="Condition">Condition</text>
@@ -724,11 +818,20 @@ www.ovresko.com</text>
 		<text key="Culture / Pays">Cûlture / Pays</text>
 		<text key="Culture is empty">Cûlture pays est obligatoire</text>
 		<text key="Date naissance">Date naissance</text>
+		<text key="déffirent de">déffirent de</text>
+		<text key="Déplacer vers le bas">Déplacer vers le bas</text>
+		<text key="Déplacer vers le haut">Déplacer vers le haut</text>
 		<text key="documents trouvés">documents trouvés</text>
 		<text key="Données actualisées">Données actualisées...</text>
 		<text key="Dupliquer">Dupliquer</text>
+		<text key="Éditer le">Éditer le</text>
 		<text key="édition en masse">Modification en masse</text>
+		<text key="égale">égale</text>
+		<text key="Eight">Huit</text>
+		<text key="Eighteen">Dix-huit</text>
+		<text key="Eighty">Quatre-vingts</text>
 		<text key="eléments">documents</text>
+		<text key="Eleven">Onze</text>
 		<text key="Email">Email</text>
 		<text key="Email envoyé">Email envoyé</text>
 		<text key="Email provider">Sources email</text>
@@ -753,9 +856,15 @@ www.ovresko.com</text>
 		<text key="Femme">Femme</text>
 		<text key="Fermer">Fermer</text>
 		<text key="Fermeture">Fermeture</text>
+		<text key="Fifteen">Quinze</text>
+		<text key="Fifty">Cinquante</text>
 		<text key="Filter les résultats d'abord">Filter les résultats d'abord</text>
 		<text key="Filtrage">Filtrage</text>
 		<text key="Filtres Rapide">Filtres Rapide</text>
+		<text key="Five">Cinq</text>
+		<text key="Four">Quatre</text>
+		<text key="Fourteen">Quatorze</text>
+		<text key="Fourty">Quarante</text>
 		<text key="Général">Général</text>
 		<text key="home.app.btn.home">Tableau de bord</text>
 		<text key="home.app.btn.modules">Installer modules</text>
@@ -770,10 +879,12 @@ www.ovresko.com</text>
 		<text key="Home">Accueil</text>
 		<text key="homemenumenu">Menu</text>
 		<text key="Homme">Homme</text>
+		<text key="Hundred"> Cents </text>
 		<text key="Identifiant existe!">Identifiant existe!</text>
 		<text key="Ignorer les modifications?">Enregistrer les modifications?</text>
 		<text key="Importer">Importer excel</text>
 		<text key="Imprimer">Imprimer</text>
+		<text key="inférieur à">inférieur à</text>
 		<text key="Infos supplémentaires">Infos supplémentaires</text>
 		<text key="Installer nouveau">Installer nouveau</text>
 		<text key="jours">jours</text>
@@ -791,6 +902,7 @@ www.ovresko.com</text>
 		<text key="login.text.password">Mots de passe</text>
 		<text key="login.text.username">Nom d'utilisateur</text>
 		<text key="Logo entreprise">Logo d'entreprise</text>
+		<text key="Million"> Million </text>
 		<text key="Mobile">Mobile</text>
 		<text key="Model vide">Model vide</text>
 		<text key="Modifications enregistrées">Modifications enregistrées</text>
@@ -804,6 +916,9 @@ www.ovresko.com</text>
 		<text key="Mots de pass incorrect!">Mots de pass incorrect!</text>
 		<text key="Must choose a language!">Il faut choisir une langue</text>
 		<text key="N/A">N/A</text>
+		<text key="Nine">Neuf</text>
+		<text key="Nineteen">Dix-neuf</text>
+		<text key="Ninety">Quatre vingt dix</text>
 		<text key="Nom de champ">Nom de champ</text>
 		<text key="Nom de série">Nom de série</text>
 		<text key="Nom entreprise">Nom d'entreprise</text>
@@ -813,6 +928,8 @@ www.ovresko.com</text>
 		<text key="Nouveau(elle)">Nouveau(elle)</text>
 		<text key="Ok">Ok</text>
 		<text key="OkAndNew">Ok et continuer</text>
+		<text key="One">Un</text>
+		<text key="Only">Seulement</text>
 		<text key="Opération annuler">Opération annuler</text>
 		<text key="Opérations">Opérations</text>
 		<text key="Ouvrir">Ouvrir</text>
@@ -831,11 +948,13 @@ www.ovresko.com</text>
 		<text key="Recherche en cours">Recherche en cours...</text>
 		<text key="Réduire le tableau">Réduire le tableau</text>
 		<text key="Réf">Réf</text>
+		<text key="Références">Références</text>
 		<text key="Région">Région</text>
 		<text key="Règles d'autorisation">Régles d'autorisation</text>
 		<text key="Relancer">Relancer</text>
 		<text key="Réles d'autorisations" />
 		<text key="Remplacer les valeurs">Remplacer les valeurs</text>
+		<text key="ressemble">Ressemble</text>
 		<text key="Restaurer la base des données">Restaurer la base des données</text>
 		<text key="Rôle">Rôle</text>
 		<text key="Saisir la valeur à remplacer">Saisir la valeur à remplacer</text>
@@ -847,9 +966,15 @@ www.ovresko.com</text>
 		<text key="Selectionner une image">Selectionner une image</text>
 		<text key="Selectionner une ligne à ajoutée, ou vérifier la déclaration">Selectionner une ligne à ajoutée, ou vérifier la déclaration</text>
 		<text key="Selectionner une ligne!">Selectionner un document!</text>
+		<text key="Seven">Sept</text>
+		<text key="Seventeen">Dix-sept</text>
+		<text key="Seventy">Soixante-dix</text>
 		<text key="Sexe">Sexe</text>
 		<text key="Si vous annuler, vous devez modifier les changements effectués">Si vous annuler, vous devez modifier les changements effectués</text>
 		<text key="Site web">Site web</text>
+		<text key="Six">Six</text>
+		<text key="Sixteen">Seize</text>
+		<text key="Sixty">Soixante</text>
 		<text key="Source Db">Source données</text>
 		<text key="Source DB">Source DB</text>
 		<text key="startup.label.checkadmin">Creation admin</text>
@@ -869,6 +994,7 @@ www.ovresko.com</text>
 		<text key="startup.label.updates">Vérification mise à jours</text>
 		<text key="Status">Status</text>
 		<text key="Suivant">Suivant</text>
+		<text key="supérieur à">supérieur à</text>
 		<text key="Supprimer">Supprimer</text>
 		<text key="Supprimer le document">Supprimer le document</text>
 		<text key="Supprimer tout">Supprimer tout</text>
@@ -877,10 +1003,18 @@ www.ovresko.com</text>
 		<text key="Tableau de bord">Tableau de bord</text>
 		<text key="Tableau de Bord">Tableau de Bord</text>
 		<text key="Téléphone">Téléphone</text>
+		<text key="Ten">Dix</text>
 		<text key="Terminé">Terminé</text>
 		<text key="Terminée">Terminée</text>
 		<text key="Terminer">Terminer</text>
 		<text key="Texte a remplacer">Texte a remplacer</text>
+		<text key="Thirteen">Treize</text>
+		<text key="Thirty">Trente</text>
+		<text key="Thousand"> Mille </text>
+		<text key="Three">Trois</text>
+		<text key="Twelve">Douze</text>
+		<text key="Twenty">Vingt</text>
+		<text key="Two">Deux</text>
 		<text key="Tx:byte unit" comment="Default: B">o</text>
 		<text key="Tx:colon" comment="Can be used to insert additional spacing like for French."> :</text>
 		<text key="Tx:date.day" comment="Default: %d" />
@@ -967,5 +1101,6 @@ www.ovresko.com</text>
 		<text key="words.next">Suivant</text>
 		<text key="words.previous">Précédent</text>
 		<text key="words.selectall">Selectionner tous</text>
+		<text key="Zero">Zéro</text>
 	</culture>
 </translation>

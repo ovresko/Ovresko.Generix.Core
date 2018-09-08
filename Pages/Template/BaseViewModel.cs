@@ -342,7 +342,7 @@ namespace Ovresko.Generix.Core.Pages.Template
 
             if (selected != null && selected.Any())
             {
-                foreach (IModel item in selected)
+                foreach (IDocument item in selected)
                 {
                     try
                     {
@@ -456,9 +456,9 @@ namespace Ovresko.Generix.Core.Pages.Template
                                     // item.Series = item.MyModule()?.Id;
 
                                     item.ForceIgniorValidatUnique = true;
-                                    if ((item as IModel).Save())
+                                    if ((item ).Save())
                                     {
-                                        (item as IModel).Submit();
+                                        (item ).Submit();
                                     }
                                     else
                                     {
@@ -574,7 +574,7 @@ namespace Ovresko.Generix.Core.Pages.Template
                     }
                     else
                     {
-                        TotalCount = DS.db.Count<T>(a => a.NameSearch.Contains(NameSearch.ToLower()));
+                        TotalCount = DS.db.Count<T>(a => a.NameSearch.Contains(NameSearch.ToLower()) == true);
                             //await datahelper.GetMongoDataCount<T>(a => a.NameSearch.Contains(NameSearch.ToLower()));
                         Items.Clear();
                         Items.AddRange( DS.db.GetPage<T>( a=> a.NameSearch.ContainsIgniorCase(NameSearch.ToLower()), PageNumber, PageCount));
@@ -725,7 +725,7 @@ namespace Ovresko.Generix.Core.Pages.Template
             var selected = Items.Where(a => a.IsSelectedd);
             if (selected != null && selected.Any())
             {
-                foreach (IModel item in selected)
+                foreach (IDocument item in selected)
                 {
                     try
                     {

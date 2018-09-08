@@ -32,6 +32,10 @@ namespace Ovresko.Generix.Core.Pages.Template
             //if(win.)
         }
 
-        
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            var offset = scroller.VerticalOffset;
+            (this.DataContext as DetailViewModel).SidePanelMargin = new  Thickness(20, offset,20,20);
+        }
     }
 }

@@ -316,9 +316,9 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
         [DontShowInDetail]
         public bool IsSelectedd { get; set; }
 
-        public virtual IDocument Map(string mappedClass)
+        public virtual IDocument Map(string toDocument,IDocument fromDocument )
         {
-            return this;
+            return fromDocument;
         }
 
         [LiteDB.BsonIgnore]
@@ -572,12 +572,23 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
                 if (doc != null)
                 {
                     doc = this.MapRefsTo(doc, Nested: true);
-                    (doc as IModel).Save();
+                    (doc ).Save();
                 }
             }
         }
 
+        public abstract bool Save();
 
+        public abstract bool Delete(bool ConfirmFromUser = true);
+
+        public abstract bool Submit();
+
+        public abstract bool Cancel();
+        public abstract Task NotifyUpdates();
+
+        public abstract void NotifyUpdates(string source);
+
+        public abstract void Open(OpenMode mode);
     }
 
 }

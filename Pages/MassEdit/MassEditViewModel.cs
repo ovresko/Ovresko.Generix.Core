@@ -122,7 +122,7 @@ namespace Ovresko.Generix.Core.Pages.MassEdit
 
                 }
 
-                foreach (IModel item in aDocuments)
+                foreach (IDocument item in aDocuments)
                 {
                     var aType = SelectedProp.aProperty.PropertyType;
                     if (aType.IsGenericType &&
