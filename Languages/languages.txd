@@ -60,6 +60,8 @@ www.ovresko.com</text>
 		<text key="déffirent de">مختلف عن</text>
 		<text key="Déplacer vers le bas">الى الأسفل</text>
 		<text key="Déplacer vers le haut">إلى الأعلى</text>
+		<text key="Document non enregsitré">الملف غير محفوظ</text>
+		<text key="Document non enregsitré ou validé">الملف غير محفوظ او مؤكد</text>
 		<text key="documents trouvés">تم العثور على بيانات</text>
 		<text key="Données actualisées" acceptpunctuation="true">...تم التحديث</text>
 		<text key="Dupliquer">إنسخ</text>
@@ -344,6 +346,8 @@ www.ovresko.com</text>
 		<text key="déffirent de">Not equals</text>
 		<text key="Déplacer vers le bas">Move down</text>
 		<text key="Déplacer vers le haut">Move up</text>
+		<text key="Document non enregsitré">Document not saved!</text>
+		<text key="Document non enregsitré ou validé">The document is not saved or submitted!</text>
 		<text key="documents trouvés">Documents found</text>
 		<text key="Données actualisées">Data updated...</text>
 		<text key="Dupliquer">Duplicate</text>
@@ -821,6 +825,8 @@ www.ovresko.com</text>
 		<text key="déffirent de">déffirent de</text>
 		<text key="Déplacer vers le bas">Déplacer vers le bas</text>
 		<text key="Déplacer vers le haut">Déplacer vers le haut</text>
+		<text key="Document non enregsitré">Document non enregsitré</text>
+		<text key="Document non enregsitré ou validé">Document non enregsitré ou validé!</text>
 		<text key="documents trouvés">documents trouvés</text>
 		<text key="Données actualisées">Données actualisées...</text>
 		<text key="Dupliquer">Dupliquer</text>

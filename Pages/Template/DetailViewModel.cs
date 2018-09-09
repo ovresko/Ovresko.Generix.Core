@@ -1290,7 +1290,7 @@ namespace Ovresko.Generix.Core.Pages.Template
                
                 dynamic box = data[0];
                 dynamic optionLienField = data[1];
-                dynamic mytypeAttr = data[2];
+                myTypeAttribute mytypeAttr = data[2] as myTypeAttribute;
                 dynamic allatt = data[3];
                 string propName = data[4] as string;
 
@@ -1320,8 +1320,8 @@ namespace Ovresko.Generix.Core.Pages.Template
                         Guid _id = modelValuesId;
                         //sourceEntity = DataHelpers.GetDataStatic(mytypeAttr.type, a => (a as IDocument).Id == _id);
                         //IGenericData ds = DataHelpers.GetGenericData(mytypeAttr.type);
-
-                        sourceEntity = DS.Generic(mytypeAttr.type)?.GetById(_id);
+                        var gen = DS.Generic(mytypeAttr.type.Name);
+                        sourceEntity = gen.GetById(_id);
                     }
                     else
                     {

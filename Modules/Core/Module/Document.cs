@@ -370,7 +370,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
             if (this.isLocal || (this.Submitable && this.DocStatus != 1))
             {
                 if (IgnorMessage == false)
-                    DataHelpers.ShowMessage(_("Document non enregsitré ou validé!")+$" {this.CollectionName}");
+                    DataHelpers.ShowMessage(_("Document non enregsitré ou validé")+$" {this.CollectionName}");
                 return false;
             }
             return true;
@@ -381,7 +381,7 @@ namespace Ovresko.Generix.Core.Modules.Core.Module
             if (this.isLocal)
             {
                 if (!IgnorMessage)
-                    DataHelpers.ShowMessage(_("Document non enregsitré!") + $" {this.CollectionName}");
+                    DataHelpers.ShowMessage(_("Document non enregsitré") + $" {this.CollectionName}");
                 return false;
             }
             return true;
