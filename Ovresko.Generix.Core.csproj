@@ -351,6 +351,7 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Exceptions\ModuleClassNotFoundException.cs" />
+    <Compile Include="Framework\Events\DocumentSubmittedEvent.cs" />
     <Compile Include="Framework\Helpers\NumberToWords.cs" />
     <Compile Include="Framework\ModuleBuilderView.xaml.cs">
       <DependentUpon>ModuleBuilderView.xaml</DependentUpon>
